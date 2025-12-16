@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tantara avec Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Gloria+Hallelujah&family=Lora:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --mada-red: #d32f2f;     /* Rouge drapeau / Terre */
+            --mada-green: #388e3c;   /* Vert drapeau / Forêt */
+            --royal-gold: #ffa000;   /* Or royal */
+            --parchment: #fff8e1;    /* Papier vieux */
+            --ink-color: #3e2723;    /* Encre sépia */
+        }
+
+        body {
+            background-color: #efebe9;
+            font-family: 'Lora', serif;
+            color: var(--ink-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .book-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--parchment);
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(62, 39, 35, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #d7ccc8;
+        }
+
+        /* Cadre décoratif style "Lamba" */
+        .border-deco {
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 2px solid var(--mada-green);
+            pointer-events: none;
+            z-index: 10;
+        }
+        .border-deco::after {
+            content: "";
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 2px solid var(--mada-red);
+        }
+
+        /* Taches d'aquarelle */
+        .watercolor {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .spot-red { background: var(--mada-red); width: 300px; height: 300px; top: -100px; left: -50px; }
+        .spot-green { background: var(--mada-green); width: 250px; height: 250px; bottom: -50px; right: -50px; }
+        .spot-gold { background: var(--royal-gold); width: 200px; height: 200px; top: 40%; left: 30%; opacity: 0.3; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: var(--ink-color);
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            border-bottom: 3px double var(--mada-red);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--mada-green);
+            margin-top: 40px;
+            border-left: 5px solid var(--royal-gold);
+            padding-left: 15px;
+        }
+
+        .deric-bubble {
+            font-family: 'Gloria Hallelujah', cursive;
+            background: white;
+            padding: 15px;
+            border-radius: 20px 20px 20px 0;
+            border: 2px solid var(--ink-color);
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+        }
+        .deric-icon { font-size: 3em; margin-right: 15px; }
+
+        .king-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid var(--mada-red);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .king-icon {
+            font-size: 2.5em;
+            margin-right: 15px;
+            background: var(--royal-gold);
+            border-radius: 50%;
+            width: 60px; height: 60px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .timeline-box {
+            border-left: 4px solid var(--mada-red);
+            padding-left: 20px;
+            margin: 30px 0;
+        }
+        .date-item {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .date-item::before {
+            content: "⬤";
+            color: var(--mada-red);
+            position: absolute;
+            left: -29px;
+            top: 0;
+            font-size: 0.8em;
+        }
+        .date-bold {
+            font-weight: bold;
+            color: var(--mada-red);
+            font-family: 'Cinzel', serif;
+        }
+
+        .quiz-box {
+            background: #e8f5e9;
+            border: 2px dashed var(--mada-green);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .page-break {
+            margin: 60px 0;
+            border-bottom: 1px dotted var(--ink-color);
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--mada-red);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; border: none; margin: 0; width: 100%; max-width: 100%; padding: 20px;}
+            .border-deco { display: none; } /* Enlever le cadre pour l'impression si besoin */
+            .page-break { page-break-after: always; border: none; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Livre</a>
+
+    <div class="book-page">
+        <div class="border-deco"></div>
+        <div class="watercolor spot-red"></div>
+        <div class="watercolor spot-green"></div>
+        <div class="watercolor spot-gold"></div>
+
+        <div class="content">
+            <!-- COUVERTURE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 2px; font-weight: bold;">PROGRAMME CEPE - HISTOIRE (TANTARA)</p>
+                <h1>Voyage dans le Temps</h1>
+                <h3 style="font-family:'Gloria Hallelujah'; color: #555;">Les Aventures Historiques de Tonton Deric</h3>
+                <div style="font-size: 6em; margin: 20px;">🕰️🇲🇬🍞</div>
+                <p><em>De la période royale à l'Indépendance</em></p>
+            </div>
+
+            <div class="deric-bubble">
+                <div class="deric-icon"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;"></div>
+                <div>
+                    "Manao ahoana ! Je suis <strong>Tonton Deric</strong>. Aujourd'hui, je ne grille pas du pain, je remonte le temps ! Attache ta ceinture, nous partons explorer l'histoire fascinante de Madagascar."
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : ROYAUMES -->
+            <h2>Chapitre I : Les Grands Rois (Ny Mpanjaka)</h2>
+            <p>Avant, Madagascar était divisée en plusieurs royaumes. Puis, de grands rois ont unifié l'île.</p>
+
+            <div class="king-card">
+                <div class="king-icon">👑</div>
+                <div>
+                    <strong style="font-size: 1.2em; color: var(--mada-red);">Andrianampoinimerina</strong>
+                    <br><em>(Le roi qui a commencé l'unification)</em>
+                    <p>Il régnait à Ambohimanga. Sa célèbre phrase est : <br>
+                    <strong>"Ny ranomasina no valamparihiko"</strong> (La mer est la limite de ma rizière).</p>
+                    <small>Il a organisé le Fokontany et les marchés.</small>
+                </div>
+            </div>
+
+            <div class="king-card">
+                <div class="king-icon">⚔️</div>
+                <div>
+                    <strong style="font-size: 1.2em; color: var(--mada-red);">Radama I</strong>
+                    <br><em>(Le fils, le modernisateur)</em>
+                    <p>Il a continué l'œuvre de son père. Il a :</p>
+                    <ul>
+                        <li>Conquis presque toute l'île.</li>
+                        <li>Ouvert les premières écoles (1820).</li>
+                        <li>Adopté l'alphabet latin (A, B, C...) pour écrire le Malagasy.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="deric-bubble">
+                <div class="deric-icon">💡</div>
+                <div>
+                    "Astuce CEPE : Retiens bien que <strong>Radama I</strong> a ouvert l'école ! C'est grâce à lui qu'on peut lire ce livre aujourd'hui !"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : COLONISATION -->
+            <h2>Chapitre II : La Période Coloniale</h2>
+            <p>Après le règne des Reines (Ranavalona I, II, III), la France a colonisé Madagascar.</p>
+
+            <div class="timeline-box">
+                <div class="date-item">
+                    <span class="date-bold">1896 :</span> Madagascar devient une <strong>colonie française</strong>. La reine Ranavalona III est exilée.
+                </div>
+                <div class="date-item">
+                    <span class="date-bold">Général Gallieni :</span> C'est le premier gouverneur général. Il a aboli la royauté et l'esclavage, mais a imposé le travail forcé.
+                </div>
+                <div class="date-item">
+                    <span class="date-bold">Les Menalamba :</span> Ce sont des résistants malgaches qui se sont battus contre la colonisation dès le début.
+                </div>
+            </div>
+
+            <div style="text-align: center; background: rgba(255,255,255,0.5); padding: 10px; border-radius: 10px;">
+                <span style="font-size: 3em;">🚂</span>
+                <p>Pendant cette période, on a construit des routes, des hôpitaux et le chemin de fer (TCE : Tana-Côte Est).</p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : INDEPENDANCE -->
+            <h2>Chapitre III : Le Retour de la Liberté</h2>
+            <p>Les Malgaches n'ont jamais oublié leur liberté. Le patriotisme a mené à l'indépendance.</p>
+
+            <div class="timeline-box" style="border-left-color: var(--mada-green);">
+                <div class="date-item">
+                    <span class="date-bold">29 Mars 1947 :</span> La grande insurrection (révolte) pour la liberté. C'est une date très importante commémorée chaque année.
+                </div>
+                <div class="date-item">
+                    <span class="date-bold">14 Octobre 1958 :</span> Proclamation de la <strong>République</strong> Malgache.
+                </div>
+                <div class="date-item">
+                    <span class="date-bold" style="font-size: 1.2em;">26 Juin 1960 :</span><br>
+                    🎉 <strong>PROCLAMATION DE L'INDÉPENDANCE !</strong> 🎉<br>
+                    Le drapeau Blanc-Rouge-Vert flotte enfin librement.
+                </div>
+            </div>
+
+            <div class="king-card" style="border-color: var(--mada-green);">
+                <div class="king-icon" style="background: var(--mada-green); color: white;">👔</div>
+                <div>
+                    <strong>Philibert Tsiranana</strong>
+                    <p>Il est le <strong>Premier Président</strong> de la République Malgache.</p>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- QUIZ FINAL -->
+            <div class="quiz-box">
+                <h2 style="margin-top:0; text-align: center; color: var(--ink-color);">🎓 Le Quiz du Petit Historien</h2>
+                <p>Aide Tonton Deric à répondre aux questions de l'examen CEPE :</p>
+                
+                <p><strong>1. Qui a dit "Ny ranomasina no valamparihiko" ?</strong><br>
+                ▢ Radama I<br>
+                ▢ Andrianampoinimerina</p>
+
+                <p><strong>2. En quelle année Madagascar est-elle devenue indépendante ?</strong><br>
+                ▢ 1947<br>
+                ▢ 1960</p>
+
+                <p><strong>3. Qui fut le premier Président de la République ?</strong><br>
+                ▢ Philibert Tsiranana<br>
+                ▢ Didier Ratsiraka</p>
+                
+                <p><strong>4. Comment s'appelait le gouverneur français qui a exilé la Reine ?</strong><br>
+                ▢ Gallieni<br>
+                ▢ De Gaulle</p>
+            </div>
+
+            <!-- PIED DE PAGE / SOLUTIONS -->
+            <div style="margin-top: 50px; text-align: center; border-top: 1px solid #aaa; padding-top: 20px;">
+                <p style="font-family: 'Gloria Hallelujah';">"Mazotoa mianatra ! (Bon courage pour les études !)"</p>
+                <div style="font-size: 0.8em; color: #666; transform: rotate(180deg); margin-top: 20px;">
+                    <strong>Réponses :</strong> 1. Andrianampoinimerina - 2. 1960 - 3. Philibert Tsiranana - 4. Gallieni.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

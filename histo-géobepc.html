@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Histoire-Géo BEPC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Handlee&family=Merriweather:ital,wght@0,300;0,700;1,300&family=Oswald:wght@500&display=swap');
+
+        :root {
+            --hist-sepia: #d7ccc8;
+            --hist-red: #8d6e63;
+            --geo-green: #81c784;
+            --geo-blue: #4fc3f7;
+            --paper-bg: #fffdf0;
+            --ink-color: #2c3e50;
+        }
+
+        body {
+            background-color: #546e7a;
+            font-family: 'Merriweather', serif;
+            color: var(--ink-color);
+            margin: 0;
+            padding: 20px;
+            font-size: 17px;
+        }
+
+        .book-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--paper-bg);
+            padding: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        /* Effets Aquarelles Dualité (Hist/Géo) */
+        .watercolor {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .wash-sepia { background: #bcaaa4; width: 400px; height: 400px; top: -100px; left: -100px; }
+        .wash-green { background: #a5d6a7; width: 350px; height: 350px; bottom: -50px; right: -50px; }
+        .wash-blue { background: #81d4fa; width: 200px; height: 200px; top: 40%; right: 10%; mix-blend-mode: multiply; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5em;
+            text-align: center;
+            color: #37474f;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 4px double #555;
+            display: inline-block;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2em;
+            margin-top: 50px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+        }
+        .hist-title { color: #5d4037; border-left: 8px solid #5d4037; padding-left: 15px; }
+        .geo-title { color: #2e7d32; border-left: 8px solid #2e7d32; padding-left: 15px; }
+
+        .deric-avatar {
+            float: right;
+            font-size: 4em;
+            margin-left: 20px;
+            filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.1));
+        }
+
+        .timeline {
+            border-left: 4px solid #8d6e63;
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .event {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .event::before {
+            content: "";
+            position: absolute;
+            left: -29px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background: #5d4037;
+            border-radius: 50%;
+        }
+        .date { font-weight: bold; font-family: 'Oswald'; color: #b71c1c; font-size: 1.1em; }
+
+        .geo-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #81c784;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .map-placeholder {
+            background: #e0f7fa;
+            border: 2px dashed #0288d1;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            font-family: 'Handlee', cursive;
+            color: #0277bd;
+            margin: 15px 0;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+        .summary-table th { background: #455a64; color: white; padding: 10px; }
+        .summary-table td { border: 1px solid #ccc; padding: 8px; }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 2px dotted #78909c;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #455a64;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer l'Atlas</a>
+
+    <div class="book-page">
+        <!-- Aquarelles -->
+        <div class="watercolor wash-sepia"></div>
+        <div class="watercolor wash-green"></div>
+        <div class="watercolor wash-blue"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="letter-spacing: 2px; font-weight: bold; color: #555;">PROGRAMME BEPC</p>
+                <h1>L'Atlas Temporel</h1>
+                <h3 style="font-family:'Handlee'; font-size: 1.8em; color: #555; margin-top: -10px;">Histoire & Géographie avec Tonton Deric</h3>
+                <div style="font-size: 5em; margin: 20px;">🌍📜🧭</div>
+            </div>
+
+            <div style="background: white; padding: 20px; border: 1px solid #999; border-radius: 5px; font-family: 'Handlee', cursive; font-size: 1.2em;">
+                <span style="font-size: 2.5em; float: left; margin-right: 15px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">🗞️</span>
+                "Flash Spécial ! Ici Tonton Deric. Pour le BEPC, tu dois voyager dans le temps (Guerre Mondiale, Décolonisation) et voyager sur la carte (Madagascar, Japon, USA). Prépare tes fiches, ça va secouer !"
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- PARTIE 1 : HISTOIRE -->
+            <h2 class="section-title hist-title">I. Histoire : Le Monde et Madagascar</h2>
+            <div class="deric-avatar">📻</div>
+            <p>Le XXème siècle a été mouvementé. Voici les points clés à mémoriser.</p>
+
+            <h3>1. La Seconde Guerre Mondiale (1939 - 1945)</h3>
+            <p>Un conflit planétaire qui oppose deux camps :</p>
+            <ul>
+                <li><strong>L'Axe :</strong> Allemagne (Hitler), Italie, Japon.</li>
+                <li><strong>Les Alliés :</strong> France, Royaume-Uni, USA, URSS.</li>
+            </ul>
+            <p><strong>Bilan :</strong> 50 millions de morts, création de l'ONU (1945) pour maintenir la paix.</p>
+
+            <h3>2. Madagascar vers l'Indépendance</h3>
+            <p>C'est LA partie la plus importante pour ton examen. Retiens cette chronologie :</p>
+
+            <div class="timeline">
+                <div class="event">
+                    <div class="date">1896</div>
+                    Madagascar devient une <strong>Colonie Française</strong>. (Fin de la royauté).
+                </div>
+                <div class="event">
+                    <div class="date">29 Mars 1947</div>
+                    <strong>L'Insurrection :</strong> Révolte sanglante des nationalistes malgaches (MDRM) contre la colonisation. Répression violente.
+                </div>
+                <div class="event">
+                    <div class="date">14 Octobre 1958</div>
+                    Proclamation de la <strong>République Malgache</strong> (au sein de la Communauté Française). Le drapeau tricolore est hissé.
+                </div>
+                <div class="event">
+                    <div class="date">26 Juin 1960</div>
+                    Proclamation de l'<strong>Indépendance</strong> totale. Philibert Tsiranana devient le 1er Président.
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- PARTIE 2 : GEOGRAPHIE -->
+            <h2 class="section-title geo-title">II. Géographie : Étude de l'Espace</h2>
+            <div class="deric-avatar">🔭</div>
+            <p>On étudie souvent les grandes puissances (Japon, USA) et surtout Madagascar.</p>
+
+            <h3>1. Le Japon : Un Modèle de Développement</h3>
+            <div class="geo-card">
+                <p>Le Japon est un archipel pauvre en ressources naturelles, mais c'est une <strong>Grande Puissance Économique</strong>.</p>
+                <ul style="list-style-type: none;">
+                    <li>🏭 <strong>Industrie :</strong> Toyota, Sony (Haute technologie).</li>
+                    <li>🎣 <strong>Pêche :</strong> 1ère nation de pêche au monde.</li>
+                    <li>🧠 <strong>Atout :</strong> Sa population (travailleuse, éduquée).</li>
+                    <li>⚠️ <strong>Contraintes :</strong> Séismes, volcans, manque d'espace.</li>
+                </ul>
+            </div>
+
+            <h3>2. Madagascar : Économie</h3>
+            <p>Madagascar est un pays à vocation agricole (80% de la population).</p>
+            
+            <div class="map-placeholder">
+                [Imagine ici la carte de Madagascar]<br>
+                Nord (SAVA) : Vanille, Café, Girofle<br>
+                Centre (Hautes Terres) : Riz, Artisanat<br>
+                Sud : Élevage de Zébus, sécheresse
+            </div>
+
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Cultures Vivrières (Pour manger)</th>
+                        <th>Cultures de Rente (Pour vendre/export)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Le Riz (Aliment de base)</td>
+                        <td>La Vanille (1er producteur mondial)</td>
+                    </tr>
+                    <tr>
+                        <td>Manioc, Maïs</td>
+                        <td>Café, Girofle, Litchi</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Les Problèmes Économiques :</strong></p>
+            <ul>
+                <li>L'érosion des sols (Lavaka).</li>
+                <li>Le mauvais état des routes (enclavement).</li>
+                <li>La croissance démographique rapide.</li>
+            </ul>
+
+            <div class="page-break"></div>
+
+            <!-- QUIZ FINAL -->
+            <div style="background: #eceff1; border: 3px double #455a64; padding: 25px; border-radius: 10px;">
+                <h3 style="margin-top:0; text-align: center;">🎓 Test Rapide BEPC</h3>
+                
+                <p><strong>1. Qui fut le premier Président de la République Malgache ?</strong><br>
+                ................................................................</p>
+
+                <p><strong>2. Quelle organisation mondiale a été créée en 1945 ?</strong><br>
+                ⚪ L'OTAN<br>
+                ⚪ L'ONU</p>
+
+                <p><strong>3. Citer deux produits d'exportation de Madagascar.</strong><br>
+                ................................................................</p>
+                
+                <p><strong>4. Le Japon est riche en pétrole. Vrai ou Faux ?</strong><br>
+                ⚪ Vrai<br>
+                ⚪ Faux (Ils importent tout !)</p>
+            </div>
+
+            <!-- SOLUTIONS -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Handlee'; font-size: 2em;">"Comprendre le passé pour construire l'avenir !"</p>
+                <div style="font-size: 0.8em; color: #777; transform: rotate(180deg); margin-top: 20px;">
+                    Réponses : 1. Philibert Tsiranana - 2. ONU - 3. Vanille, Café, Crevettes... - 4. Faux.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

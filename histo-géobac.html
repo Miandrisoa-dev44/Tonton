@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Histoire-Géo BAC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Permanent+Marker&family=Playfair+Display:wght@700&display=swap');
+
+        :root {
+            --hist-red: #c62828;
+            --hist-grey: #546e7a;
+            --geo-green: #2e7d32;
+            --geo-blue: #0277bd;
+            --paper-texture: #f4f1ea;
+            --ink-color: #212121;
+        }
+
+        body {
+            background-color: #cfd8dc;
+            font-family: 'Lato', sans-serif;
+            color: var(--ink-color);
+            margin: 0;
+            padding: 20px;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .book-page {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--paper-texture);
+            padding: 70px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+            border-left: 10px solid var(--hist-red);
+            border-right: 10px solid var(--geo-green);
+        }
+
+        /* Aquarelles "Géopolitique" */
+        .watercolor-stain {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+            opacity: 0.5;
+            mix-blend-mode: multiply;
+        }
+        .stain-conflict { background: var(--hist-red); width: 450px; height: 450px; top: -100px; left: -100px; }
+        .stain-world { background: var(--geo-blue); width: 400px; height: 400px; bottom: -50px; right: -80px; opacity: 0.4; }
+        .stain-nature { background: var(--geo-green); width: 250px; height: 250px; top: 40%; left: 40%; opacity: 0.3; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5em;
+            text-align: center;
+            color: #37474f;
+            margin-bottom: 5px;
+            letter-spacing: 3px;
+            border-bottom: 2px solid #333;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8em;
+            color: var(--hist-red);
+            margin-top: -10px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .title-hist { color: var(--hist-red); border-left: 6px solid var(--hist-grey); padding-left: 15px; }
+        .title-geo { color: var(--geo-green); border-left: 6px solid var(--geo-blue); padding-left: 15px; }
+
+        .deric-reporter {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #999;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+            font-style: italic;
+        }
+
+        .timeline-box {
+            border-left: 3px solid var(--hist-red);
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .event { margin-bottom: 15px; }
+        .date { font-weight: bold; font-family: 'Cinzel', serif; color: var(--hist-red); }
+
+        .geo-card {
+            background: white;
+            border-top: 5px solid var(--geo-blue);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .method-box {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+
+        .tag-serie {
+            font-size: 0.6em;
+            background: #333;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 10px;
+            text-transform: uppercase;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px dotted #777;
+            text-align: center;
+        }
+        .page-break::after { content: "🌍"; font-size: 1.5em; background: var(--paper-texture); position: relative; top: 16px; padding: 0 10px; }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--hist-grey);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+            .page-break::after { content: ""; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Dossier</a>
+
+    <div class="book-page">
+        <!-- Fond Aquarelle -->
+        <div class="watercolor-stain stain-conflict"></div>
+        <div class="watercolor-stain stain-world"></div>
+        <div class="watercolor-stain stain-nature"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #555; text-transform: uppercase;">TERMINALE (Toutes Séries)</p>
+                <h1>L'Odyssée du Monde</h1>
+                <div class="subtitle">Histoire & Géographie avec Tonton Deric</div>
+                <div style="font-size: 4em; margin-top: 20px;">🗺️🎥📰</div>
+            </div>
+
+            <div class="deric-reporter">
+                <span style="font-size: 3.5em; margin-right: 20px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">📸</span>
+                <div>
+                    "Ici Tonton Deric, en direct du XXème siècle ! 
+                    Le BAC d'Histoire-Géo, c'est comprendre comment le monde est passé de la Guerre Froide à la Mondialisation.
+                    C'est aussi maîtriser les défis de notre belle île, Madagascar. Préparez vos fiches, on analyse !"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- PARTIE 1 : HISTOIRE -->
+            <h2 class="title-hist">I. Histoire : Le Monde depuis 1945 <span class="tag-serie">Séries A, C, D</span></h2>
+            <p>Deux thèmes majeurs dominent : La Guerre Froide (Bipolarisation) et la Décolonisation (Tiers-Monde).</p>
+
+            <div class="geo-card" style="border-top-color: var(--hist-red);">
+                <h3>Le Conflit Idéologique (Est vs Ouest)</h3>
+                <p>Le monde est divisé en deux blocs antagonistes qui ne s'affrontent jamais directement (Équilibre de la terreur nucléaire).</p>
+                <ul>
+                    <li><strong>Bloc de l'Ouest (USA) :</strong> Capitalisme, Libéralisme, OTAN, Plan Marshall.</li>
+                    <li><strong>Bloc de l'Est (URSS) :</strong> Communisme, Socialisme, Pacte de Varsovie, CAEM.</li>
+                </ul>
+                <p><em>Fin de la Guerre Froide :</em> Chute du Mur de Berlin (1989) et éclatement de l'URSS (1991).</p>
+            </div>
+
+            <h3>Focus Madagascar : La Marche vers l'Indépendance</h3>
+            <div class="timeline-box">
+                <div class="event">
+                    <span class="date">1946 :</span> Madagascar devient Territoire d'Outre-Mer (TOM). Création du MDRM.
+                </div>
+                <div class="event">
+                    <span class="date">29 Mars 1947 :</span> <strong>L'Insurrection.</strong> Révolte contre le colonialisme. Répression sanglante, dissolution du MDRM.
+                </div>
+                <div class="event">
+                    <span class="date">1956 :</span> Loi Defferre (Loi Cadre). Début de l'autonomie.
+                </div>
+                <div class="event">
+                    <span class="date">14 Oct. 1958 :</span> Proclamation de la République Malgache.
+                </div>
+                <div class="event">
+                    <span class="date">26 Juin 1960 :</span> Indépendance totale.
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- PARTIE 2 : GEOGRAPHIE -->
+            <h2 class="title-geo">II. Géographie : La Mondialisation <span class="tag-serie">Séries A, C, D</span></h2>
+            <p>Le monde est un "Village Planétaire" dominé par la Triade (USA, UE, Asie de l'Est).</p>
+
+            <div class="geo-card">
+                <h3>Les USA : Une Superpuissance</h3>
+                <p>Malgré la montée de la Chine, les États-Unis restent le pôle dominant.</p>
+                <ul>
+                    <li><strong>Hard Power :</strong> Armée, Dollar, Diplomatie.</li>
+                    <li><strong>Soft Power :</strong> Cinéma (Hollywood), Mode de vie (American Way of Life), Technologie (GAFAM).</li>
+                </ul>
+            </div>
+
+            <div class="geo-card" style="border-top-color: var(--geo-green);">
+                <h3>Madagascar : Atouts et Contraintes</h3>
+                <p>Sujet classique de dissertation : <em>"Madagascar, un pays riche peuplé de pauvres ?"</em></p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <strong>✅ Atouts (Potentialités)</strong>
+                        <ul>
+                            <li>Ressources minières (Nickel, Cobalt, Saphir).</li>
+                            <li>Tourisme (Biodiversité unique).</li>
+                            <li>Agriculture (Vanille, Cacao).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>❌ Contraintes (Freins)</strong>
+                        <ul>
+                            <li>Relief accidenté (enclavement).</li>
+                            <li>Climat (Cyclones, sécheresse dans le Sud).</li>
+                            <li>Instabilité politique et corruption.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- METHODOLOGIE DISSERTATION -->
+            <div class="method-box">
+                <h3 style="margin-top:0; text-align: center; color: #e65100;">📝 Méthodo : La Dissertation BAC</h3>
+                <p>Ne jamais réciter le cours ! Il faut répondre à une <strong>Problématique</strong>.</p>
+                
+                <p><strong>Exemple de sujet :</strong> <em>L'ONU a-t-elle réussi sa mission de maintien de la paix depuis 1945 ?</em></p>
+                
+                <ul style="list-style: none;">
+                    <li><strong>Introduction :</strong> Définir l'ONU (1945, New York). Poser la question (Efficace ou impuissante ?). Annoncer le plan.</li>
+                    <li><strong>I. Les Réussites :</strong> Éviter une 3ème guerre mondiale, Aide humanitaire (UNICEF, PAM), Décolonisation.</li>
+                    <li><strong>II. Les Échecs :</strong> Guerres civiles, Droit de veto qui bloque tout (Guerre Froide), Conflits actuels.</li>
+                    <li><strong>Conclusion :</strong> Bilan mitigé. L'ONU est indispensable mais imparfaite.</li>
+                </ul>
+            </div>
+
+            <!-- QUIZ RAPIDE -->
+            <div style="border: 2px solid var(--hist-grey); padding: 20px; background: white; margin-top: 20px;">
+                <h3 style="margin-top: 0; text-align: center;">Quiz Express</h3>
+                <p><strong>1. Qui est le père de l'indépendance malgache ?</strong><br>
+                Réponse : Philibert Tsiranana.</p>
+                <p><strong>2. Que signifie "Pays Tiers-Monde" à l'origine ?</strong><br>
+                Réponse : Les pays qui ne sont alignés ni sur l'Ouest (USA), ni sur l'Est (URSS).</p>
+                <p><strong>3. Quelle est la capitale économique des USA ?</strong><br>
+                Réponse : New York (la capitale politique est Washington).</p>
+            </div>
+
+            <!-- FOOTER -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Permanent Marker'; font-size: 2.5em; color: var(--hist-grey);">"Le monde appartient à ceux qui le comprennent."</p>
+                <div style="font-size: 3em;">📡🏗️🌾</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

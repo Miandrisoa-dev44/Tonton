@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SVT BEPC - Le Labo de Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&family=Kalam:wght@300;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --bio-green: #66bb6a;
+            --blood-red: #ef5350;
+            --dna-purple: #ab47bc;
+            --microscope-blue: #42a5f5;
+            --text-dark: #263238;
+            --paper-texture: #f4f7f6;
+        }
+
+        body {
+            background-color: #cfd8dc;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .book-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--paper-texture);
+            padding: 60px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-left: 10px solid var(--bio-green);
+        }
+
+        /* Effets d'Aquarelle "Microscope" */
+        .bio-stain {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .stain-blood { background: var(--blood-red); width: 300px; height: 300px; top: -50px; right: -80px; }
+        .stain-cell { background: var(--bio-green); width: 400px; height: 400px; bottom: -100px; left: -100px; opacity: 0.3; }
+        .stain-dna { background: var(--dna-purple); width: 200px; height: 200px; top: 40%; left: 40%; mix-blend-mode: multiply; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Dosis', sans-serif;
+            font-size: 4em;
+            text-align: center;
+            color: #1b5e20;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        h2 {
+            font-family: 'Dosis', sans-serif;
+            color: var(--dna-purple);
+            font-size: 2.2em;
+            border-bottom: 2px solid var(--microscope-blue);
+            margin-top: 50px;
+            display: inline-block;
+        }
+
+        .lab-badge {
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Kalam', cursive;
+            color: #555;
+            font-size: 1.2em;
+        }
+
+        /* Cartes de Concepts */
+        .concept-card {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .microscope-view {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #ddd;
+            position: absolute;
+            right: 20px;
+            top: -20px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .deric-lab-note {
+            background: #e3f2fd;
+            border-left: 5px solid var(--microscope-blue);
+            padding: 15px;
+            margin-top: 15px;
+            font-family: 'Kalam', cursive;
+            color: #0d47a1;
+        }
+
+        .definition-box {
+            background: #f1f8e9;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border: 1px dashed var(--bio-green);
+        }
+
+        .schema-placeholder {
+            border: 2px dashed #bbb;
+            background: rgba(255,255,255,0.5);
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            color: #777;
+            font-style: italic;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bio-green);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px dotted #999;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Labo</a>
+
+    <div class="book-page">
+        <!-- Aquarelles -->
+        <div class="bio-stain stain-blood"></div>
+        <div class="bio-stain stain-cell"></div>
+        <div class="bio-stain stain-dna"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-weight: bold; color: #555;">PRÉPARATION EXAMEN BEPC</p>
+                <h1>Le Labo du Vivant</h1>
+                <div class="lab-badge">
+                    <span style="font-size: 5em;">🔬🧬<img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;"></span><br>
+                    "Analyse biologique avec le Professeur Tonton Deric"
+                </div>
+            </div>
+
+            <div class="deric-lab-note">
+                <strong>Introduction du Professeur Deric :</strong><br>
+                "Bienvenue, jeune chercheur ! En CM2, je t'ai appris à manger sainement. Pour le BEPC, nous allons plonger <strong>à l'intérieur</strong> de tes cellules. Mets tes lunettes de protection, on va manipuler de l'ADN et des microbes !"
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : IMMUNOLOGIE -->
+            <h2>I. L'Immunologie (Le Système de Défense)</h2>
+            <p>Ton corps est une forteresse assiégée par les micro-organismes. Comment se défend-il ?</p>
+
+            <div class="concept-card">
+                <div class="microscope-view" style="color: var(--blood-red);">🦠</div>
+                <h3>1. L'Agression</h3>
+                <p>Les microbes pathogènes tentent de pénétrer (Infection). S'ils se multiplient, c'est l'invasion.</p>
+                <div class="definition-box">
+                    <strong>Antigène :</strong> Élément étranger (le méchant) qui déclenche une réaction de défense.
+                </div>
+            </div>
+
+            <div class="concept-card">
+                <div class="microscope-view" style="color: var(--microscope-blue);">🛡️</div>
+                <h3>2. La Riposte (Réaction Immunitaire)</h3>
+                <p>Il y a deux lignes de défense principales :</p>
+                <ul>
+                    <li><strong>Les Phagocytes :</strong> Ce sont les "éboueurs". Ils mangent tout ce qui traîne (Phagocytose). C'est une réaction rapide et non spécifique.</li>
+                    <li><strong>Les Lymphocytes B :</strong> Ce sont les "tireurs d'élite". Ils produisent des <strong>Anticorps</strong> spécifiques pour neutraliser un antigène précis.</li>
+                </ul>
+                
+                <div class="deric-lab-note">
+                    💡 <strong>Analogie de Deric :</strong><br>
+                    La Phagocytose, c'est comme un balai qui ramasse toutes les miettes.<br>
+                    Les Anticorps, c'est une clé (anticorps) qui ne rentre que dans une seule serrure (antigène). C'est la <strong>spécificité</strong>.
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : GÉNÉTIQUE -->
+            <h2>II. La Génétique (Le Code de la Vie)</h2>
+            <p>Pourquoi as-tu les yeux de ta mère ? Tout est écrit dans le noyau de tes cellules.</p>
+
+            <div class="concept-card">
+                <div class="microscope-view" style="color: var(--dna-purple);">🧬</div>
+                <h3>Le Support de l'Hérédité</h3>
+                <p>L'information génétique se trouve dans le <strong>Noyau</strong> des cellules, sur les <strong>Chromosomes</strong>.</p>
+                <p>Les chromosomes sont constitués d'<strong>ADN</strong> (Acide Désoxyribonucléique).</p>
+                
+                <div class="definition-box">
+                    <strong>Caryotype Humain :</strong> C'est la photo des chromosomes rangés. L'être humain possède <strong>46 chromosomes</strong> (23 paires).<br>
+                    La 23ème paire détermine le sexe : <strong>XX</strong> (Femme) ou <strong>XY</strong> (Homme).
+                </div>
+            </div>
+
+            <div class="deric-lab-note">
+                ⚠️ <strong>Attention au BEPC :</strong><br>
+                Un <strong>Gène</strong> est une portion d'ADN qui porte une information précise (ex: groupe sanguin).<br>
+                Un <strong>Allèle</strong> est une version de ce gène (ex: Allèle A, Allèle B, Allèle O).
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : NUTRITION & DIGESTION -->
+            <h2>III. Nutrition : De l'Aliment au Nutriment</h2>
+            <p>La digestion est une transformation mécanique (dents) et chimique (enzymes).</p>
+
+            <div class="concept-card">
+                <h3>Le Rôle des Enzymes</h3>
+                <p>Les sucs digestifs contiennent des <strong>enzymes</strong>. Ce sont des ciseaux chimiques.</p>
+                <div class="schema-placeholder">
+                    [Schéma Mental]<br>
+                    Amidon (Grosse Molécule) ➔ Amylase (Ciseaux) ➔ Glucose (Petite Molécule / Nutriment)
+                </div>
+                <p>Une fois coupés en nutriments, ils passent dans le sang au niveau de l'<strong>Intestin Grêle</strong>. C'est l'<strong>Absorption Intestinale</strong>.</p>
+            </div>
+
+            <!-- QUIZ RAPIDE -->
+            <div style="background: #fff3e0; border: 2px dashed #ffb74d; padding: 25px; border-radius: 10px; margin-top: 40px;">
+                <h3 style="margin-top:0; color: #ef6c00; text-align: center;">🧪 Test Rapide avant l'Exam</h3>
+                
+                <p><strong>1. Où se fait le passage des nutriments dans le sang ?</strong><br>
+                ⚪ L'estomac<br>
+                ⚪ Les villosités de l'intestin grêle</p>
+                
+                <p><strong>2. Quel est le rôle des Lymphocytes B ?</strong><br>
+                ⚪ Manger les microbes (Phagocytose)<br>
+                ⚪ Produire des anticorps</p>
+                
+                <p><strong>3. Combien de chromosomes possède un gamète (spermatozoïde ou ovule) ?</strong><br>
+                ⚪ 46 chromosomes<br>
+                ⚪ 23 chromosomes (seulement la moitié !)</p>
+            </div>
+
+            <!-- SOLUTIONS -->
+            <div style="margin-top: 50px; text-align: center; border-top: 1px solid #ccc; padding-top: 20px;">
+                <div style="font-size: 0.8em; color: #777; transform: rotate(180deg); margin-bottom: 20px;">
+                    Réponses : 1. Villosités - 2. Produire anticorps - 3. 23 (pour que 23+23 fasse 46 à la fécondation).
+                </div>
+                <p style="font-family: 'Kalam'; font-size: 2em; color: var(--bio-green);">"Science sans conscience n'est que ruine de l'âme... mais Science avec révisions, c'est le BEPC assuré !"</p>
+                <div style="font-size: 4em;">💊🔬</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

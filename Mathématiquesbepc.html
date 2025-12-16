@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Maths BEPC - Professeur Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@700&family=Lato:wght@300;400;700&display=swap');
+
+        :root {
+            --math-indigo: #3f51b5;
+            --geom-teal: #009688;
+            --algebra-red: #e91e63;
+            --gold-accent: #ffb300;
+            --paper-texture: #fdfbf7;
+            --ink-black: #212121;
+        }
+
+        body {
+            background-color: #cfd8dc;
+            font-family: 'Lato', sans-serif;
+            color: var(--ink-black);
+            margin: 0;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .book-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--paper-texture);
+            padding: 60px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        /* Effets d'Aquarelle "Mature" */
+        .paint-wash {
+            position: absolute;
+            z-index: 0;
+            filter: blur(50px);
+            opacity: 0.5;
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+        .wash-indigo { background: var(--math-indigo); width: 500px; height: 500px; top: -150px; right: -100px; }
+        .wash-teal { background: var(--geom-teal); width: 400px; height: 300px; bottom: 0; left: -100px; }
+        .wash-gold { background: var(--gold-accent); width: 200px; height: 200px; top: 40%; left: 40%; mix-blend-mode: multiply; opacity: 0.3; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4em;
+            text-align: center;
+            color: var(--math-indigo);
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--gold-accent);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2em;
+            color: var(--ink-black);
+            margin-top: 50px;
+            border-left: 5px solid var(--algebra-red);
+            padding-left: 20px;
+        }
+
+        .intro-box {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5em;
+            text-align: center;
+            color: #555;
+            margin-bottom: 40px;
+        }
+
+        /* Cadres de Formules */
+        .formula-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .formula-card::before {
+            content: "Σ";
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: var(--math-indigo);
+            color: white;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            line-height: 30px;
+        }
+
+        .math-display {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-size: 1.3em;
+            text-align: center;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            color: #000;
+        }
+
+        .deric-pro-tip {
+            display: flex;
+            align-items: center;
+            background: #e8f5e9;
+            border: 1px dashed var(--geom-teal);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .exam-section {
+            border: 3px double var(--ink-black);
+            padding: 30px;
+            margin-top: 50px;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .geometry-draw {
+            width: 200px;
+            height: 150px;
+            border-left: 2px solid black;
+            border-bottom: 2px solid black;
+            position: relative;
+            margin: 20px auto;
+        }
+        .triangle-line {
+            position: absolute;
+            width: 250px;
+            height: 2px;
+            background: black;
+            top: 0; left: 0;
+            transform-origin: 0 0;
+            transform: rotate(37deg);
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--math-indigo);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Cours</a>
+
+    <div class="book-page">
+        <!-- Arrière-plan Aquarelle -->
+        <div class="paint-wash wash-indigo"></div>
+        <div class="paint-wash wash-teal"></div>
+        <div class="paint-wash wash-gold"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="letter-spacing: 4px; font-weight: bold; color: #555; text-transform: uppercase;">Préparation Brevet (BEPC)</p>
+                <h1>Le Laboratoire Mathématique</h1>
+                <div style="font-size: 5em; margin: 10px;">📐<img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">⚡🍞</div>
+                <div class="intro-box">
+                    "Bienvenue dans la cour des grands. Ici, on ne grille plus des tartines, on calcule leur trajectoire parabolique ! Je suis le <strong>Professeur Deric</strong>, ton assistant pour le BEPC."
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : RACINES CARRÉES -->
+            <h2>I. Les Racines Carrées (Ny fototra)</h2>
+            <p>C'est la base du calcul en 3ème. Une racine carrée, c'est comme trouver l'ingrédient original d'un gâteau déjà cuit.</p>
+
+            <div class="formula-card">
+                <h3>Les Règles Sacrées</h3>
+                <p>Pour tout nombre positif a et b :</p>
+                <div class="math-display">√(a × b) = √a × √b</div>
+                <div class="math-display">√(a / b) = √a / √b</div>
+                <p style="color: var(--algebra-red); font-weight: bold;">⚠️ ATTENTION : √(a + b) ≠ √a + √b</p>
+                
+                <div class="deric-pro-tip">
+                    <span style="font-size: 2em; margin-right: 15px;">🤓</span>
+                    <div>
+                        <strong>Astuce BEPC :</strong> On te demandera souvent d'écrire sous la forme a√b.<br>
+                        Exemple : √50 = √(25 * 2) = √25 * √2 = 5√2.
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHAPITRE 2 : CALCUL LITTERAL -->
+            <h2>II. Calcul Littéral & Identités</h2>
+            <p>Développer (Manitatra) et Factoriser (Mamadika hoorana). Tu dois connaître ces 3 formules par cœur, même si je te réveille à minuit !</p>
+
+            <div class="formula-card" style="border-left: 5px solid var(--algebra-red);">
+                <h3>Les 3 Identités Remarquables</h3>
+                <ol>
+                    <li>(a + b)^2 = a^2 + 2ab + b^2</li>
+                    <li>(a - b)^2 = a^2 - 2ab + b^2</li>
+                    <li>(a - b)(a + b) = a^2 - b^2</li>
+                </ol>
+            </div>
+
+            <div class="deric-pro-tip">
+                <span style="font-size: 2em; margin-right: 15px;">🛡️</span>
+                <div>
+                    <strong>Le Piège du Signe "Moins" :</strong><br>
+                    Quand tu développes -(3x + 2), le signe "moins" est comme un laser : il change tous les signes à l'intérieur !<br>
+                    Resultat : -3x - 2.
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : GEOMETRIE -->
+            <h2>III. Thalès et Pythagore</h2>
+            <p>Les deux meilleurs amis du géomètre. L'un pour les parallèles, l'autre pour les angles droits.</p>
+
+            <div class="formula-card">
+                <h3>La Propriété de Thalès</h3>
+                <p>Sert à calculer des longueurs quand on a des <strong>droites parallèles</strong>.</p>
+                <div class="math-display">
+                    AM / AB = AN / AC = MN / BC
+                </div>
+                <p><em>(Le petit triangle est proportionnel au grand triangle)</em></p>
+            </div>
+
+            <div class="formula-card">
+                <h3>Trigonométrie (Triangle Rectangle)</h3>
+                <p>Souviens-toi du mot magique : <strong>SOH - CAH - TOA</strong></p>
+                <ul>
+                    <li><strong>S</strong>inus = <strong>O</strong>pposé / <strong>H</strong>ypoténuse</li>
+                    <li><strong>C</strong>osinus = <strong>A</strong>djacent / <strong>H</strong>ypoténuse</li>
+                    <li><strong>T</strong>angente = <strong>O</strong>pposé / <strong>A</strong>djacent</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- SUJET TYPE EXAMEN -->
+            <div class="exam-section">
+                <div style="text-align: center;">
+                    <h2 style="margin-top:0; border:none; text-decoration: underline;">SUJET TYPE BEPC</h2>
+                    <p><em>Durée : Jusqu'à ce que le pain soit doré</em></p>
+                </div>
+
+                <p><strong>Exercice 1 : Algèbre (Points chauds)</strong><br>
+                On donne l'expression E = (2x - 3)^2 - (2x - 3)(x + 5).<br>
+                1. Développer et réduire E.<br>
+                2. Factoriser E.<br>
+                3. Résoudre l'équation (2x - 3)(x - 8) = 0.</p>
+
+                <hr style="border: 0; border-top: 1px dashed #999; margin: 20px 0;">
+
+                <p><strong>Exercice 2 : Géométrie (Architecture)</strong><br>
+                ABC est un triangle rectangle en A. On sait que AB = 3cm et AC = 4cm.<br>
+                1. Calculer la longueur BC (Utilise Pythagore).<br>
+                2. Calculer cos(ABC).</p>
+            </div>
+
+            <!-- SOLUTIONS -->
+            <div style="margin-top: 50px; padding: 20px; background: #e0f2f1; border-radius: 10px;">
+                <h3 style="color: var(--geom-teal);">💡 Solutions (Le coin du corrigé)</h3>
+                <p style="font-size: 0.9em; line-height: 1.6;">
+                    <strong>Ex 1 :</strong><br>
+                    1. Dév : (4x^2 - 12x + 9) - (2x^2 + 10x - 3x - 15) = 2x^2 - 19x + 24.<br>
+                    2. Facto : Le facteur commun est (2x-3). E = (2x-3)[(2x-3) - (x+5)] = (2x-3)(x-8)$.<br>
+                    3. Équation : Soit 2x-3=0 (x=3/2) ou x-8=0 (x=8). Solutions : S={1,5 ; 8}.<br>
+                    <br>
+                    <strong>Ex 2 :</strong><br>
+                    1. BC^2 = AB^2 + AC^2 = 9 + 16 = 25. Donc BC = √25 = 5cm.<br>
+                    2. cos(B) = Adj / Hyp = AB / BC = 3 / 5 = 0,6.
+                </p>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <p style="font-family: 'Dancing Script', cursive; font-size: 2em; color: var(--math-indigo);">"La logique est ton alliée. Bon courage pour le BEPC !"</p>
+                <div style="font-size: 4em;">🎓📝</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

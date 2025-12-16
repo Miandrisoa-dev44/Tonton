@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Le Français avec Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Kalam:wght@300;400&display=swap');
+
+        :root {
+            --ink-blue: #1a237e;
+            --ink-light: #534bae;
+            --paper-cream: #fffdf5;
+            --highlight-orange: #ffcc80;
+            --accent-purple: #ce93d8;
+            --watercolor-lavender: #e1bee7;
+        }
+
+        body {
+            background-color: #f3e5f5; /* Fond violet très pâle */
+            font-family: 'EB Garamond', serif;
+            color: var(--ink-blue);
+            margin: 0;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .book-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--paper-cream);
+            padding: 60px;
+            box-shadow: 0 15px 35px rgba(26, 35, 126, 0.15);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+            /* Effet texture papier */
+            background-image: linear-gradient(#f1f1f1 1px, transparent 1px);
+            background-size: 100% 3em; 
+        }
+
+        /* Taches d'aquarelle artistiques */
+        .paint-splash {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+        .splash-top { top: -60px; right: -60px; width: 350px; height: 350px; background: var(--watercolor-lavender); }
+        .splash-mid { top: 40%; left: -80px; width: 250px; height: 250px; background: var(--highlight-orange); mix-blend-mode: multiply;}
+        .splash-bot { bottom: -40px; right: 20%; width: 300px; height: 200px; background: var(--ink-light); opacity: 0.2; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4em;
+            text-align: center;
+            color: var(--ink-blue);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px rgba(200,200,200,0.5);
+        }
+
+        h2 {
+            font-family: 'Kalam', cursive;
+            color: var(--ink-light);
+            border-bottom: 2px solid var(--highlight-orange);
+            display: inline-block;
+            margin-top: 40px;
+            font-size: 2em;
+        }
+
+        .intro-box {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 50px;
+            padding: 20px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+        }
+
+        .grammar-rule {
+            background: rgba(232, 234, 253, 0.9);
+            border-left: 5px solid var(--ink-blue);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .exercise-box {
+            border: 2px dashed var(--accent-purple);
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+        }
+
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: 'Kalam', cursive;
+        }
+        .verb-table th {
+            background-color: var(--watercolor-lavender);
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+        }
+        .verb-table td {
+            border-bottom: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .homophone-battle {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .vs-circle {
+            background: var(--highlight-orange);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .page-break {
+            margin: 60px 0;
+            border-bottom: 1px solid var(--accent-purple);
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--ink-blue);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: sans-serif;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 100;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .btn-print:hover { transform: scale(1.05); }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 30px; background-image: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Cahier</a>
+
+    <div class="book-page">
+        <!-- Taches d'aquarelle -->
+        <div class="paint-splash splash-top"></div>
+        <div class="paint-splash splash-mid"></div>
+        <div class="paint-splash splash-bot"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="letter-spacing: 2px; font-size: 0.9em; color: #666;">PRÉPARATION CEPE - LANGUE FRANÇAISE</p>
+                <h1>Les Mots Magiques<br>de Tonton Deric</h1>
+                <div style="font-size: 5em;">✒️📜<img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;"></div>
+            </div>
+
+            <div class="intro-box">
+                <p>"Bonjour ! Je suis <strong>Tonton Deric</strong>. Je veux écrire le plus beau livre de recettes du monde, mais la langue française est pleine de pièges ! Accords, conjugaisons, homophones... Aide-moi à ne pas faire de fautes !"</p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : GRAMMAIRE -->
+            <h2>Chapitre I : L'Analyse de la Phrase</h2>
+            <p>Pour réussir le CEPE, tu dois savoir qui fait l'action et sur quoi porte l'action.</p>
+
+            <div class="grammar-rule">
+                <h3>📜 Règle d'Or : GNS et GV</h3>
+                <p>Dans une phrase, on cherche d'abord le <strong>Verbe</strong> (l'action).<br>
+                Ensuite, on demande <em>"Qui est-ce qui... ?"</em> pour trouver le <strong>Sujet (GNS)</strong>.</p>
+                <p><em>Exemple :</em> <span style="color:red;">Le petit grille-pain</span> <span style="color:blue;">mange</span> <span style="color:green;">une tartine</span>.<br>
+                <small>(GNS)</small> + <small>(Verbe)</small> + <small>(COD)</small></p>
+            </div>
+
+            <div class="exercise-box">
+                <h3>À toi de jouer ! 🎯</h3>
+                <p>Dans les phrases suivantes, souligne le <strong>Sujet</strong> et encadre le <strong>COD</strong> (Complément d'Objet Direct) :</p>
+                <ol>
+                    <li>Tonton Deric prépare un gâteau au chocolat.</li>
+                    <li>Les élèves révisent leurs leçons.</li>
+                    <li>La foudre magique frappe le vieux grille-pain.</li>
+                </ol>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : CONJUGAISON -->
+            <h2>Chapitre II : Le Voyage dans le Temps</h2>
+            <p>Conjuguer, c'est habiller le verbe selon le moment. Au CEPE, ces 4 temps sont rois !</p>
+
+            <div class="verb-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2">Le Verbe AVOIR (L'Auxiliaire)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Présent</strong> (Maintenant)</td>
+                            <td>J'ai, Tu as, Il a...</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Futur Simple</strong> (Demain)</td>
+                            <td>J'aurai, Tu auras, Il aura...</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Imparfait</strong> (Autrefois)</td>
+                            <td>J'avais, Tu avais, Il avait...</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Passé Composé</strong> (Hier, fini)</td>
+                            <td>J'ai eu, Tu as eu...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="exercise-box">
+                <h3>⚡ Le Défi Conjugaison</h3>
+                <p>Mets le verbe entre parenthèses au temps demandé :</p>
+                <ul style="list-style: none;">
+                    <li>1. Demain, nous (finir) ........................ les exercices. <em>(Futur)</em></li>
+                    <li>2. Hier, Tonton Deric (chanter) ........................ dans la cuisine. <em>(Passé Composé)</em></li>
+                    <li>3. Quand j'étais petit, je (jouer) ........................ aux billes. <em>(Imparfait)</em></li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : ORTHOGRAPHE -->
+            <h2>Chapitre III : Les Pièges (Homophones)</h2>
+            <p>C'est la partie préférée des examinateurs du CEPE ! Ne confonds pas les mots qui s'entendent pareil.</p>
+
+            <div class="homophone-battle">
+                <div style="text-align: center;">
+                    <h3 style="color: darkred;">a</h3>
+                    <p>Verbe Avoir<br><em>"Il a faim"</em><br>On peut dire <strong>"avait"</strong>.</p>
+                </div>
+                <div class="vs-circle">VS</div>
+                <div style="text-align: center;">
+                    <h3 style="color: darkred;">à</h3>
+                    <p>Préposition<br><em>"Je vais à l'école"</em><br>On <strong>NE peut PAS</strong> dire "avait".</p>
+                </div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px dashed #ccc;">
+
+            <div class="homophone-battle">
+                <div style="text-align: center;">
+                    <h3 style="color: darkblue;">et</h3>
+                    <p>Pour ajouter<br><em>"Toi et moi"</em><br>On peut dire <strong>"et puis"</strong>.</p>
+                </div>
+                <div class="vs-circle">VS</div>
+                <div style="text-align: center;">
+                    <h3 style="color: darkblue;">est</h3>
+                    <p>Verbe Être<br><em>"Il est gentil"</em><br>On peut dire <strong>"était"</strong>.</p>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h3>📝 Complète les phrases</h3>
+                <p>Tonton Deric ..... (a / à) mal ..... (a / à) la tête.<br>
+                Son pain ..... (et / est) brûlé ..... (et / est) dur.</p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- COMPREHENSION DE TEXTE -->
+            <h2>Chapitre IV : Lecture & Compréhension</h2>
+            
+            <div style="background: white; padding: 25px; border: 1px solid #ddd; box-shadow: 5px 5px 0px #eee;">
+                <h3 style="margin-top: 0; text-align: center;">Tonton Deric à la Rescousse</h3>
+                <p style="text-align: justify;">
+                    Ce matin-là, la boulangerie était triste. Le grand four était en panne ! Le boulanger pleurait : "Comment cuire les baguettes pour le CEPE des enfants ?".<br>
+                    Soudain, Tonton Deric s'avança. Il brancha sa prise et concentra toute son énergie. Il devint rouge, puis orange, puis jaune éclatant ! Il dégageait une chaleur douce. En quelques minutes, toutes les baguettes furent dorées et croustillantes. "Merci Tonton Deric !" cria le boulanger.
+                </p>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <p><strong>Questions :</strong></p>
+                <ol>
+                    <li>Pourquoi le boulanger pleurait-il ?</li>
+                    <li>Comment Tonton Deric a-t-il sauvé la situation ?</li>
+                    <li>Trouve dans le texte un adjectif qualificatif qui décrit les baguettes.</li>
+                </ol>
+            </div>
+
+            <!-- FOOTER SOLUTIONS -->
+            <div style="margin-top: 80px; transform: rotate(180deg); font-size: 0.8em; color: #888; text-align: center;">
+                <p><strong>Solutions :</strong></p>
+                <p>Ex 1 : 1. Sujet: Tonton Deric / COD: un gâteau. 2. Sujet: Les élèves / COD: leurs leçons.</p>
+                <p>Ex 2 : 1. finirons - 2. a chanté - 3. jouais.</p>
+                <p>Ex 3 : Tonton Deric <strong>a</strong> mal <strong>à</strong> la tête. Son pain <strong>est</strong> brûlé <strong>et</strong> dur.</p>
+                <p>Lecture : 1. Le four était en panne. 2. En chauffant avec son énergie. 3. Dorées / Croustillantes.</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>English BEPC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lato:ital,wght@0,400;0,700;1,400&family=Pacifico&display=swap');
+
+        :root {
+            --royal-blue: #1565c0;
+            --bus-red: #d32f2f;
+            --tea-beige: #efebe9;
+            --rain-grey: #cfd8dc;
+            --paper-white: #fffdfc;
+        }
+
+        body {
+            background-color: #b0bec5;
+            font-family: 'Lato', sans-serif;
+            color: #263238;
+            margin: 0;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .book-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--paper-white);
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+        }
+
+        /* Aquarelles "London Style" */
+        .paint-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .blob-blue { background: var(--royal-blue); width: 400px; height: 400px; top: -150px; left: -100px; }
+        .blob-red { background: var(--bus-red); width: 350px; height: 350px; bottom: -50px; right: -80px; }
+        .blob-beige { background: #d7ccc8; width: 250px; height: 250px; top: 40%; right: 20%; mix-blend-mode: multiply; opacity: 0.3; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Abril Fatface', cursive;
+            font-size: 4em;
+            text-align: center;
+            color: var(--royal-blue);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px rgba(211, 47, 47, 0.2);
+        }
+
+        h2 {
+            font-family: 'Abril Fatface', cursive;
+            color: var(--bus-red);
+            font-size: 2.2em;
+            border-bottom: 4px solid var(--royal-blue);
+            display: inline-block;
+            margin-top: 50px;
+        }
+
+        .deric-speech {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--royal-blue);
+            border-radius: 20px 20px 20px 0;
+            padding: 25px;
+            margin: 30px 0;
+            font-family: 'Pacifico', cursive;
+            color: #333;
+            box-shadow: 5px 5px 0 rgba(21, 101, 192, 0.2);
+            display: flex;
+            align-items: center;
+        }
+
+        .grammar-box {
+            background: #e3f2fd;
+            border-left: 6px solid var(--royal-blue);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .vocab-card {
+            background: #ffebee; /* Red tint */
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px dashed var(--bus-red);
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .flag-divider {
+            height: 10px;
+            background: linear-gradient(90deg, var(--royal-blue) 33%, white 33%, white 66%, var(--bus-red) 66%);
+            margin: 40px 0;
+            opacity: 0.7;
+        }
+
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin: 15px 0;
+        }
+        .verb-table th { background: var(--royal-blue); color: white; padding: 10px; }
+        .verb-table td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 2px dotted #999;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--royal-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Print the Book</a>
+
+    <div class="book-page">
+        <!-- Aquarelles -->
+        <div class="paint-blob blob-blue"></div>
+        <div class="paint-blob blob-red"></div>
+        <div class="paint-blob blob-beige"></div>
+
+        <div class="content">
+            <!-- COUVERTURE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #555;">BEPC EXAM PREPARATION</p>
+                <h1>English Success</h1>
+                <h3 style="font-family:'Pacifico'; color: #666; font-size: 2em; margin-top: -10px;">With Uncle Deric</h3>
+                <div style="font-size: 6em; margin: 20px;">🇬🇧🙋🍞</div>
+            </div>
+
+            <div class="deric-speech">
+                <div style="font-size: 3em; margin-right: 20px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">🍵</div>
+                <div>
+                    "Hello mates! I am <strong>Uncle Deric</strong>. 
+                    I put on my bowler hat to help you master Shakespeare's language. 
+                    Don't worry, English is like toast: better when it's simple and crisp! Let's go!"
+                </div>
+            </div>
+
+            <div class="flag-divider"></div>
+
+            <!-- CHAPITRE 1 : LES TEMPS (TENSES) -->
+            <h2>I. The Time Machine (Tenses)</h2>
+            <p>Au BEPC, tu dois absolument distinguer le passé daté et le passé lié au présent.</p>
+
+            <div class="grammar-box">
+                <h3>🕰️ Simple Past vs. Present Perfect</h3>
+                
+                <p><strong>1. Simple Past (Le Passé Simple)</strong><br>
+                Action terminée dans le passé, avec une date précise.<br>
+                <em>Keywords: Yesterday, Last week, In 1990, 2 days ago.</em><br>
+                📝 <span style="color:var(--royal-blue);">I <strong>ate</strong> a toast yesterday.</span></p>
+
+                <hr style="border:0; border-top:1px dashed #aaa; margin: 15px 0;">
+
+                <p><strong>2. Present Perfect (Have + Participe Passé)</strong><br>
+                Action passée mais sans date, ou qui a une conséquence maintenant.<br>
+                <em>Keywords: Just, Already, Yet, Since, For.</em><br>
+                📝 <span style="color:var(--bus-red);">I <strong>have eaten</strong> a toast. (I am not hungry now).</span></p>
+            </div>
+
+            <div class="vocab-card">
+                <strong>Irregular Verbs (Les verbes irréguliers)</strong><br>
+                Au BEPC, apprends au moins ceux-ci :<br>
+                Go -> Went -> Gone<br>
+                See -> Saw -> Seen<br>
+                Take -> Took -> Taken<br>
+                Buy -> Bought -> Bought
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : VOIX PASSIVE -->
+            <h2>II. The Passive Voice</h2>
+            <p>C'est une transformation magique très courante à l'examen.</p>
+            
+            <div class="grammar-box" style="border-left-color: var(--bus-red); background: #ffebee;">
+                <h3>The Formula: BE + Past Participle</h3>
+                
+                <p><strong>Active:</strong> <br>
+                Deric <span style="color:blue;">grills</span> the bread.</p>
+                
+                <p><strong>Passive:</strong> <br>
+                The bread <span style="color:red;">is grilled</span> by Deric.</p>
+                
+                <p>⚠️ <strong>Attention aux temps :</strong><br>
+                - Active (Past): Deric <em>grilled</em> the bread.<br>
+                - Passive (Past): The bread <em>was grilled</em> by Deric.</p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : REPORTED SPEECH -->
+            <h2>III. Reported Speech</h2>
+            <p>Quand tu racontes ce que quelqu'un a dit ("He said that..."). On recule d'un cran dans le temps !</p>
+
+            <table class="verb-table">
+                <thead>
+                    <tr>
+                        <th>Direct Speech (Présent)</th>
+                        <th>Reported Speech (Passé)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>"I <strong>am</strong> happy."</td>
+                        <td>He said (that) he <strong>was</strong> happy.</td>
+                    </tr>
+                    <tr>
+                        <td>"I <strong>like</strong> tea."</td>
+                        <td>He said he <strong>liked</strong> tea.</td>
+                    </tr>
+                    <tr>
+                        <td>"I <strong>will</strong> come."</td>
+                        <td>He said he <strong>would</strong> come.</td>
+                    </tr>
+                    <tr>
+                        <td>"I <strong>can</strong> swim."</td>
+                        <td>He said he <strong>could</strong> swim.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 4 : ESSAY WRITING -->
+            <h2>IV. Essay Writing (Expression Écrite)</h2>
+            <p>Pour la rédaction (60-80 mots), utilise des <strong>Linking Words</strong> pour structurer tes idées.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="vocab-card" style="background: #e8f5e9; border-color: green;">
+                    <strong>Introduction</strong><br>
+                    First of all,<br>
+                    To begin with,<br>
+                    In my opinion,
+                </div>
+                <div class="vocab-card" style="background: #fff3e0; border-color: orange;">
+                    <strong>Development</strong><br>
+                    Then / Next,<br>
+                    However (Pourtant),<br>
+                    Moreover (De plus),
+                </div>
+            </div>
+            <div class="vocab-card" style="background: #e1f5fe; border-color: blue;">
+                <strong>Conclusion</strong><br>
+                To conclude,<br>
+                Finally,<br>
+                In short,
+            </div>
+
+            <!-- QUIZ -->
+            <div style="margin-top: 50px; border: 3px double var(--royal-blue); padding: 25px; border-radius: 15px; background: white;">
+                <h3 style="margin-top:0; text-align: center; color: var(--royal-blue);">🇬🇧 The Final Quiz</h3>
+                
+                <p><strong>1. "I ________ (to live) in Madagascar since 2010."</strong><br>
+                a) live<br>
+                b) have lived<br>
+                c) lived</p>
+
+                <p><strong>2. Transform into Passive: "The teacher opens the door."</strong><br>
+                ...........................................................................</p>
+
+                <p><strong>3. "If I have money, I ________ (to buy) a new toaster."</strong><br>
+                a) will buy<br>
+                b) would buy</p>
+                
+                <hr>
+                <div style="font-size: 0.8em; color: #888; text-align: center;">
+                    <em>Answers: 1. b (have lived) - 2. The door is opened by the teacher. - 3. a (will buy - 1st Conditional).</em>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Pacifico'; font-size: 2em; color: var(--bus-red);">"Keep calm and pass the BEPC!"</p>
+                <div style="font-size: 3em;">🚌🎡</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

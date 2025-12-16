@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Problèmes CEPE avec Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Fredoka:wght@300;500&family=Gochi+Hand&display=swap');
+
+        :root {
+            --puzzle-purple: #ba68c8;
+            --logic-blue: #90caf9;
+            --alert-orange: #ffcc80;
+            --paper-bg: #fffdf7;
+            --ink-text: #4a148c;
+        }
+
+        body {
+            background-color: #e1bee7;
+            font-family: 'Fredoka', sans-serif;
+            color: var(--ink-text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .book-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--paper-bg);
+            padding: 50px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            /* Texture papier millimétré léger */
+            background-image: linear-gradient(rgba(200, 200, 255, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(200, 200, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Taches Aquarelle "Mystère" */
+        .paint-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(45px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+        .blob-purple { background: var(--puzzle-purple); width: 350px; height: 350px; top: -80px; left: -80px; }
+        .blob-blue { background: var(--logic-blue); width: 300px; height: 300px; bottom: -50px; right: -50px; }
+        .blob-orange { background: var(--alert-orange); width: 200px; height: 200px; top: 40%; left: 40%; mix-blend-mode: multiply; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Gochi Hand', cursive;
+            font-size: 3.5em;
+            text-align: center;
+            color: #6a1b9a;
+            margin-bottom: 5px;
+            text-shadow: 3px 3px 0px rgba(255,255,255,0.5);
+        }
+
+        h2 {
+            font-family: 'Architects Daughter', cursive;
+            color: #d81b60;
+            border-bottom: 3px dashed var(--puzzle-purple);
+            margin-top: 50px;
+            display: inline-block;
+        }
+
+        .investigator-badge {
+            background: white;
+            border: 2px solid #8e24aa;
+            border-radius: 50px;
+            padding: 15px 30px;
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            width: fit-content;
+        }
+
+        .case-file {
+            background: rgba(255, 255, 255, 0.9);
+            border-left: 8px solid var(--puzzle-purple);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 0 15px 15px 0;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.05);
+        }
+
+        .method-box {
+            background: #e3f2fd;
+            border: 1px dashed var(--logic-blue);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+
+        .data-highlight {
+            background-color: var(--alert-orange);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+        .step-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        .step-list li::before {
+            content: "🔍";
+            position: absolute;
+            left: 0;
+        }
+
+        .page-break {
+            margin: 60px 0;
+            border-bottom: 2px dotted #aaa;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #6a1b9a;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: sans-serif;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; background-image: none; border: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer les Dossiers</a>
+
+    <div class="book-page">
+        <!-- Aquarelles -->
+        <div class="paint-blob blob-purple"></div>
+        <div class="paint-blob blob-blue"></div>
+        <div class="paint-blob blob-orange"></div>
+
+        <div class="content">
+            <!-- COUVERTURE -->
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-weight: bold; letter-spacing: 2px; color: #555;">PRÉPARATION CEPE - PROBLÈMES</p>
+                <h1>Les Énigmes Résolues</h1>
+                <h3 style="font-family:'Architects Daughter'; font-size: 2em; margin-top: -10px;">Par l'Inspecteur Tonton Deric</h3>
+                <div style="font-size: 6em; margin: 20px;">🕵️‍♂️🔎🍞</div>
+            </div>
+
+            <div style="text-align: center;">
+                <div class="investigator-badge">
+                    <span style="font-size: 2.5em; margin-right: 15px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;"></span>
+                    <div>
+                        "Un problème, c'est comme une tartine brûlée :<br>il faut gratter le noir pour trouver le bon !"<br>
+                        <strong>Suis ma méthode en 3 étapes.</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : METHODOLOGIE -->
+            <h2>Dossier I : La Méthode Secrète</h2>
+            <p>Avant de calculer, tu dois être un détective. Ne fonce pas tête baissée !</p>
+
+            <div class="method-box" style="background: white; border: 2px solid #6a1b9a;">
+                <h3 style="margin-top:0;">Les 3 Étapes de l'Enquête :</h3>
+                <ul class="step-list">
+                    <li><strong>1. Le Tri des Preuves (Données) :</strong> Lis le texte 2 fois. Surligne les chiffres importants et ce qu'ils représentent (kg, Ar, mètres...).</li>
+                    <li><strong>2. La Question (Objectif) :</strong> Que cherche-t-on ? Le prix total ? Le reste ? Souligne la question.</li>
+                    <li><strong>3. L'Opération (Action) :</strong>
+                        <br>Total ou somme ➔ <strong>Addition (+)</strong>
+                        <br>Reste ou différence ➔ <strong>Soustraction (-)</strong>
+                        <br>Prix unitaire vers Prix total ➔ <strong>Multiplication (x)</strong>
+                        <br>Partage équitable ➔ <strong>Division (:)</strong>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- CAS PRATIQUE 1 : ACHATS -->
+            <div class="case-file">
+                <h3>🛒 Affaire N°1 : Le Marché de Mme Soa</h3>
+                <p>Mme Soa va au marché. Elle achète <span class="data-highlight">3 kg de riz</span> à <span class="data-highlight">2 800 Ar le kg</span> et <span class="data-highlight">1 poulet</span> à <span class="data-highlight">15 000 Ar</span>.<br>
+                Elle donne un billet de <span class="data-highlight">20 000 Ar</span> et un billet de <span class="data-highlight">5 000 Ar</span>.</p>
+                <p><strong>Question : Combien d'argent doit-on lui rendre ?</strong></p>
+                
+                <div class="method-box">
+                    <p><strong>Résolution :</strong></p>
+                    <ol>
+                        <li>Prix du riz : 2800 * 3 = 8 400 Ar</li>
+                        <li>Dépense Totale : 8 400 + 15 000 = 23 400 Ar</li>
+                        <li>Argent donné : 20 000 + 5 000 = 25 000 Ar</li>
+                        <li>Monnaie rendue : 25 000 - 23 400 = 1 600 Ar</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CAS PRATIQUE 2 : GEOMETRIE -->
+            <h2>Dossier II : Terrain & Récolte</h2>
+            <p>C'est le classique du CEPE : un champ, une clôture et une production.</p>
+
+            <div class="case-file" style="border-left-color: #2e7d32;">
+                <h3>🌾 Affaire N°2 : La Rizière Rectangulaire</h3>
+                <p>Un paysan a une rizière rectangulaire.<br>
+                Sa longueur est de <span class="data-highlight">60 m</span>. Sa largeur est la <span class="data-highlight">moitié</span> de sa longueur.</p>
+                <p><strong>Questions :</strong><br>
+                1. Calcule le périmètre.<br>
+                2. Si on produit 3 kg de riz par m², quelle est la production totale ?</p>
+
+                <div class="method-box">
+                    <p><strong>Enquête de Tonton Deric :</strong></p>
+                    <p>Attention ! "Moitié" veut dire divisé par 2.</p>
+                    <ul>
+                        <li>Largeur = 60 : 2 = 30 m</li>
+                        <li>Périmètre (Tour) = (60 + 30) * 2 = 180 m</li>
+                        <li>Aire (Surface) = 60 * 30 = 1 800 m^2</li>
+                        <li>Production = 1 800 * 3 = 5 400 kg (ou 5,4 tonnes)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CAS PRATIQUE 3 : PROPORTIONNALITE -->
+            <h2>Dossier III : La Règle de Trois</h2>
+            <p>L'arme secrète de l'inspecteur : Le tableau magique.</p>
+
+            <div class="case-file" style="border-left-color: #ef6c00;">
+                <h3>⚡ Affaire N°3 : La Facture de Tonton Deric</h3>
+                <p>Pour griller <span class="data-highlight">50 tartines</span>, Tonton Deric consomme <span class="data-highlight">200 Watts</span> d'énergie.</p>
+                <p><strong>Question :</strong> Combien consomme-t-il pour griller <span class="data-highlight">150 tartines</span> ?</p>
+
+                <div style="display: flex; justify-content: center; margin-top: 15px;">
+                    <table border="1" style="border-collapse: collapse; width: 80%; text-align: center; background: white;">
+                        <tr style="background: #ffe0b2;">
+                            <th>Tartines</th>
+                            <th>Énergie (Watts)</th>
+                        </tr>
+                        <tr>
+                            <td>50</td>
+                            <td>200</td>
+                        </tr>
+                        <tr>
+                            <td>150</td>
+                            <td><strong>?</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="method-box">
+                    <p><strong>Le Calcul en croix :</strong></p>
+                    <p>(150 * 200)/50</p>
+                    <p>Astuce : 150 c'est 3 * 50. Donc l'énergie est aussi 3 * 200.<br>
+                    <strong>Réponse : 600 Watts.</strong></p>
+                </div>
+            </div>
+
+            <!-- LE DEFI FINAL -->
+            <div style="margin-top: 50px; background: #fff3e0; border: 3px dashed #ff9800; padding: 25px; border-radius: 15px;">
+                <h2 style="margin-top:0; border:none; text-align:center;">🕵️‍♀️ L'Enigme Finale (À toi de jouer)</h2>
+                <p>Un maçon doit carreler une pièce carrée de <strong>4 m de côté</strong>.<br>
+                1. Calcule l'aire de la pièce en m^2, puis en cm^2.<br>
+                2. Un carreau mesure 20cm * 20cm. Quelle est son aire ?<br>
+                3. Combien de carreaux faut-il ?</p>
+                
+                <p style="font-size: 0.8em; color: grey; text-align: right;">(Réponse : 1. 16m²=160 000cm² | 2. 400cm² | 3. 400 carreaux)</p>
+            </div>
+
+            <!-- PIED DE PAGE -->
+            <div style="margin-top: 50px; text-align: center;">
+                <p style="font-family: 'Gochi Hand'; font-size: 1.5em;">"Élémentaire, mon cher grille-pain !"</p>
+                <div style="font-size: 4em;">🎓📜</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

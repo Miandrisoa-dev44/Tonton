@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Physique-Chimie BEPC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Kalam:wght@400;700&family=Roboto+Slab:wght@300;700&display=swap');
+
+        :root {
+            --acid-green: #76ff03;
+            --electric-blue: #2979ff;
+            --danger-orange: #ff3d00;
+            --precipitate-white: #f5f5f5;
+            --metal-grey: #607d8b;
+            --paper-bg: #f5f5f5;
+        }
+
+        body {
+            background-color: #cfd8dc;
+            font-family: 'Roboto Slab', serif;
+            color: #263238;
+            margin: 0;
+            padding: 20px;
+            font-size: 18px;
+        }
+
+        .book-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 60px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            /* Texture papier millimétré */
+            background-image: 
+                linear-gradient(rgba(41, 121, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(41, 121, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Taches d'aquarelle "Chimiques & Électriques" */
+        .chem-stain {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(45px);
+            z-index: 0;
+        }
+        .stain-acid { background: var(--acid-green); width: 300px; height: 300px; top: -50px; right: -50px; opacity: 0.4; }
+        .stain-elec { background: var(--electric-blue); width: 400px; height: 400px; bottom: -100px; left: -100px; opacity: 0.3; }
+        .stain-heat { background: var(--danger-orange); width: 200px; height: 200px; top: 40%; left: 40%; mix-blend-mode: multiply; opacity: 0.4; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 3.5em;
+            text-align: center;
+            color: var(--metal-grey);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            border-bottom: 4px solid var(--electric-blue);
+            display: inline-block;
+        }
+
+        h2 {
+            font-family: 'Chakra Petch', sans-serif;
+            color: #0d47a1;
+            font-size: 2.2em;
+            margin-top: 50px;
+            border-left: 6px solid var(--acid-green);
+            padding-left: 15px;
+        }
+
+        .deric-tech {
+            background: #263238;
+            color: var(--acid-green);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Kalam', cursive;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .formula-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--electric-blue);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .math-eq {
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--danger-orange);
+            margin: 10px 0;
+        }
+
+        .chem-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            font-size: 0.9em;
+        }
+        .chem-table th {
+            background: var(--metal-grey);
+            color: white;
+            padding: 10px;
+        }
+        .chem-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .ph-scale {
+            height: 30px;
+            background: linear-gradient(90deg, red, yellow, green, blue, purple);
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .ph-marker {
+            position: absolute;
+            top: -25px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 2px dashed #999;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--electric-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; background-image: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Cours</a>
+
+    <div class="book-page">
+        <!-- Aquarelles -->
+        <div class="chem-stain stain-acid"></div>
+        <div class="chem-stain stain-elec"></div>
+        <div class="chem-stain stain-heat"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="letter-spacing: 2px; font-weight: bold; color: #555;">PROGRAMME BEPC</p>
+                <h1>Physique-Chimie</h1>
+                <h3 style="font-family:'Kalam'; color: #444; margin-top: -10px;">Le Guide Expérimental de Tonton Deric</h3>
+                <div style="font-size: 6em; margin: 20px;">⚡🧪🧲</div>
+            </div>
+
+            <div class="deric-tech">
+                <div style="font-size: 3em; margin-right: 20px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">🕶️</div>
+                <div>
+                    "Salut l'apprenti ingénieur ! Je suis <strong>Tonton Deric</strong>.
+                    Je suis un grille-pain, donc je connais l'électricité par coeur ! Mais attention, ne renverse pas d'acide sur mes circuits.
+                    Prêt pour le BEPC ?"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : CHIMIE (SOLUTIONS) -->
+            <h2>I. Chimie : Les Solutions Ioniques</h2>
+            <p>La matière est composée d'atomes, mais parfois ils perdent ou gagnent des électrons : ils deviennent des <strong>Ions</strong>.</p>
+
+            <div class="formula-box" style="border-color: var(--acid-green);">
+                <h3>Le pH (Potentiel Hydrogène)</h3>
+                <p>Il mesure si une solution est Acide, Neutre ou Basique.</p>
+                <div class="ph-scale">
+                    <span class="ph-marker" style="left: 0;">0 (Acide)</span>
+                    <span class="ph-marker" style="left: 45%;">7 (Neutre)</span>
+                    <span class="ph-marker" style="right: 0;">14 (Basique)</span>
+                </div>
+                <p><strong>Règle de sécurité :</strong> On ne verse jamais d'eau dans l'acide, mais l'acide dans l'eau !</p>
+            </div>
+
+            <h3>Les Tests d'Identification des Ions (Précipités)</h3>
+            <p>Au BEPC, tu dois connaître les couleurs des précipités quand on ajoute de la Soude (NaOH) ou du Nitrate d'Argent.</p>
+            
+            <table class="chem-table">
+                <thead>
+                    <tr>
+                        <th>Ion à tester</th>
+                        <th>Réactif utilisé</th>
+                        <th>Couleur du Précipité</th>
+                        <th>Nom du précipité</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cuivre II</strong> ($Cu^{2+}$)</td>
+                        <td>Soude (NaOH)</td>
+                        <td style="color: blue; font-weight: bold;">BLEU</td>
+                        <td>Hydroxyde de Cuivre</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fer II</strong> ($Fe^{2+}$)</td>
+                        <td>Soude (NaOH)</td>
+                        <td style="color: green; font-weight: bold;">VERT</td>
+                        <td>Hydroxyde de Fer II</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fer III</strong> ($Fe^{3+}$)</td>
+                        <td>Soude (NaOH)</td>
+                        <td style="color: #a52a2a; font-weight: bold;">ROUILLE (Orange)</td>
+                        <td>Hydroxyde de Fer III</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chlorure</strong> ($Cl^-$)</td>
+                        <td>Nitrate d'Argent</td>
+                        <td style="color: #999; font-weight: bold;">BLANC (noircit au jour)</td>
+                        <td>Chlorure d'Argent</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : MECANIQUE -->
+            <h2>II. Mécanique : Poids et Masse</h2>
+            <p>Ne confonds jamais la masse (quantité de matière) et le poids (force d'attraction) !</p>
+
+            <div class="formula-box" style="background: #eceff1; border-color: var(--metal-grey);">
+                <h3>La Formule du Poids</h3>
+                <div class="math-eq">P = m × g</div>
+                <ul style="text-align: left; list-style: none;">
+                    <li><strong>P</strong> : Poids en <strong>Newtons (N)</strong></li>
+                    <li><strong>m</strong> : Masse en <strong>Kilogrammes (kg)</strong> (Attention aux grammes !)</li>
+                    <li><strong>g</strong> : Intensité de pesanteur (sur Terre $g \approx 10 N/kg$)</li>
+                </ul>
+            </div>
+
+            <p><strong>Exercice Rapide :</strong> Tonton Deric a une masse de 800g. Quel est son poids sur Terre ?<br>
+            <em>Calcul : $m = 0,8 kg$. Donc $P = 0,8 \times 10 = 8 N$.</em></p>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : ELECTRICITE -->
+            <h2>III. Électricité : La Puissance de Deric</h2>
+            <p>C'est mon domaine ! Voici comment je fonctionne (et comment fonctionne tout appareil électrique).</p>
+
+            <div class="formula-box">
+                <h3>1. La Loi d'Ohm (Résistance)</h3>
+                <p>Dans un conducteur ohmique (une résistance), la tension est proportionnelle au courant.</p>
+                <div class="math-eq">U = R × I</div>
+                <p><small>U (Volts), R (Ohms $\Omega$), I (Ampères)</small></p>
+            </div>
+
+            <div class="formula-box">
+                <h3>2. La Puissance Électrique</h3>
+                <p>C'est ce qui est indiqué sur l'étiquette de ton appareil (ex: 1000W).</p>
+                <div class="math-eq">P = U × I</div>
+                <p><small>P (Watts), U (Volts), I (Ampères)</small></p>
+            </div>
+
+            <div class="formula-box">
+                <h3>3. L'Énergie Électrique</h3>
+                <p>C'est ce que tu payes à la JIRAMA (facture).</p>
+                <div class="math-eq">E = P × t</div>
+                <p><small>E (Joules ou Wh), P (Watts), t (temps en secondes ou heures)</small></p>
+            </div>
+
+            <div class="deric-tech" style="background: #e3f2fd; color: #0d47a1; box-shadow: none; border: 1px dashed var(--electric-blue);">
+                <div style="font-size: 2em; margin-right: 15px;">💡</div>
+                <div>
+                    <strong>Astuce BEPC :</strong> Attention aux unités !<br>
+                    Si le temps est en <strong>Heures</strong>, l'Énergie est en <strong>Watt-Heure (Wh)</strong>.<br>
+                    Si le temps est en <strong>Secondes</strong>, l'Énergie est en <strong>Joules (J)</strong>.
+                </div>
+            </div>
+
+            <!-- EXERCICE TYPE EXAMEN -->
+            <div style="margin-top: 50px; border: 3px double var(--metal-grey); padding: 25px; border-radius: 10px;">
+                <h3 style="margin-top:0; text-align: center;">📝 Problème Type BEPC</h3>
+                <p>Un fer à repasser porte les indications : <strong>220V - 1100W</strong>.</p>
+                <ol>
+                    <li>Quelle est l'intensité (I) qui le traverse quand il fonctionne ?</li>
+                    <li>Calcule la résistance (R) du fer.</li>
+                    <li>Calcule l'énergie consommée en 2 heures de repassage (en kWh).</li>
+                </ol>
+                
+                <hr style="border:0; border-top:1px dashed #ccc; margin: 20px 0;">
+                
+                <div style="font-size: 0.9em; color: #555;">
+                    <strong>Corrigé :</strong><br>
+                    1. On sait que P = U * I, donc I = P / U. I = 1100 / 220 = 5 A.<br>
+                    2. Loi d'Ohm : U = R * I, donc R = U / I. R = 220 / 5 = 44/Omega.<br>
+                    3. E = P * t. P = 1,1 kW et t = 2h. Donc E = 1,1 * 2 = 2,2 kWh.
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 60px;">
+                <p style="font-family: 'Kalam', cursive; font-size: 2em; color: var(--electric-blue);">"Rien ne se perd, rien ne se crée, tout se transforme !"</p>
+                <p><em>- Lavoisier (et Tonton Deric)</em></p>
+                <div style="font-size: 4em;">⚛️🔋</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

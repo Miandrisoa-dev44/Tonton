@@ -1,0 +1,93 @@
+/* =========================================
+           RESPONSIVE DESIGN (MOBILE & TABLETTE)
+           ========================================= */
+        
+        /* 1. Ajustement global pour petits écrans */
+        @media (max-width: 768px) {
+            
+            /* On enlève les marges du corps pour gagner de la place */
+            body {
+                padding: 10px;
+                background-color: #fff; /* Fond blanc sur mobile pour lisibilité */
+            }
+
+            /* La page du livre prend toute la largeur */
+            .book-page {
+                padding: 20px 15px; /* Beaucoup moins de marge interne */
+                width: 100%;
+                max-width: 100%;
+                box-shadow: none; /* On enlève l'ombre lourde */
+                border: none;
+                border-radius: 0;
+            }
+
+            /* 2. Typographie adaptée */
+            h1 { font-size: 2.2em !important; line-height: 1.1; }
+            h2 { font-size: 1.6em !important; margin-top: 30px; }
+            h3 { font-size: 1.3em !important; }
+            p, li { font-size: 1.1em !important; text-align: left; }
+            
+            /* Les gros émojis décoratifs */
+            div[style*="font-size: 5em"], 
+            div[style*="font-size: 6em"],
+            div[style*="font-size: 4em"] {
+                font-size: 3em !important;
+                margin: 10px !important;
+            }
+
+            /* 3. Les Boîtes de contenu (Cartes, Formules, Règles) */
+            .problem-card, .concept-card, .formula-card, 
+            .grammar-box, .geo-card, .method-box, .info-card {
+                padding: 15px !important;
+                margin: 15px 0 !important;
+                width: 100% !important;
+            }
+
+            /* 4. Tonton Deric et les bulles de dialogue */
+            .deric-bubble, .deric-note, .deric-speech, 
+            .deric-explorer, .deric-gentleman, .deric-philosopher,
+            .deric-researcher, .deric-reporter, .deric-tech, .deric-poet, .mpikabary-box {
+                flex-direction: column; /* On empile l'icône et le texte */
+                text-align: center;
+                padding: 15px;
+            }
+            .deric-avatar, .deric-icon, div[style*="font-size: 3em"] {
+                margin-right: 0 !important;
+                margin-bottom: 10px;
+            }
+
+            /* 5. Les Grilles et Tableaux */
+            /* Transforme les colonnes côte à côte en empilement vertical */
+            .info-grid, .figure-style-grid, .grammar-grid, 
+            .vocab-grid, .concept-grid, .experiment-box, .kabary-structure {
+                grid-template-columns: 1fr !important; /* 1 seule colonne */
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            /* Pour les tableaux de conjugaison/grammaire : Scroll horizontal */
+            table {
+                display: block;
+                width: 100%;
+                overflow-x: auto; /* Permet de glisser le doigt si le tableau est large */
+                white-space: nowrap;
+            }
+
+            /* 6. Les Décorations (Aquarelles) */
+            /* On les rend plus discrètes pour ne pas gêner la lecture */
+            .watercolor, .watercolor-blob, .watercolor-stain, 
+            .paint-splash, .paint-blob, .paint-nebula, .paint-cloud, .ink-wash {
+                opacity: 0.15 !important; /* Très transparent */
+                transform: scale(0.6); /* Plus petit */
+            }
+            
+            /* Empêcher le débordement horizontal */
+            .content { overflow-x: hidden; }
+
+            /* Cas particulier : Les chronologies (Timeline) */
+            .timeline, .literary-timeline {
+                margin-left: 10px;
+                padding-left: 15px;
+            }
+        }

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>L'Herbier Scientifique de Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Caveat:wght@500&family=Gentium+Book+Plus&display=swap');
+
+        :root {
+            --leaf-green: #88c999;
+            --earth-brown: #8d6e63;
+            --flower-pink: #ffb7b2;
+            --sky-blue: #b2ebf2;
+            --text-dark: #2e4033;
+            --paper-texture: #f9f7f1;
+        }
+
+        body {
+            background-color: #dcedc8;
+            font-family: 'Gentium Book Plus', serif;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .book-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--paper-texture);
+            padding: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        /* Effet Aquarelle en CSS */
+        .watercolor-stain {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(30px);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .stain-green { background: var(--leaf-green); width: 300px; height: 300px; top: -50px; right: -50px; }
+        .stain-pink { background: var(--flower-pink); width: 250px; height: 250px; bottom: 10%; left: -50px; }
+        .stain-blue { background: var(--sky-blue); width: 200px; height: 200px; top: 20%; left: 40%; mix-blend-mode: multiply; }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Amatic SC', cursive;
+            font-weight: 700;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: var(--earth-brown);
+            text-align: center;
+            margin-bottom: 10px;
+            line-height: 0.9;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #558b2f;
+            border-bottom: 2px solid var(--leaf-green);
+            margin-top: 40px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .deric-note {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px dashed var(--earth-brown);
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-family: 'Caveat', cursive;
+            font-size: 1.4em;
+            color: #d84315;
+            display: flex;
+            align-items: center;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        .deric-avatar {
+            font-size: 3em;
+            margin-right: 15px;
+        }
+
+        .diagram-box {
+            border: 3px solid var(--leaf-green);
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.7);
+            text-align: center;
+        }
+
+        .diagram-label {
+            display: inline-block;
+            background: var(--text-dark);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 5px;
+            font-family: sans-serif;
+            font-size: 0.8em;
+        }
+
+        .quiz-section {
+            background: rgba(179, 229, 252, 0.4);
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--sky-blue);
+            margin-top: 30px;
+        }
+
+        .page-break {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        ul.symptoms li {
+            margin-bottom: 10px;
+            list-style-type: none;
+        }
+        ul.symptoms li::before {
+            content: "🌡️ ";
+        }
+
+        /* Bouton d'impression */
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--text-dark);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: sans-serif;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 20px; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Livre</a>
+
+    <div class="book-page">
+        <!-- Décor Aquarelle -->
+        <div class="watercolor-stain stain-green"></div>
+        <div class="watercolor-stain stain-pink"></div>
+
+        <div class="content">
+            <!-- COUVERTURE -->
+            <div style="text-align: center; margin-top: 60px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #555;">PRÉPARATION CEPE - SVT</p>
+                <h1>L'EXPLORATEUR<br>DU VIVANT</h1>
+                <div style="font-size: 6em; margin: 20px;">🧬🍃🍞</div>
+                <p style="font-family: 'Caveat', cursive; font-size: 2em; color: #555;">Les Sciences Naturelles<br>racontées par Tonton Deric</p>
+            </div>
+
+            <div class="deric-note" style="margin-top: 50px;">
+                <div class="deric-avatar"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;"></div>
+                <div>
+                    "Salut jeune scientifique ! Moi c'est <strong>Tonton Deric</strong>.<br>
+                    Je suis une machine, mais je suis fasciné par la nature. 
+                    Comment ton corps transforme-t-il une tartine en énergie ? 
+                    Comment une graine devient-elle un arbre ? Découvrons-le ensemble !"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : LE CORPS HUMAIN -->
+            <div class="watercolor-stain stain-pink" style="top:0; right:0;"></div>
+            
+            <h2>Chapitre I : La Machine Humaine</h2>
+            
+            <p>Ton corps est comme une cuisine ultra-perfectionnée. Tonton Deric a étudié le plan de construction !</p>
+
+            <h3>1. La Digestion : Le voyage de la tartine</h3>
+            <p>Pour que je fonctionne, il me faut de l'électricité. Pour que tu fonctionnes, il te faut des <strong>aliments</strong>.</p>
+            
+            <div class="diagram-box">
+                <h4>🗺️ Le trajet des aliments</h4>
+                <p>Remets les étapes dans l'ordre (1 à 5) :</p>
+                <p>
+                    [ ... ] L'Estomac (Le mixeur géant)<br>
+                    [ ... ] La Bouche (Le broyeur)<br>
+                    [ ... ] L'Intestin Grêle (Le trieur de vitamines)<br>
+                    [ ... ] L'Oesophage (Le toboggan)<br>
+                    [ ... ] Le Gros Intestin (La sortie des déchets)
+                </p>
+            </div>
+
+            <h3>2. La Circulation Sanguine</h3>
+            <p>Le sang est le livreur du corps. Il transporte l'oxygène et les nutriments.</p>
+            <div class="deric-note">
+                <div class="deric-avatar">❤️</div>
+                <div>
+                    "Le moteur de tout ça, c'est le <strong>COEUR</strong> ! Il fonctionne comme une pompe. Si je grille trop de pain, je chauffe. Si tu cours trop vite, ton cœur bat plus vite !"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : SANTÉ ET MALADIES -->
+            <div class="watercolor-stain stain-blue" style="top: -50px; left: -50px;"></div>
+
+            <h2>Chapitre II : Tonton Deric contre les Microbes</h2>
+            <p>Pour réussir le CEPE, tu dois savoir comment protéger ton corps (Prophylaxie).</p>
+
+            <h3>🦟 L'Ennemi N°1 : Le Paludisme</h3>
+            <p>Le paludisme est une maladie transmise par la piqûre d'un moustique appelé l'<strong>Anophèle femelle</strong>.</p>
+            
+            <div class="diagram-box" style="border-color: #ffccbc; background: #fffbe6;">
+                <h4>Les Symptômes</h4>
+                <ul class="symptoms" style="text-align: left;">
+                    <li>Forte fièvre</li>
+                    <li>Maux de tête terribles</li>
+                    <li>Frissons et tremblements</li>
+                    <li>Vomissements</li>
+                </ul>
+            </div>
+
+            <h3>🛡️ Comment se protéger ? (La Prophylaxie)</h3>
+            <p>Tonton Deric a une armure en métal, mais toi tu dois :</p>
+            <ul>
+                <li>Dormir sous une <strong>moustiquaire imprégnée</strong> d'insecticide.</li>
+                <li>Assainir les alentours de la maison (enlever les eaux stagnantes où les moustiques pondent).</li>
+                <li>Couper les herbes hautes.</li>
+            </ul>
+
+            <div class="deric-note">
+                <div class="deric-avatar">💧</div>
+                <div>
+                    "Attention aussi à l'eau sale ! Elle peut donner le <strong>CHOLÉRA</strong> ou la <strong>BILHARZIOSE</strong>. Bois toujours de l'eau bouillie ou filtrée (Sur'Eau)."
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : LES PLANTES -->
+            <div class="watercolor-stain stain-green" style="top:0; width: 100%;"></div>
+
+            <h2>Chapitre III : Le Royaume Vert</h2>
+            <p>Les plantes sont magiques : elles mangent du soleil ! Cela s'appelle la <strong>Photosynthèse</strong>.</p>
+
+            <h3>🌺 Les Parties de la Fleur</h3>
+            <p>Pour faire des fruits et des graines, la fleur doit se reproduire. Connais-tu ses organes ?</p>
+
+            <div class="diagram-box">
+                <div style="font-size: 4em;">🥀</div>
+                <p><strong>Devinette Botanique :</strong></p>
+                <p>Je suis la partie mâle qui porte le pollen (la poudre jaune).<br>
+                <em>Réponse : L' É _ _ M _ _ E</em></p>
+                <hr style="border:0; border-top:1px dashed #ccc;">
+                <p>Je suis la partie femelle au centre, qui reçoit le pollen.<br>
+                <em>Réponse : Le P _ S _ _ L</em></p>
+            </div>
+
+            <h3>🌱 De la graine à la plante</h3>
+            <p>Pour germer, une graine a besoin de trois choses essentielles. Tonton Deric appelle ça la "Recette de la Vie" :</p>
+            <ol>
+                <li>De l'<strong>Humidité</strong> (Eau)</li>
+                <li>De la <strong>Chaleur</strong> (Soleil)</li>
+                <li>De l'<strong>Air</strong> (Oxygène)</li>
+            </ol>
+            <p><em>Attention : La lumière n'est pas obligatoire pour la germination (sous terre il fait noir), mais elle est obligatoire pour la croissance !</em></p>
+
+            <div class="page-break"></div>
+
+            <!-- LE GRAND QUIZ DU CEPE -->
+            <div class="quiz-section">
+                <h2 style="margin-top:0; text-align: center;">🎓 Le Quiz Final de Tonton Deric</h2>
+                <p>Coche la bonne réponse (ou imagine que tu le fais) :</p>
+
+                <p><strong>1. Quel organe nettoie le sang dans le corps ?</strong><br>
+                ⚪ Le Coeur<br>
+                ⚪ Les Reins<br>
+                ⚪ L'Estomac</p>
+
+                <p><strong>2. Comment s'appelle l'union du pollen et de l'ovule chez la fleur ?</strong><br>
+                ⚪ La Germination<br>
+                ⚪ La Fécondation<br>
+                ⚪ La Végétation</p>
+
+                <p><strong>3. Pourquoi faut-il se laver les mains avant de manger ?</strong><br>
+                ⚪ Pour ne pas salir la fourchette<br>
+                ⚪ Pour éviter les microbes et les maladies<br>
+                ⚪ Pour que ça sente bon</p>
+                
+                <p><strong>4. Lequel de ces animaux est un vertébré ?</strong><br>
+                ⚪ Le Ver de terre<br>
+                ⚪ Le Moustique<br>
+                ⚪ La Poule</p>
+            </div>
+
+            <!-- PAGE DE FIN ET REPONSES -->
+            <div style="margin-top: 50px; text-align: center; border-top: 2px solid var(--earth-brown); padding-top: 20px;">
+                <p style="font-family: 'Caveat', cursive; font-size: 1.5em;">"Tu as terminé ! La nature n'a plus de secrets pour toi."</p>
+                <div style="font-size: 3em;">🌟🍞🌿</div>
+                
+                <div style="font-size: 0.8em; color: #666; margin-top: 30px; transform: rotate(180deg);">
+                    <strong>Réponses :</strong> <br>
+                    Digestion : Bouche > Oesophage > Estomac > Intestin Grêle > Gros Intestin.<br>
+                    Fleur : Étamine / Pistil.<br>
+                    Quiz : 1. Les Reins - 2. La Fécondation - 3. Éviter les microbes - 4. La Poule.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

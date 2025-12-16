@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Maths BAC - Le Grand Manuscrit</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@700&family=Montserrat:wght@300;400;600&display=swap');
+
+        :root {
+            --analysis-blue: #283593;
+            --algebra-red: #c62828;
+            --proba-green: #2e7d32;
+            --gold-accent: #fbc02d;
+            --deep-purple: #4527a0;
+            --paper-color: #fdfbf7;
+        }
+
+        body {
+            background-color: #eceff1;
+            font-family: 'Montserrat', sans-serif;
+            color: #263238;
+            margin: 0;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .book-page {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--paper-color);
+            padding: 70px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        /* Aquarelles "Haut Niveau" (Abstraites et Élégantes) */
+        .paint-wash {
+            position: absolute;
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.5;
+            mix-blend-mode: multiply;
+        }
+        .wash-blue { background: var(--analysis-blue); width: 500px; height: 500px; top: -150px; left: -150px; border-radius: 40%; }
+        .wash-red { background: var(--algebra-red); width: 400px; height: 400px; bottom: -100px; right: -100px; border-radius: 50%; }
+        .wash-gold { background: var(--gold-accent); width: 300px; height: 300px; top: 30%; right: 10%; opacity: 0.3; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4em;
+            text-align: center;
+            color: var(--analysis-blue);
+            margin-bottom: 5px;
+            border-bottom: 2px solid var(--gold-accent);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5em;
+            color: #333;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+        }
+        .tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.4em;
+            background: #333;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 15px;
+            vertical-align: middle;
+            text-transform: uppercase;
+        }
+        .tag-all { background: var(--analysis-blue); }
+        .tag-sci { background: var(--algebra-red); } /* Séries C, D, S */
+        .tag-lit { background: var(--proba-green); } /* Séries A, L, OSE */
+
+        .grand-maitre-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 30px 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3em;
+            font-style: italic;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .formula-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .formula-card {
+            background: white;
+            border-left: 4px solid;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .border-blue { border-color: var(--analysis-blue); }
+        .border-red { border-color: var(--algebra-red); }
+        .border-green { border-color: var(--proba-green); }
+
+        .math-tex {
+            font-family: 'Times New Roman', serif;
+            font-style: italic;
+            font-size: 1.2em;
+            text-align: center;
+            display: block;
+            margin: 10px 0;
+            color: black;
+        }
+
+        .graph-placeholder {
+            width: 100%;
+            height: 150px;
+            border-left: 2px solid black;
+            border-bottom: 2px solid black;
+            position: relative;
+            margin: 20px 0;
+            opacity: 0.7;
+        }
+        .curve {
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 100%;
+            border-top: 2px solid var(--algebra-red);
+            border-radius: 0 100% 0 0;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px solid #bbb;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--analysis-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Manuscrit</a>
+
+    <div class="book-page">
+        <!-- Fond Aquarelle -->
+        <div class="paint-wash wash-blue"></div>
+        <div class="paint-wash wash-red"></div>
+        <div class="paint-wash wash-gold"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 4px; font-weight: bold; color: #555; text-transform: uppercase;">TERMINALE (Toutes Séries)</p>
+                <h1>Le Grand Manuscrit</h1>
+                <h3 style="font-family:'Dancing Script'; font-size: 2.5em; color: var(--analysis-blue); margin-top: -10px;">Objectif BAC avec Maître Deric</h3>
+                <div style="font-size: 5em; margin: 20px;">🎓📜♾️</div>
+            </div>
+
+            <div class="grand-maitre-box">
+                <span style="font-size: 2.5em; margin-right: 20px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">🎓</span>
+                <div>
+                    "Nous y voilà. L'ultime étape. Ne laisse pas ton cerveau surchauffer. 
+                    Que tu sois littéraire (A, L, OSE) ou scientifique (C, D, S), la rigueur est la clé. 
+                    Validons ce diplôme ensemble !"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : ANALYSE (FONCTIONS) -->
+            <h2>I. Étude de Fonctions <span class="tag tag-all">Toutes Séries</span></h2>
+            <p>C'est le cœur du sujet. Limites, Dérivées, Variations. C'est inévitable au BAC.</p>
+
+            <div class="formula-container">
+                <div class="formula-card border-blue">
+                    <strong>1. La Dérivée (f')</strong><br>
+                    Elle donne le sens de variation.
+                    <span class="math-tex">Si f'(x) > 0 ➔ f est Croissante ↗</span>
+                    <span class="math-tex">Si f'(x) < 0 ➔ f est Décroissante ↘</span>
+                </div>
+                <div class="formula-card border-blue">
+                    <strong>2. Logarithme Néperien (ln)</strong>
+                    <span class="math-tex">ln(1) = 0</span>
+                    <span class="math-tex">ln(e) = 1</span>
+                    <span class="math-tex">ln(a × b) = ln(a) + ln(b)</span>
+                    <small>Domaine : ]0 ; +∞[</small>
+                </div>
+                <div class="formula-card border-blue">
+                    <strong>3. Exponentielle (exp)</strong>
+                    <span class="math-tex">e^0 = 1</span>
+                    <span class="math-tex">ln(e^x) = x</span>
+                    <span class="math-tex">(e^u)' = u' × e^u</span>
+                    <small>Toujours positif !</small>
+                </div>
+            </div>
+
+            <p><strong>Méthode infaillible pour le Tableau de Variation :</strong></p>
+            <ol>
+                <li>Calculer le Domaine de Définition (D_f).</li>
+                <li>Calculer les Limites aux bornes (Recherche d'Asymptotes).</li>
+                <li>Calculer la Dérivée f'(x).</li>
+                <li>Étudier le SIGNE de la dérivée.</li>
+                <li>Tracer le tableau avec les flèches.</li>
+            </ol>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : SUITES NUMERIQUES -->
+            <h2>II. Les Suites Numériques <span class="tag tag-all">Toutes Séries</span></h2>
+            <p>Arithmétiques (l'addition) ou Géométriques (la multiplication) ? Il faut savoir choisir.</p>
+
+            <div class="formula-container">
+                <div class="formula-card border-green">
+                    <strong>Suite Arithmétique (U_n)</strong>
+                    <p>On ajoute une raison r.</p>
+                    <span class="math-tex">U_{n+1} = U_n + r</span>
+                    <span class="math-tex">U_n = U_0 + n * r</span>
+                </div>
+                <div class="formula-card border-green">
+                    <strong>Suite Géométrique (V_n)</strong>
+                    <p>On multiplie par une raison q.</p>
+                    <span class="math-tex">V_{n+1} = V_n * q</span>
+                    <span class="math-tex">V_n = V_0 * q^n</span>
+                </div>
+            </div>
+
+            <div style="background: #e8f5e9; padding: 15px; border-radius: 5px; border-left: 5px solid var(--proba-green);">
+                💡 <strong>Astuce OSE / A :</strong> Les suites servent souvent à calculer des <strong>Intérêts</strong> ou des <strong>Populations</strong>.
+                Si ça augmente de 5% par an, c'est une suite Géométrique de raison q = 1,05.
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : PROBABILITÉS -->
+            <h2>III. Probabilités & Stat <span class="tag tag-all">Toutes Séries</span></h2>
+            
+            <p><strong>Probabilité Conditionnelle :</strong> P_A(B) ou P(B/A).</p>
+            <span class="math-tex">P(A \cap B) = P(A) * P_A(B)</span>
+            
+            <hr style="border: 0; border-top: 1px dashed #ccc; margin: 20px 0;">
+
+            <h3>Spécial Séries A / OSE : Statistiques</h3>
+            <p><strong>Point Moyen G :</strong> (x ; y).<br>
+            <strong>Ajustement Affine (Mayer) :</strong> On divise le nuage en 2 groupes, on calcule G1 et G2, et on trouve l'équation de la droite (G1G2).</p>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 4 : AVANCÉ (C, D, S) -->
+            <h2>IV. Le Coin des Experts <span class="tag tag-sci">Séries C, D, S</span></h2>
+            <p>Ici, on ne rigole plus. C'est le domaine des Nombres Complexes et des Intégrales.</p>
+
+            <div class="formula-container">
+                <div class="formula-card border-red">
+                    <strong>Nombres Complexes C</strong>
+                    <span class="math-tex">z = a + ib</span>
+                    <span class="math-tex">i^2 = -1</span>
+                    <p><strong>Module :</strong> |z| = √(a^2 + b^2)</p>
+                    <p><strong>Forme Trigo :</strong> z = |z|(cos(theta) + isin(theta))</p>
+                </div>
+                <div class="formula-card border-red">
+                    <strong>Calcul Intégral</strong>
+                    <p>L'intégrale, c'est l'aire sous la courbe.</p>
+                    <span class="math-tex">\int_{a}^{b} f(x) dx = [F(x)]_{a}^{b} = F(b) - F(a)</span>
+                    <small>Où F est la primitive de f.</small>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- LE PROBLEME ULTIME -->
+            <div style="border: 3px double var(--analysis-blue); padding: 30px; background: white;">
+                <h2 style="margin-top: 0; text-align: center;">L'Épreuve du Feu (Sujet Type)</h2>
+                <p><strong>Fonction :</strong> f(x) = x - 1 + ln(x) définie sur ]0; +infini[.</p>
+                
+                <ol>
+                    <li><strong>Limites :</strong>
+                        <ul>
+                            <li>En 0 : ln(0) to -infini, donc lim f(x) = -infini. (Asymptote Verticale x=0).</li>
+                            <li>En +infini : Tout tend vers +infini, donc lim f(x) = +infini.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Dérivée :</strong> f'(x) = 1 + 1/x.<br>
+                    Sur ]0; +infini[, 1 > 0 et 1/x > 0. Donc f'(x) > 0.</li>
+                    <li><strong>Variation :</strong> La fonction est strictement <strong>Croissante</strong>.</li>
+                    <li><strong>Bijection :</strong> Comme elle est continue et croissante de -infini vers +infini, elle coupe l'axe des abscisses une seule fois (Solution unique alpha).</li>
+                </ol>
+                
+                <div class="graph-placeholder">
+                    <span style="position: absolute; bottom: 10px; right: 10px;">x</span>
+                    <span style="position: absolute; top: 10px; left: 10px;">y</span>
+                    <div class="curve"></div>
+                    <span style="position: absolute; top: 40%; left: 40%; font-weight: bold; color: var(--algebra-red);">f(x) ↗</span>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Dancing Script'; font-size: 2.5em; color: var(--analysis-blue);">"C'est la fin du livre, mais le début de ta vie d'étudiant !"</p>
+                <p><em>- Maître Tonton Deric</em></p>
+                <div style="font-size: 3em;">🎓🍞🚀</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

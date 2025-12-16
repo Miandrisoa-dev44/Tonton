@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>L'Atlas de Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Merriweather:ital,wght@0,300;0,700;1,300&family=Permanent+Marker&display=swap');
+
+        :root {
+            --ocean-blue: #81d4fa;
+            --land-green: #a5d6a7;
+            --earth-red: #ffab91;
+            --deep-blue: #0277bd;
+            --text-color: #263238;
+            --paper-color: #fffefb;
+        }
+
+        body {
+            background-color: #cfd8dc;
+            font-family: 'Merriweather', serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .book-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--paper-color);
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        /* Effets d'Aquarelle et Texture */
+        .watercolor-wash {
+            position: absolute;
+            z-index: 0;
+            opacity: 0.6;
+            filter: blur(50px);
+            border-radius: 50%;
+        }
+        .wash-ocean { background: var(--ocean-blue); width: 400px; height: 400px; top: -100px; right: -100px; }
+        .wash-land { background: var(--land-green); width: 300px; height: 300px; bottom: 50px; left: -50px; }
+        .wash-red { background: var(--earth-red); width: 200px; height: 200px; top: 40%; left: 30%; mix-blend-mode: multiply; }
+
+        .compass {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            font-size: 4em;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Permanent Marker', cursive;
+            color: var(--deep-blue);
+            font-size: 3.5em;
+            text-align: center;
+            margin-bottom: 10px;
+            transform: rotate(-2deg);
+        }
+
+        h2 {
+            font-family: 'Architects Daughter', cursive;
+            color: #d84315; /* Rouge brique */
+            border-bottom: 3px solid var(--land-green);
+            padding-bottom: 5px;
+            margin-top: 50px;
+        }
+
+        .map-box {
+            border: 3px solid var(--deep-blue);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+        }
+
+        .deric-explorer {
+            background: #fff3e0;
+            border: 2px dashed #ff9800;
+            padding: 15px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            font-family: 'Architects Daughter', cursive;
+            margin: 20px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .info-card {
+            background: rgba(255,255,255,0.7);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid var(--deep-blue);
+        }
+
+        .page-break {
+            margin: 60px 0;
+            border-bottom: 1px dotted #999;
+        }
+
+        /* Style pour les listes géographiques */
+        ul.geo-list li {
+            margin-bottom: 10px;
+        }
+        ul.geo-list li::marker {
+            color: var(--deep-blue);
+            content: "📍 ";
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--deep-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-family: sans-serif;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 20px; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer l'Atlas</a>
+
+    <div class="book-page">
+        <!-- Décor Aquarelle -->
+        <div class="watercolor-wash wash-ocean"></div>
+        <div class="watercolor-wash wash-land"></div>
+        <div class="watercolor-wash wash-red"></div>
+        <div class="compass">🧭</div>
+
+        <div class="content">
+            <!-- COUVERTURE -->
+            <div style="text-align: center; margin-top: 60px;">
+                <p style="letter-spacing: 2px; font-weight: bold; color: #555;">PRÉPARATION CEPE - GÉOGRAPHIE</p>
+                <h1>L'ATLAS DE<br>TONTON DERIC</h1>
+                <div style="font-size: 6em; margin: 20px;">🌍🗺️🧭</div>
+                <p style="font-style: italic;">Découvre Madagascar et le Monde avec ton grille-pain explorateur !</p>
+            </div>
+
+            <div class="deric-explorer">
+                <div style="font-size: 3em; margin-right: 15px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">🎒</div>
+                <div>
+                    "Salut l'aventurier ! J'ai mis mon sac à dos et ma boussole. Sais-tu que Madagascar est une île immense ? Allons cartographier tout ça pour ton examen !"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : LE MONDE -->
+            <h2>Chapitre I : Notre Place dans le Monde</h2>
+            
+            <div class="map-box">
+                <h3 style="margin-top:0;">🌐 La Terre est ronde (comme une miche de pain)</h3>
+                <p>Il y a <strong>5 Continents</strong> habités :</p>
+                <ol>
+                    <li>L'Afrique (C'est là où nous sommes !)</li>
+                    <li>L'Europe</li>
+                    <li>L'Asie</li>
+                    <li>L'Amérique</li>
+                    <li>L'Océanie</li>
+                </ol>
+                <p>Et <strong>5 Océans</strong> : Pacifique, Atlantique, Indien, Arctique, Antarctique.</p>
+            </div>
+
+            <p><strong>Madagascar</strong> est située dans l'<strong>Hémisphère Sud</strong>, dans l'<strong>Océan Indien</strong>.<br>
+            Elle est séparée de l'Afrique par le <strong>Canal du Mozambique</strong>.</p>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : MADAGASCAR PHYSIQUE -->
+            <h2>Chapitre II : Le Relief de la Grande Île</h2>
+            <p>Madagascar est rouge, verte et haute ! Tonton Deric grimpe les montagnes.</p>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <h4>⛰️ Les Montagnes</h4>
+                    <p>Le point le plus haut (le sommet) est le <strong>Maromokotro</strong> (2 876 m) dans le massif du Tsaratanana.</p>
+                    <p>Le 2ème est le <strong>Pic Boby</strong> dans l'Andringitra.</p>
+                </div>
+                <div class="info-card" style="border-color: var(--land-green);">
+                    <h4>🌊 Les Eaux (Hydrographie)</h4>
+                    <p>Le plus long fleuve : <strong>Le Mangoky</strong>.</p>
+                    <p>Le plus grand lac : <strong>Le Lac Alaotra</strong>.</p>
+                    <p>Le canal artificiel à l'Est : <strong>Le Canal des Pangalanes</strong>.</p>
+                </div>
+            </div>
+
+            <div class="deric-explorer">
+                <div style="font-size: 2.5em; margin-right: 10px;">🌧️☀️</div>
+                <div>
+                    "Ici, il n'y a pas 4 saisons comme en Europe, mais <strong>2 saisons</strong> :<br>
+                    1. <strong>Fahavaratra</strong> (Saison des pluies - Chaud)<br>
+                    2. <strong>Ririnina</strong> (Saison sèche - Froid)"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : ÉCONOMIE -->
+            <h2>Chapitre III : Les Richesses de l'Île</h2>
+            <p>Que produit Madagascar ? Beaucoup de choses délicieuses !</p>
+
+            <div class="map-box" style="border-color: #ffca28; background: #fffde7;">
+                <h3>🚜 L'Agriculture et l'Élevage</h3>
+                <ul class="geo-list">
+                    <li><strong>Le Riz :</strong> Aliment de base (Culture vivrière).</li>
+                    <li><strong>La Vanille :</strong> Madagascar est le 1er producteur mondial (Culture de rente, SAVA).</li>
+                    <li><strong>Le Zébu :</strong> Symbole de richesse et aide pour les travaux des champs.</li>
+                    <li><strong>Le Café, le Girofle :</strong> Sur la côte Est.</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- QUIZ FINAL -->
+            <div style="background: #e1f5fe; border: 2px dashed var(--deep-blue); padding: 25px; border-radius: 15px;">
+                <h2 style="margin-top:0; text-align: center; border:none; color: var(--deep-blue);">🧭 Le Quiz Géographique</h2>
+                <p>Vérifie tes connaissances avec Tonton Deric :</p>
+
+                <p><strong>1. Quel est le plus haut sommet de Madagascar ?</strong><br>
+                ⚪ Le Pic Boby<br>
+                ⚪ Le Maromokotro</p>
+
+                <p><strong>2. Dans quel océan se trouve Madagascar ?</strong><br>
+                ⚪ L'Océan Pacifique<br>
+                ⚪ L'Océan Indien</p>
+
+                <p><strong>3. Quelle est la capitale de Madagascar ?</strong><br>
+                ⚪ Antananarivo<br>
+                ⚪ Toamasina</p>
+                
+                <p><strong>4. Comment s'appelle le canal qui longe la côte Est ?</strong><br>
+                ⚪ Le Canal de Suez<br>
+                ⚪ Le Canal des Pangalanes</p>
+            </div>
+
+            <!-- PIED DE PAGE & REPONSES -->
+            <div style="margin-top: 50px; text-align: center; border-top: 1px solid #ccc; padding-top: 20px;">
+                <p style="font-family: 'Architects Daughter'; font-size: 1.5em;">"Bon voyage vers le CEPE !"</p>
+                <div style="font-size: 3em;">🚣🏾‍♀️🌴 lemur</div>
+                
+                <div style="font-size: 0.8em; color: #777; transform: rotate(180deg); margin-top: 30px;">
+                    <strong>Solutions :</strong> 1. Maromokotro - 2. Indien - 3. Antananarivo - 4. Pangalanes.
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

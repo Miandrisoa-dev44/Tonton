@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Français BEPC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Dancing+Script:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;500&display=swap');
+
+        :root {
+            --ink-blue: #1a237e;
+            --poetry-purple: #7b1fa2;
+            --accent-gold: #ffb300;
+            --paper-cream: #fdfbf7;
+            --text-grey: #37474f;
+        }
+
+        body {
+            background-color: #eceff1;
+            font-family: 'Lora', serif;
+            color: var(--text-grey);
+            margin: 0;
+            padding: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .book-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--paper-cream);
+            padding: 60px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            border-top: 5px solid var(--ink-blue);
+        }
+
+        /* Effets d'Aquarelle "Encre et Plume" */
+        .ink-wash {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+            opacity: 0.4;
+        }
+        .wash-blue { background: var(--ink-blue); width: 400px; height: 400px; top: -100px; right: -100px; }
+        .wash-purple { background: var(--poetry-purple); width: 350px; height: 350px; bottom: -50px; left: -80px; }
+        .wash-gold { background: var(--accent-gold); width: 200px; height: 200px; top: 40%; left: 40%; mix-blend-mode: multiply; opacity: 0.2; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5em;
+            text-align: center;
+            color: var(--ink-blue);
+            margin-bottom: 5px;
+            border-bottom: 1px solid var(--accent-gold);
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--poetry-purple);
+            font-weight: 500;
+            font-size: 2.2em;
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+        }
+        h2::before {
+            content: "✒️";
+            margin-right: 15px;
+            font-size: 0.8em;
+        }
+
+        .editor-note {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4em;
+            color: #555;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 30px 0;
+            position: relative;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.05);
+        }
+
+        /* Boites de cours */
+        .lesson-box {
+            background: rgba(255, 255, 255, 0.9);
+            border-left: 5px solid var(--ink-blue);
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .figure-style-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .figure-card {
+            background: #f3e5f5;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed var(--poetry-purple);
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+        .grammar-table th {
+            background: var(--ink-blue);
+            color: white;
+            padding: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .grammar-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .argument-box {
+            border: 2px solid var(--accent-gold);
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff8e1;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--ink-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Manuel</a>
+
+    <div class="book-page">
+        <!-- Fond Aquarelle -->
+        <div class="ink-wash wash-blue"></div>
+        <div class="ink-wash wash-purple"></div>
+        <div class="ink-wash wash-gold"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #555; text-transform: uppercase;">Révisions BEPC - Français</p>
+                <h1>Les Belles Lettres</h1>
+                <h3 style="font-family:'Dancing Script'; color: var(--poetry-purple); font-size: 2em; margin-top: -10px;">Le guide littéraire de Tonton Deric</h3>
+                <div style="font-size: 5em; margin: 20px;">📜✒️🍞</div>
+            </div>
+
+            <div class="editor-note">
+                <span style="font-size: 2em; float: left; margin-right: 15px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;"></span>
+                "Chers collégiens, le BEPC est un examen de maturité. Il ne suffit plus de savoir lire, il faut <strong>analyser</strong>, <strong>argumenter</strong> et maîtriser les subtilités de la langue. Rangeons les miettes, sortons les plumes !"<br>
+                <em>- Tonton Deric, Rédacteur en Chef.</em>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : GRAMMAIRE COMPLEXE -->
+            <h2>I. La Grammaire : Les Liens Logiques</h2>
+            <p>Pour réussir l'épreuve de langue et la rédaction, tu dois maîtriser les connecteurs logiques. Ils sont le ciment de tes idées.</p>
+
+            <div class="lesson-box">
+                <h3>Les Relations Logiques Essentielles</h3>
+                <table class="grammar-table">
+                    <thead>
+                        <tr>
+                            <th>Relation</th>
+                            <th>Connecteurs (Mots de liaison)</th>
+                            <th>Exemple (Phrase complexe)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cause</strong><br>(Pourquoi ?)</td>
+                            <td>Car, parce que, puisque, comme (en début de phrase)...</td>
+                            <td>"Il a réussi <strong>car</strong> il a révisé."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Conséquence</strong><br>(Résultat)</td>
+                            <td>Donc, alors, par conséquent, si bien que...</td>
+                            <td>"Il a révisé, <strong>donc</strong> il a réussi."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Opposition</strong><br>(Contradiction)</td>
+                            <td>Mais, or, cependant, pourtant, bien que (+ subjonctif)...</td>
+                            <td>"Il est petit <strong>bien qu'il</strong> soit fort."</td>
+                        </tr>
+                        <tr>
+                            <td><strong>But</strong><br>(Objectif)</td>
+                            <td>Pour que, afin que (+ subjonctif)...</td>
+                            <td>"Je t'aide <strong>pour que</strong> tu comprennes."</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : FIGURES DE STYLE -->
+            <h2>II. Les Figures de Style</h2>
+            <p>Elles donnent de la saveur au texte, comme de la confiture sur une tartine. Il faut savoir les repérer pour les questions de compréhension.</p>
+
+            <div class="figure-style-grid">
+                <div class="figure-card">
+                    <h4>🌋 La Métaphore</h4>
+                    <p>Une comparaison sans mot de liaison.</p>
+                    <p><em>Ex: "Cet homme est un lion."</em></p>
+                </div>
+                <div class="figure-card">
+                    <h4>⚖️ La Comparaison</h4>
+                    <p>Rapprochement avec "comme", "tel", "pareil à".</p>
+                    <p><em>Ex: "Il est fort comme un lion."</em></p>
+                </div>
+                <div class="figure-card">
+                    <h4>🎭 La Personnification</h4>
+                    <p>Donner des traits humains à un objet.</p>
+                    <p><em>Ex: "Le grille-pain souffrait en silence."</em></p>
+                </div>
+                <div class="figure-card">
+                    <h4>📈 L'Hyperbole</h4>
+                    <p>L'exagération.</p>
+                    <p><em>Ex: "Je meurs de faim !"</em></p>
+                </div>
+            </div>
+
+            <div class="editor-note">
+                💡 <strong>Conseil BEPC :</strong> Ne dis pas juste "c'est une métaphore". Dis : "L'auteur utilise une métaphore pour montrer que..." (Explique l'effet !).
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : ARGUMENTATION -->
+            <h2>III. Le Texte Argumentatif</h2>
+            <p>C'est souvent le sujet de la <strong>Rédaction</strong>. Tu dois défendre une Thèse (ton opinion).</p>
+
+            <div class="argument-box">
+                <h3>La Structure d'un Paragraphe Argumentatif</h3>
+                <p>Imagine un sandwich :</p>
+                <ul style="list-style-type: none;">
+                    <li>🍞 <strong>1. L'Argument :</strong> L'idée principale. <br><em>(Connecteur : D'abord, Ensuite...)</em></li>
+                    <li>🧀 <strong>2. L'Explication :</strong> Tu développes ton idée.</li>
+                    <li>🥬 <strong>3. L'Exemple :</strong> Une preuve concrète pour illustrer. <br><em>(Ex: Comme, par exemple...)</em></li>
+                    <li>🍞 <strong>4. Conclusion partielle :</strong> Petite phrase de fin.</li>
+                </ul>
+            </div>
+
+            <div class="lesson-box">
+                <h4>Exercice Type : Convaincre</h4>
+                <p><strong>Sujet :</strong> Pensez-vous que la lecture soit utile ?</p>
+                <p><strong>Exemple de paragraphe :</strong><br>
+                "<strong>Premièrement</strong>, la lecture enrichit le vocabulaire <em>(Argument)</em>. <strong>En effet</strong>, en lisant des livres variés, on découvre de nouveaux mots que l'on n'utilise pas à l'oral <em>(Explication)</em>. <strong>Par exemple</strong>, en lisant Victor Hugo, j'ai appris le mot 'misérable' <em>(Exemple)</em>."</p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 4 : REECRITURE -->
+            <h2>IV. L'Épreuve de Réécriture</h2>
+            <p>C'est des points faciles à ne pas perdre !</p>
+            
+            <div class="lesson-box" style="border-left-color: var(--poetry-purple);">
+                <h3>Les pièges à éviter</h3>
+                <p>Quand on change le sujet ("Je" devient "Nous") ou le temps ("Présent" devient "Imparfait"), attention aux réactions en chaîne !</p>
+                <ul>
+                    <li><strong>L'accord du Verbe :</strong> Si le sujet change, la terminaison change.</li>
+                    <li><strong>L'accord de l'Adjectif / Participe Passé :</strong> "Elle est <em>allée</em>" devient "Ils sont <em>allés</em>".</li>
+                    <li><strong>Les Déterminants possessifs :</strong> "Je prends <em>mon</em> sac" devient "Nous prenons <em>nos</em> sacs".</li>
+                </ul>
+            </div>
+
+            <!-- PIED DE PAGE -->
+            <div style="margin-top: 60px; text-align: center; border-top: 1px solid #ccc; padding-top: 20px;">
+                <p style="font-family: 'Dancing Script', cursive; font-size: 2em; color: var(--ink-blue);">"Les mots sont des armes. Utilise-les bien !"</p>
+                <div style="font-size: 3em;">📚🎓</div>
+                <p style="font-size: 0.8em; color: #777;">Bon courage pour le BEPC !</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

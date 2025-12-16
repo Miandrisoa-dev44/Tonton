@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Physique-Chimie BAC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Exo+2:ital,wght@0,300;0,700;1,400&family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --space-blue: #0d47a1;
+            --neon-green: #00e676;
+            --atom-purple: #d500f9;
+            --energy-yellow: #ffea00;
+            --paper-color: #f3f4f6;
+            --dark-text: #212121;
+        }
+
+        body {
+            background-color: #b0bec5;
+            font-family: 'Exo 2', sans-serif;
+            color: var(--dark-text);
+            margin: 0;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        .book-page {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 70px;
+            box-shadow: 0 0 50px rgba(13, 71, 161, 0.3);
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            /* Texture Papier Technique */
+            background-image: 
+                linear-gradient(#e0e0e0 1px, transparent 1px),
+                linear-gradient(90deg, #e0e0e0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Aquarelles "Cosmiques" */
+        .paint-nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            mix-blend-mode: normal;
+        }
+        .nebula-blue { background: var(--space-blue); width: 600px; height: 600px; top: -200px; right: -200px; opacity: 0.2; }
+        .nebula-purple { background: var(--atom-purple); width: 400px; height: 400px; bottom: -50px; left: -100px; opacity: 0.3; }
+        .nebula-green { background: var(--neon-green); width: 250px; height: 250px; top: 40%; left: 30%; opacity: 0.15; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Audiowide', cursive;
+            font-size: 3.5em;
+            text-align: center;
+            color: var(--space-blue);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.5em;
+            color: #555;
+            margin-top: -10px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: 'Audiowide', cursive;
+            font-size: 2em;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid;
+            padding-bottom: 10px;
+        }
+        .h2-phys { color: var(--space-blue); border-color: var(--space-blue); }
+        .h2-chem { color: var(--atom-purple); border-color: var(--atom-purple); }
+
+        .deric-tech {
+            background: rgba(33, 33, 33, 0.9);
+            color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+            font-family: 'Share Tech Mono', monospace;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Badges Séries */
+        .tag {
+            font-family: 'Exo 2', sans-serif;
+            font-weight: bold;
+            font-size: 0.6em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            vertical-align: middle;
+            margin-left: 15px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .tag-sci { background: var(--space-blue); color: white; border: 1px solid white; } /* C, D, S */
+        .tag-lit { background: var(--neon-green); color: black; } /* A, L, OSE */
+        .tag-all { background: #444; color: white; }
+
+        .formula-card {
+            background: white;
+            border-left: 5px solid;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .border-blue { border-color: var(--space-blue); }
+        .border-purple { border-color: var(--atom-purple); }
+
+        .math-eq {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.5em;
+            font-style: italic;
+            text-align: center;
+            display: block;
+            margin: 15px 0;
+            color: #333;
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .experiment-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .chem-step {
+            background: rgba(255,255,255,0.8);
+            border: 1px dashed var(--atom-purple);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px solid #999;
+            text-align: center;
+        }
+        .page-break::after { content: "⚛"; font-size: 2em; background: white; position: relative; top: 18px; padding: 0 10px; color: var(--space-blue); }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--space-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; background-image: none; }
+            .page-break { page-break-after: always; border: none; }
+            .page-break::after { content: ""; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Cours</a>
+
+    <div class="book-page">
+        <!-- Fond Aquarelle -->
+        <div class="paint-nebula nebula-blue"></div>
+        <div class="paint-nebula nebula-purple"></div>
+        <div class="paint-nebula nebula-green"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #555; text-transform: uppercase;">TERMINALE (Toutes Séries)</p>
+                <h1>L'Univers Quantique</h1>
+                <div class="subtitle">Physique & Chimie Nucléaire avec Tonton Deric</div>
+                <div style="font-size: 5em; margin-top: 20px;">☢️🚀🧪</div>
+            </div>
+
+            <div class="deric-tech">
+                <span style="font-size: 3.5em; margin-right: 20px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">☢️</span>
+                <div>
+                    "Initialisation du module BAC...<br>
+                    Séries C/D/S : Préparez vos intégrales pour la mécanique.<br>
+                    Séries A/L : Concentrez-vous sur l'énergie et l'environnement.<br>
+                    La physique n'est pas de la magie, c'est juste le mode d'emploi de l'univers."
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- PHYSIQUE : MECANIQUE -->
+            <h2 class="h2-phys">I. Mécanique de Newton <span class="tag tag-sci">Séries C, D, S</span></h2>
+            <p>Étudier le mouvement d'un projectile (ou d'une tartine qui saute) grâce aux lois de Newton.</p>
+
+            <div class="formula-card border-blue">
+                <h3>Théorème du Centre d'Inertie (TCI)</h3>
+                <p>Dans un référentiel galiléen, la somme des forces est égale au produit de la masse par l'accélération.</p>
+                <span class="math-eq">∑ F_ext = m * a_G</span>
+                
+                <p><strong>Application : Chute Libre (Projectile)</strong></p>
+                <ul>
+                    <li>Seule force : Le Poids (P = m * g).</li>
+                    <li>Donc m * g = m * a ➔ a = g.</li>
+                    <li>Il faut intégrer deux fois pour trouver la position x(t) et z(t).</li>
+                </ul>
+            </div>
+
+            <div style="background: #e3f2fd; padding: 15px; border-radius: 5px;">
+                💡 <strong>Le secret de Deric :</strong> N'oublie jamais les <strong>Conditions Initiales</strong> (Vitesse $V_0$ et Position $OG_0$) pour trouver les constantes lors de l'intégration.
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- PHYSIQUE : NUCLEAIRE -->
+            <h2 class="h2-phys">II. Physique Nucléaire <span class="tag tag-all">Toutes Séries</span></h2>
+            <p>Le noyau de l'atome, la radioactivité et l'énergie (E=mc^2).</p>
+
+            <div class="formula-card border-blue">
+                <h3>Loi de Décroissance Radioactive</h3>
+                <p>Le nombre de noyaux diminue avec le temps.</p>
+                <span class="math-eq">N(t) = N_0 * e^(-lambda(t))</span>
+                <p><strong>Demi-vie (t_{1/2}) :</strong> Le temps nécessaire pour que la moitié des noyaux se désintègrent.</p>
+                <span class="math-eq">t_{1/2} = ln(2)/lambda</span>
+            </div>
+
+            <div class="experiment-box">
+                <div class="chem-step" style="border-color: var(--space-blue);">
+                    <strong>Fission (Centrales)</strong><br>
+                    Un gros noyau (Uranium) se casse en deux sous l'impact d'un neutron.<br>
+                    <em>Produit beaucoup de déchets.</em>
+                </div>
+                <div class="chem-step" style="border-color: var(--space-blue);">
+                    <strong>Fusion (Soleil)</strong><br>
+                    Deux petits noyaux (Hydrogène) s'assemblent.<br>
+                    <em>Produit énormément d'énergie, peu de déchets (Futur).</em>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHIMIE : ORGANIQUE -->
+            <h2 class="h2-chem">III. Chimie Organique <span class="tag tag-sci">Séries C, D, S</span></h2>
+            <p>La chimie du Carbone. Estérification et Saponification.</p>
+
+            <div class="formula-card border-purple">
+                <h3>Réaction d'Estérification</h3>
+                <p>C'est la fabrication d'une odeur (banane, pomme...) ou d'un arôme.</p>
+                <span class="math-eq">Acide + Alcool ⇌ Ester + Eau</span>
+                <p><strong>Caractéristiques :</strong> Lente, Limitée (équilibre), Athermique.</p>
+            </div>
+
+            <div class="formula-card border-purple">
+                <h3>Réaction de Saponification (Savon)</h3>
+                <p>Action de la Soude (Base forte) sur un corps gras (Ester).</p>
+                <span class="math-eq">Ester + Soude ➔ Savon + Alcool</span>
+                <p><strong>Caractéristiques :</strong> Totale (irréversible) et Rapide (à chaud).</p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHIMIE : ACIDE BASE -->
+            <h2 class="h2-chem">IV. Acides et Bases (pH) <span class="tag tag-all">Toutes Séries</span></h2>
+            
+            <div class="formula-card border-purple">
+                <h3>Le pH des solutions aqueuses</h3>
+                <span class="math-eq">pH = -log[H_3O^+]</span>
+                <span class="math-eq">[H_3O^+] = 10^{-pH}</span>
+                
+                <p><strong>Produit Ionique de l'eau (Ke) :</strong></p>
+                <p>A 25^circ C, Ke = [H_3O^+][OH^-] = 10^{-14}.<br>
+                Donc pH + pOH = 14.</p>
+            </div>
+
+            <!-- EXERCICE TYPE BAC -->
+            <div style="border: 3px double var(--space-blue); padding: 30px; background: white;">
+                <h3 style="margin-top: 0; text-align: center; color: var(--space-blue);">Sujet Type : Datation au Carbone 14</h3>
+                <p>On retrouve un ossement ancien. Son activité radioactive est de A = 12$ désintégrations/min.
+                Un ossement vivant actuel a une activité A_0 = 15.<br>
+                La constante lambda = 1,2 * 10^{-4}  an^{-1}.</p>
+                
+                <p><strong>Calcul de l'âge (t) :</strong></p>
+                <ol>
+                    <li>Formule : A(t) = A_0 * e^{-lambda t}</li>
+                    <li>On isole l'exponentielle : e^{-lambda t} = A / A_0</li>
+                    <li>On passe au logarithme : -lambda t = ln(A / A_0)</li>
+                    <li>t = - 1/lambda ln(A/{A_0}</li>
+                    <li>t = - 1/0,00012 ln(12/15) approximativement 1859 ans.</li>
+                </ol>
+            </div>
+
+            <!-- FOOTER -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Audiowide'; font-size: 2em; color: var(--dark-text);">"E = mc²... et BAC = en Poche !"</p>
+                <div style="font-size: 3em;">💡⚛️🎓</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

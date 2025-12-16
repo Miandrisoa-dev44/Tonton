@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Français BAC - Anthologie Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Monsieur+La+Doulaise&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:wght@300;400;600&display=swap');
+
+        :root {
+            --ink-blue: #283593;
+            --romantic-purple: #6a1b9a;
+            --parchment: #fdfbf7;
+            --gold-leaf: #cca300;
+            --text-dark: #212121;
+            --rose-red: #ad1457;
+        }
+
+        body {
+            background-color: #cfd8dc;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .book-page {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--parchment);
+            padding: 70px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Aquarelles "Poétiques" */
+        .watercolor-splash {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            z-index: 0;
+            opacity: 0.4;
+            mix-blend-mode: multiply;
+        }
+        .splash-ink { background: var(--ink-blue); width: 500px; height: 500px; top: -150px; right: -150px; transform: rotate(30deg); }
+        .splash-rose { background: var(--rose-red); width: 400px; height: 400px; bottom: -50px; left: -100px; opacity: 0.3; }
+        .splash-gold { background: var(--gold-leaf); width: 250px; height: 250px; top: 40%; left: 40%; opacity: 0.2; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4em;
+            text-align: center;
+            color: var(--ink-blue);
+            margin-bottom: 5px;
+            letter-spacing: 5px;
+            border-bottom: 1px solid var(--gold-leaf);
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: var(--romantic-purple);
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            border-left: 5px solid var(--gold-leaf);
+            padding-left: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-family: 'Monsieur La Doulaise', cursive;
+            font-size: 2.5em;
+            color: #555;
+            margin-top: -10px;
+        }
+
+        .deric-poet {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid #bbb;
+            padding: 25px;
+            margin: 40px 0;
+            text-align: center;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-style: italic;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .deric-poet::after {
+            content: "✒️";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            background: var(--parchment);
+            padding: 0 10px;
+        }
+
+        .method-card {
+            background: white;
+            border-top: 4px solid var(--ink-blue);
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .literary-timeline {
+            border-left: 2px solid var(--text-dark);
+            margin: 30px 0;
+            padding-left: 20px;
+        }
+        .movement {
+            margin-bottom: 20px;
+        }
+        .movement-title {
+            font-weight: bold;
+            color: var(--rose-red);
+            font-family: 'Cinzel', serif;
+        }
+
+        .quote-box {
+            font-family: 'Monsieur La Doulaise', cursive;
+            font-size: 2em;
+            text-align: center;
+            color: var(--ink-blue);
+            margin: 30px 0;
+            line-height: 1.2;
+        }
+
+        .tag {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.6em;
+            text-transform: uppercase;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: white;
+            vertical-align: middle;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .tag-lit { background-color: var(--romantic-purple); } /* Série A, L */
+        .tag-sci { background-color: var(--ink-blue); } /* Série C, D, S */
+        .tag-all { background-color: #555; }
+
+        .table-rhetorique {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Source Sans Pro', sans-serif;
+            background: rgba(255,255,255,0.8);
+        }
+        .table-rhetorique th { background: var(--text-dark); color: white; padding: 10px; }
+        .table-rhetorique td { border: 1px solid #ddd; padding: 10px; }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+        .page-break::before { content: "❦"; font-size: 2em; color: #ccc; background: var(--parchment); position: relative; top: 18px; padding: 0 10px; }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--ink-blue);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+            .page-break::before { content: ""; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer l'Anthologie</a>
+
+    <div class="book-page">
+        <!-- Fond Aquarelle -->
+        <div class="watercolor-splash splash-ink"></div>
+        <div class="watercolor-splash splash-rose"></div>
+        <div class="watercolor-splash splash-gold"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #555; text-transform: uppercase;">TERMINALE (Toutes Séries)</p>
+                <h1>L'Anthologie Littéraire</h1>
+                <div class="subtitle">Méthodologie & Culture avec Tonton Deric</div>
+                <div style="font-size: 4em; margin-top: 20px;">🖋️🎭🕯️</div>
+            </div>
+
+            <div class="deric-poet">
+                <span style="font-size: 3em; display: block; margin-bottom: 10px;">🧐🧣</span>
+                "Bienvenue, chers esprits éclairés. Le BAC n'est pas seulement un examen, c'est l'art de convaincre et d'émouvoir. 
+                Que tu sois scientifique (concis et logique) ou littéraire (éloquent et profond), ta plume est ton épée.
+                Affûtons-la ensemble !"
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : METHODOLOGIE -->
+            <h2>I. L'Art de la Dissertation <span class="tag tag-all">Toutes Séries</span></h2>
+            <p>La dissertation est une démonstration logique. Ce n'est pas du bavardage. La structure est reine.</p>
+
+            <div class="method-card">
+                <h3>Le Plan Dialectique (Le fameux Thèse-Antithèse-Synthèse)</h3>
+                <p>À utiliser quand le sujet pose une question fermée (Oui/Non) ou demande de discuter un point de vue.</p>
+                <ul>
+                    <li><strong>I. Thèse :</strong> On explique et on valide l'opinion de l'auteur. <br><em>"Certes, la littérature sert à s'évader..."</em></li>
+                    <li><strong>II. Antithèse :</strong> On nuance, on montre les limites. <br><em>"Cependant, elle a aussi une fonction d'engagement politique..."</em></li>
+                    <li><strong>III. Synthèse :</strong> On dépasse la contradiction (ne pas dire "ça dépend"). <br><em>"Finalement, la littérature est un miroir complexe de l'homme..."</em></li>
+                </ul>
+            </div>
+
+            <div class="deric-poet" style="background: #e8eaf6; border-color: var(--ink-blue);">
+                💡 <strong>Conseil de Deric :</strong> 
+                Une bonne introduction, c'est l'entonnoir :<br>
+                1. Amorce (Généralité) ➔ 2. Sujet (Citation) ➔ 3. Problématique (Question) ➔ 4. Plan.
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : ANALYSE DE TEXTE -->
+            <h2>II. Le Commentaire Composé <span class="tag tag-all">Toutes Séries</span></h2>
+            <p>Il ne faut jamais raconter l'histoire (paraphrase). Il faut expliquer <strong>comment</strong> l'auteur produit un effet.</p>
+
+            <div class="method-card">
+                <h3>La Grille d'Analyse (Outils)</h3>
+                <table class="table-rhetorique">
+                    <thead>
+                        <tr>
+                            <th>Outil</th>
+                            <th>Exemple</th>
+                            <th>Effet possible (Interprétation)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Champ Lexical</strong></td>
+                            <td>Mots liés à la nuit (ombre, noir, lune...)</td>
+                            <td>Crée une atmosphère mystérieuse ou angoissante.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hyperbole</strong></td>
+                            <td>"Je meurs de soif"</td>
+                            <td>Insistance, dramatisation, satire.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Oxymore</strong></td>
+                            <td>"Cette obscure clarté" (Corneille)</td>
+                            <td>Souligne un conflit intérieur, une complexité.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Anaphore</strong></td>
+                            <td>Répétition en début de phrase</td>
+                            <td>Rythme, obsession, conviction.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : HISTOIRE LITTERAIRE -->
+            <h2>III. Les Grands Mouvements <span class="tag tag-lit">Important Séries A/L</span></h2>
+            <p>Pour l'épreuve de culture générale, tu dois situer les auteurs dans le temps.</p>
+
+            <div class="literary-timeline">
+                <div class="movement">
+                    <div class="movement-title">XIXe : Le Romantisme (1800-1850)</div>
+                    Expression du "Moi", sentiments, nature, mal du siècle.<br>
+                    <em>Auteurs : Victor Hugo, Lamartine, Musset.</em>
+                </div>
+                <div class="movement">
+                    <div class="movement-title">XIXe : Le Réalisme & Naturalisme (1850-1890)</div>
+                    Peindre la réalité telle qu'elle est, même la misère. Approche scientifique (Zola).<br>
+                    <em>Auteurs : Balzac, Flaubert, Zola, Maupassant.</em>
+                </div>
+                <div class="movement">
+                    <div class="movement-title">XXe : La Négritude (Capital pour Madagascar)</div>
+                    Affirmation de l'identité noire, refus de l'assimilation coloniale, fierté des racines.<br>
+                    <em>Auteurs : Aimé Césaire, Léopold S. Senghor, Léon G. Damas.</em><br>
+                    <em>À Madagascar : Jean-Joseph Rabearivelo, Jacques Rabemananjara.</em>
+                </div>
+                <div class="movement">
+                    <div class="movement-title">XXe : L'Absurde & L'Existentialisme</div>
+                    L'homme est seul face à un monde sans sens. Il doit créer sa liberté.<br>
+                    <em>Auteurs : Camus, Sartre, Ionesco, Beckett.</em>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "Ma bouche sera la bouche des malheurs qui n'ont point de bouche, ma voix, la liberté de celles qui s'afluent au cachot du désespoir."<br>
+                <span style="font-size: 0.6em; font-family: 'Playfair Display';">— Aimé Césaire, Cahier d'un retour au pays natal.</span>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- EXERCICE PRATIQUE -->
+            <div style="border: 1px double var(--ink-blue); padding: 30px; background: white; margin-top: 20px;">
+                <h2 style="margin-top: 0; text-align: center; border: none; font-size: 1.8em;">Sujet Type BAC (Mini-Entraînement)</h2>
+                <p><strong>Sujet de Dissertation :</strong> <em>"Le romancier doit-il nécessairement s'inspirer de la réalité ?"</em></p>
+                
+                <p><strong>Piste de Correction (Plan Dialectique) :</strong></p>
+                <ul>
+                    <li><strong>I. Certes, le roman imite le réel (Mimesis).</strong><br>
+                    Le Réalisme (Balzac) veut "faire concurrence à l'état civil". Le lecteur a besoin de vraisemblance pour croire à l'histoire.</li>
+                    
+                    <li><strong>II. Mais le roman est aussi une création imaginaire.</strong><br>
+                    La Science-Fiction, le Fantastique. Même le réaliste fait des choix (il ne raconte pas tout). L'art transforme le réel.</li>
+                    
+                    <li><strong>III. Synthèse : Le roman est un "mensonge vrai".</strong><br>
+                    Il utilise l'imagination pour révéler une vérité profonde sur l'homme, plus forte que la simple réalité quotidienne.</li>
+                </ul>
+            </div>
+
+            <!-- FOOTER -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Monsieur La Doulaise'; font-size: 3em; color: var(--text-dark);">"Hâtez-vous lentement, et sans perdre courage..."</p>
+                <p><em>- Boileau (et Tonton Deric)</em></p>
+                <div style="font-size: 3em;">🦉📖🥀</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

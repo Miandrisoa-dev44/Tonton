@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+    <meta charset="UTF-8">
+    <title>Malagasy BEPC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Gentium+Plus:ital,wght@0,400;0,700;1,400&family=Kaushan+Script&display=swap');
+
+        :root {
+            --lamba-red: #b71c1c;
+            --clay-brown: #8d6e63;
+            --raffia-yellow: #fff59d;
+            --royal-purple: #4a148c;
+            --leaf-green: #33691e;
+            --paper-texture: #fffdf0;
+        }
+
+        body {
+            background-color: #d7ccc8;
+            font-family: 'Gentium Plus', serif;
+            color: #3e2723;
+            margin: 0;
+            padding: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .book-page {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--paper-texture);
+            padding: 60px;
+            box-shadow: 0 20px 50px rgba(62, 39, 35, 0.3);
+            position: relative;
+            overflow: hidden;
+            border-top: 10px solid var(--lamba-red);
+            border-bottom: 10px solid var(--leaf-green);
+        }
+
+        /* Motifs Aquarelles "Gasy" */
+        .watercolor-wash {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            opacity: 0.6;
+        }
+        .wash-red { background: var(--lamba-red); width: 350px; height: 350px; top: -100px; right: -50px; opacity: 0.4; }
+        .wash-green { background: var(--leaf-green); width: 300px; height: 300px; bottom: -50px; left: -50px; opacity: 0.4; }
+        .wash-yellow { background: var(--raffia-yellow); width: 250px; height: 250px; top: 40%; left: 35%; mix-blend-mode: multiply; opacity: 0.6; }
+
+        /* Motif Zafimaniry sur le côté */
+        .side-pattern {
+            position: absolute;
+            top: 0; left: 0; bottom: 0;
+            width: 20px;
+            background-image: repeating-linear-gradient(45deg, var(--clay-brown) 0, var(--clay-brown) 10px, transparent 10px, transparent 20px);
+            opacity: 0.3;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding-left: 20px;
+        }
+
+        h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 3.5em;
+            text-align: center;
+            color: var(--lamba-red);
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-family: 'Cinzel Decorative', cursive;
+            color: var(--leaf-green);
+            font-size: 2em;
+            border-bottom: 2px solid var(--clay-brown);
+            margin-top: 50px;
+            display: inline-block;
+        }
+
+        .mpikabary-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--lamba-red);
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            box-shadow: 5px 5px 0 rgba(183, 28, 28, 0.2);
+        }
+
+        .grammar-card {
+            background: #f1f8e9;
+            border-left: 5px solid var(--leaf-green);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .kabary-structure {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .kabary-step {
+            background: var(--raffia-yellow);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            border: 1px dashed var(--clay-brown);
+            font-weight: bold;
+        }
+
+        .proverb-analysis {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .proverb-text {
+            font-style: italic;
+            font-weight: bold;
+            color: var(--royal-purple);
+            font-size: 1.1em;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px solid var(--clay-brown);
+            text-align: center;
+        }
+        .page-break::after {
+            content: "✦";
+            background: var(--paper-texture);
+            padding: 0 10px;
+            color: var(--clay-brown);
+            position: relative;
+            top: 12px;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--lamba-red);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .side-pattern { display: none; }
+            .page-break { page-break-after: always; border: none; }
+            .page-break::after { content: ""; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Natonta (Imprimer)</a>
+
+    <div class="book-page">
+        <!-- Décor -->
+        <div class="side-pattern"></div>
+        <div class="watercolor-wash wash-red"></div>
+        <div class="watercolor-wash wash-green"></div>
+        <div class="watercolor-wash wash-yellow"></div>
+
+        <div class="content">
+            <!-- COUVERTURE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #555;">FANOMANANA BEPC</p>
+                <h1>Ny Harem-pirenena</h1>
+                <h3 style="font-family:'Kaushan Script'; font-size: 2em; color: var(--clay-brown); margin-top: -10px;">Malagasy sy Haisoratra</h3>
+                <div style="font-size: 5em; margin: 20px;">🇲🇬📜🐂</div>
+            </div>
+
+            <div class="mpikabary-box">
+                <div style="font-size: 3.5em; margin-right: 20px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">👒</div>
+                <div>
+                    "Manao ahoana tompoko ! I <strong>Tonton Deric</strong> no eto. 
+                    Tsy mofo intsony no asesik'ity milina ity, fa fahendrena sy teny kanto. 
+                    Andao hianatra ny maha-Malagasy antsika mba hahazoana ny BEPC amim-boninahitra !"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : FITSIPITENY (Grammaire Avancée) -->
+            <h2>I. Fitsipiteny : Ny Fiendry (La Voix)</h2>
+            <p>Ao amin'ny BEPC, tena zava-dehibe ny fahaizana mamadika fehezanteny (Transformation).</p>
+
+            <div class="grammar-card">
+                <h3>Ny Fiendry (Les Voix du Verbe)</h3>
+                <p>Misy karazany telo lehibe ny fiendry :</p>
+                <ol>
+                    <li><strong>Fiendry Manano (Voix Active) :</strong> Ny Lazaina no manao ny asa.<br>
+                    <em>Ohatra : Mihinana vary Tonton Deric.</em> (Tonton Deric = Lazaina).</li>
+                    
+                    <li><strong>Fiendry Anoina (Voix Passive) :</strong> Ny Lazaina no iharan'ny asa (Suffixe -ina / -ana).<br>
+                    <em>Ohatra : Hohanin'i Tonton Deric ny vary.</em> (Vary = Lazaina).</li>
+                    
+                    <li><strong>Fiendry Anampivoatra (Voix Circonstancielle) :</strong> Ny Lazaina dia toe-javatra (Fotoana, Toerana, Fomba) (Préfixe I- ... -ana).<br>
+                    <em>Ohatra : Ihinanana vary ny sotro.</em> (Sotro = Lazaina).</li>
+                </ol>
+            </div>
+
+            <div style="background: #fff3e0; padding: 15px; border-radius: 10px; font-style: italic;">
+                💡 <strong>Tsiambaratelon'i Deric :</strong> 
+                Raha vao mahita tovona <strong>"I-...-ANA"</strong> ianao, dia <strong>Fiendry Anampivoatra</strong> foana io !
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : FOMBA GASY & KABARY -->
+            <h2>II. Ny Kabary Malagasy</h2>
+            <p>Ny Kabary dia tenyalahatra atao amin'ny feo avo. Misy firafitra tsy maintsy arahina.</p>
+
+            <div class="kabary-structure">
+                <div class="kabary-step">
+                    1. Ny Tsiny<br>
+                    <small>(Miala tsiny)</small>
+                </div>
+                <div class="kabary-step">
+                    2. Ny Arahaba<br>
+                    <small>(Manaloka Avo)</small>
+                </div>
+                <div class="kabary-step">
+                    3. Ny Votoatiny<br>
+                    <small>(Zavatra lazaina)</small>
+                </div>
+                <div class="kabary-step">
+                    4. Ny Firarian-tsoa<br>
+                    <small>(Hitahy, Hitombo...)</small>
+                </div>
+            </div>
+
+            <div class="grammar-card" style="border-left-color: var(--lamba-red);">
+                <h3>Ohabolana sy ny Heviny (Proverbes)</h3>
+                <p>Tsy ampy ny mahay ohabolana, mila mahay manazava ny heviny.</p>
+                
+                <div class="proverb-analysis">
+                    <p class="proverb-text">"Ny hazo no vanon-ko lakana, ny tany naniriany no tsara."</p>
+                    <p><strong>Hevitra :</strong> Miankina amin'ny fitaizana (ray aman-dreny, tontolo iainana) ny maha-olona vanona ny zanaka.</p>
+                </div>
+
+                <div class="proverb-analysis">
+                    <p class="proverb-text">"Trano atsimo sy avaratra : izay tsy mahalena ialofana."</p>
+                    <p><strong>Hevitra :</strong> Tsy tokony hisy fanavakavahana. Izay afaka manampy na mahasoa dia raisina avokoa.</p>
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : HAISORATRA (Analyse de texte) -->
+            <h2>III. Fanadihadiana Lahatsoratra</h2>
+            <p>Rehefa manao fanadihadiana (Commentaire de texte), araho ity drafitra ity :</p>
+
+            <div class="mpikabary-box" style="display: block;">
+                <h3 style="margin-top:0;">Drafitra (Plan)</h3>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li>🖊️ <strong>Fampidirana (Introduction) :</strong>
+                        <ul>
+                            <li>Manolotra ny lahatsoratra (lohateny, mpanoratra).</li>
+                            <li>Mametraka ny olana (Problématique).</li>
+                            <li>Manambara ny drafitra.</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li>📖 <strong>Vatony (Développement) :</strong>
+                        <ul>
+                            <li><strong>Hevitra 1 :</strong> Hevitra ankapobeny (Idée générale).</li>
+                            <li><strong>Hevitra 2 :</strong> Fomba entin'ny mpanoratra maneho hevitra (Kanto, Ohabolana, Sarinteny).</li>
+                        </ul>
+                    </li>
+                    <br>
+                    <li>🔚 <strong>Fehiny (Conclusion) :</strong>
+                        <ul>
+                            <li>Famintinana.</li>
+                            <li>Tamberina (Ouverture/Avis personnel).</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- QUIZ -->
+            <div style="margin-top: 50px; border: 2px dashed var(--royal-purple); padding: 20px; background: #f3e5f5; border-radius: 10px;">
+                <h3 style="color: var(--royal-purple); text-align: center; margin-top: 0;">❓ Fanazarana (Quiz BEPC)</h3>
+                
+                <p><strong>1. Inona no fiendrin'ny matoanteny ao amin'ny : "Anoratako ny taratasy" ?</strong><br>
+                a) Fiendry Manano<br>
+                b) Fiendry Anampivoatra</p>
+
+                <p><strong>2. Iza no mpanoratra malaza amin'ny Tononkalo "Ny Amboara"?</strong><br>
+                a) Dox<br>
+                b) Jean-Joseph Rabearivelo</p>
+
+                <p><strong>3. Fenoy ny ohabolana : "Ny tody tsy misy fa ny ..... no miverina"</strong><br>
+                Valiny : ..............................</p>
+            </div>
+
+            <!-- PIED DE PAGE -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Kaushan Script'; font-size: 2em; color: var(--lamba-red);">"Ny teny dia lova, ka aoka hojarianina."</p>
+                <div style="font-size: 0.8em; color: #777; transform: rotate(180deg); margin-top: 20px;">
+                    Valiny : 1. b (Anampivoatra) - 2. a (Dox) - 3. Ataon'ny tena.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+    <meta charset="UTF-8">
+    <title>Malagasy CEPE - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Lora:ital,wght@0,400;0,700;1,400&family=Patrick+Hand&display=swap');
+
+        :root {
+            --lamba-orange: #f57f17;
+            --rice-green: #8bc34a;
+            --earth-brown: #795548;
+            --clay-red: #d84315;
+            --paper-bg: #fffbf0;
+        }
+
+        body {
+            background-color: #ffe0b2;
+            font-family: 'Lora', serif;
+            color: #3e2723;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .book-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--paper-bg);
+            padding: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            border-top: 10px solid var(--lamba-orange);
+            border-bottom: 10px solid var(--rice-green);
+        }
+
+        /* Motifs Aquarelles Malagasy */
+        .watercolor-splash {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .splash-orange { background: var(--lamba-orange); width: 300px; height: 300px; top: -50px; right: -80px; }
+        .splash-green { background: var(--rice-green); width: 250px; height: 250px; bottom: 50px; left: -50px; }
+        .splash-red { background: var(--clay-red); width: 200px; height: 200px; top: 30%; left: 30%; mix-blend-mode: multiply; opacity: 0.3; }
+
+        /* Motif Aloalo (stylisé) */
+        .aloalo-border {
+            border-left: 4px dotted var(--earth-brown);
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            bottom: 20px;
+            z-index: 5;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding-left: 30px; /* Pour laisser place à la bordure */
+        }
+
+        h1 {
+            font-family: 'Lobster', cursive;
+            font-size: 3.5em;
+            text-align: center;
+            color: var(--clay-red);
+            text-shadow: 2px 2px 0px #ffccbc;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-family: 'Lobster', cursive;
+            color: var(--earth-brown);
+            border-bottom: 2px solid var(--lamba-orange);
+            display: inline-block;
+            margin-top: 40px;
+        }
+
+        .intro-bubble {
+            background: white;
+            border: 2px solid var(--lamba-orange);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 5px 5px 0 rgba(245, 127, 23, 0.2);
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.2em;
+        }
+
+        .grammar-box {
+            background: rgba(255, 255, 255, 0.7);
+            border-left: 6px solid var(--rice-green);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .proverb-card {
+            background: #fff3e0;
+            border: 1px dashed var(--clay-red);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .proverb-text {
+            font-weight: bold;
+            font-style: italic;
+            font-size: 1.2em;
+            color: var(--clay-red);
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .vocab-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .page-break {
+            margin: 60px 0;
+            border-bottom: 1px dashed var(--earth-brown);
+        }
+
+        .btn-print {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--clay-red);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 20px; border: none; }
+            .page-break { page-break-after: always; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Natonta (Imprimer)</a>
+
+    <div class="book-page">
+        <!-- Décor -->
+        <div class="aloalo-border"></div>
+        <div class="watercolor-splash splash-orange"></div>
+        <div class="watercolor-splash splash-green"></div>
+        <div class="watercolor-splash splash-red"></div>
+
+        <div class="content">
+            <!-- COUVERTURE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 2px; font-weight: bold; color: #666;">FANOMANANA CEPE</p>
+                <h1>Ny Bokiko Malagasy</h1>
+                <h3 style="font-family:'Patrick Hand'; font-size: 2em; margin-top: -10px;">Miaraka amin'i Tonton Deric</h3>
+                <div style="font-size: 6em; margin: 20px;">🍚🇲🇬🍞</div>
+            </div>
+
+            <div class="intro-bubble">
+                <div style="font-size: 3em; margin-right: 15px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;"></div>
+                <div>
+                    "Manao ahoana e! Vonona hianatra teny Malagasy ve ianao?
+                    Tsy sarotra io raha mazoto mamerina isika. Andao hianatra fitsipiteny sy ohabolana miaraka amiko!"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : FITSIPITENY (Grammaire) -->
+            <h2>Toko I : Fitsipiteny (Grammaire)</h2>
+            <p>Ny fehezanteny gasy dia toy ny trano : mila fototra tsara.</p>
+
+            <div class="grammar-box">
+                <h3>1. Ny Rafitry ny fehezanteny (Structure)</h3>
+                <p>Amin'ny teny Malagasy, matetika dia mialoha ny <strong>Enti-milaza</strong> (Verbe/Predicat).</p>
+                
+                <p style="font-size: 1.2em;">
+                    <span style="color: var(--clay-red); font-weight: bold;">Mihinana</span> 
+                    <span style="color: var(--rice-green); font-weight: bold;">mofo</span>
+                    <span style="color: var(--earth-brown); font-weight: bold;">Tonton Deric.</span>
+                </p>
+                <p>
+                    <small style="color: var(--clay-red);">[Enti-milaza]</small> + 
+                    <small style="color: var(--rice-green);">[Fameno]</small> + 
+                    <small style="color: var(--earth-brown);">[Lazaina (Sujet)]</small>
+                </p>
+                
+                <hr>
+                
+                <p><strong>Raha avadika (Inversion avec "dia") :</strong><br>
+                <em>I Tonton Deric <strong>dia</strong> mihinana mofo.</em></p>
+            </div>
+
+            <div class="grammar-box" style="border-left-color: var(--lamba-orange);">
+                <h3>2. Ny Karazana Fehezanteny</h3>
+                <ul>
+                    <li><strong>Fehezanteny manambara :</strong> Tonton Deric dia milina. (Point)</li>
+                    <li><strong>Fehezanteny manontany :</strong> Milina ve i Tonton Deric ? (Point d'interrogation)</li>
+                    <li><strong>Fehezanteny mandidy :</strong> Mihinàna mofo ! (Impératif)</li>
+                    <li><strong>Fehezanteny miantso :</strong> Ry Tonton Deric ô ! (Vocation)</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : OHABOLANA (Proverbes) -->
+            <h2>Toko II : Ohabolana (Proverbes)</h2>
+            <p>Ny ohabolana dia ravaky ny teny. Tena tia ohabolana ny mpanitsy fanadinana !</p>
+
+            <div class="proverb-card">
+                <p class="proverb-text">"Ny fianarana no lova tsara indrindra."</p>
+                <p><em>Dika : L'éducation est le meilleur des héritages.</em><br>
+                Tsy misy mpangalatra afaka maka ny fahalalana ao an-dohanao !</p>
+            </div>
+
+            <div class="proverb-card">
+                <p class="proverb-text">"Aza ny lohasaha mangina no jerena, fa Andriamanitra an-tampon'ny loha."</p>
+                <p><em>Dika : Aza manao ratsy na dia irery aza, fa mahita anao Andriamanitra.</em></p>
+            </div>
+
+            <div class="proverb-card">
+                <p class="proverb-text">"Ny ondry tsy mifampandao."</p>
+                <p><em>Dika : Firaisan-kina (Solidarité). Miaraka foana toy ny andian'ondry.</em></p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : VAMBOLANA (Vocabulaire) -->
+            <h2>Toko III : Vambolana (Vocabulaire)</h2>
+            <p>Hay ve ianao mahay teny mitovy hevitra sy mifanohitra ?</p>
+
+            <h3>🔁 Teny Mitovy Hevitra (Synonymes)</h3>
+            <div class="vocab-grid">
+                <div class="vocab-item"><strong>Mazoto</strong> = Marisi-po</div>
+                <div class="vocab-item"><strong>Mahantra</strong> = Sahirana</div>
+                <div class="vocab-item"><strong>Mianatra</strong> = Mianoka fahalalana</div>
+                <div class="vocab-item"><strong>Trano</strong> = Fonenana / Bongo</div>
+            </div>
+
+            <h3 style="margin-top: 30px;">↔️ Teny Mifanohitra (Antonymes)</h3>
+            <div class="vocab-grid">
+                <div class="vocab-item"><strong>Lava</strong> ≠ Fohy</div>
+                <div class="vocab-item"><strong>Madio</strong> ≠ Maloto</div>
+                <div class="vocab-item"><strong>Fotsy</strong> ≠ Mainty</div>
+                <div class="vocab-item"><strong>Tia</strong> ≠ Mankahala</div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- FANAZARANA (Exercices) -->
+            <div style="background: #fff8e1; border: 2px dashed var(--clay-red); padding: 25px; border-radius: 15px;">
+                <h2 style="margin-top:0; text-align: center; border:none;">Fanazarana (Quiz)</h2>
+                
+                <p><strong>1. Avadio ho fehezanteny mandidy :</strong><br>
+                "Mianatra lesona i Bao."<br>
+                <em>Valiny : ...............................................</em></p>
+
+                <p><strong>2. Omeo ny dikan'ny teny hoe "Sakaiza" :</strong><br>
+                ⚪ Fahavalo<br>
+                ⚪ Namana</p>
+
+                <p><strong>3. Fenoy ny ohabolana :</strong><br>
+                "Tondro tokana tsy mahazo ................."</p>
+                
+                <p><strong>4. Ahoana ny fanoratra ny isa "2024" amin'ny teny Malagasy ?</strong><br>
+                <em>Valiny : Efatra amby roapolo sy roa arivo.</em></p>
+            </div>
+
+            <!-- FIN -->
+            <div style="margin-top: 50px; text-align: center; border-top: 1px solid var(--earth-brown); padding-top: 20px;">
+                <p style="font-family: 'Patrick Hand'; font-size: 1.5em;">"Mazotoa homana ny fahalalana !"</p>
+                <div style="font-size: 4em;">🥄🍲</div>
+                
+                <div style="font-size: 0.8em; color: #777; transform: rotate(180deg); margin-top: 30px;">
+                    <strong>Valiny :</strong> 1. Mianara lesona ry Bao! - 2. Namana - 3. Hao (Ny firaisan-kina) - 4. Isa vakiana avy any aoriana mankany aloha.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

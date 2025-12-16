@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="mg">
+<head>
+    <meta charset="UTF-8">
+    <title>Malagasy BAC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather:ital,wght@0,300;0,700;1,300&family=Oswald:wght@300;500&display=swap');
+
+        :root {
+            --terra-cotta: #a0522d;
+            --lamba-red: #b71c1c;
+            --rice-green: #558b2f;
+            --clay-beige: #f5f5dc;
+            --indigo-gasy: #283593;
+            --text-color: #3e2723;
+        }
+
+        body {
+            background-color: #d7ccc8;
+            font-family: 'Merriweather', serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .book-page {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: #fffbf0;
+            padding: 70px;
+            box-shadow: 0 20px 60px rgba(62, 39, 35, 0.4);
+            position: relative;
+            overflow: hidden;
+            /* Bordure style Lamba */
+            border-top: 15px solid var(--lamba-red);
+            border-bottom: 15px solid var(--rice-green);
+        }
+
+        /* Aquarelles "Tany Gasy" */
+        .watercolor-stain {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            z-index: 0;
+            opacity: 0.5;
+            mix-blend-mode: multiply;
+        }
+        .stain-terra { background: var(--terra-cotta); width: 450px; height: 450px; top: -100px; left: -100px; }
+        .stain-green { background: var(--rice-green); width: 400px; height: 400px; bottom: -50px; right: -80px; opacity: 0.4; }
+        .stain-indigo { background: var(--indigo-gasy); width: 250px; height: 250px; top: 35%; right: 20%; opacity: 0.2; }
+
+        /* Motif Zafimaniry stylisé en CSS */
+        .wood-pattern {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            bottom: 20px;
+            width: 5px;
+            border-left: 2px dashed var(--terra-cotta);
+            border-right: 2px dashed var(--terra-cotta);
+            opacity: 0.5;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding-left: 30px;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5em;
+            text-align: center;
+            color: var(--lamba-red);
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5em;
+            color: var(--text-color);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: -20px;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.2em;
+            color: var(--rice-green);
+            margin-top: 60px;
+            border-bottom: 2px solid var(--terra-cotta);
+            display: inline-block;
+            padding-right: 20px;
+        }
+
+        .deric-elder {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--terra-cotta);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            box-shadow: 5px 5px 0 rgba(160, 82, 45, 0.2);
+            font-style: italic;
+        }
+
+        .concept-box {
+            background: #f1f8e9;
+            border-left: 5px solid var(--rice-green);
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .literary-card {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px dashed var(--lamba-red);
+            margin-bottom: 15px;
+        }
+
+        .table-gasy {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            font-size: 0.95em;
+        }
+        .table-gasy th { background: var(--text-color); color: white; padding: 10px; }
+        .table-gasy td { border: 1px solid #ccc; padding: 10px; }
+
+        .tag-serie {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.7em;
+            background: var(--text-color);
+            color: var(--clay-beige);
+            padding: 2px 8px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px solid #bbb;
+            text-align: center;
+        }
+        .page-break::after { content: "❖"; font-size: 1.5em; background: #fffbf0; position: relative; top: 14px; padding: 0 10px; color: var(--lamba-red); }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--lamba-red);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+            .page-break::after { content: ""; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Natonta (Imprimer)</a>
+
+    <div class="book-page">
+        <!-- Fond Aquarelle -->
+        <div class="wood-pattern"></div>
+        <div class="watercolor-stain stain-terra"></div>
+        <div class="watercolor-stain stain-green"></div>
+        <div class="watercolor-stain stain-indigo"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #666; font-family: 'Oswald';">KILASY FAMARANANA (TERMINALE)</p>
+                <h1>Ny Lova sy ny Teny</h1>
+                <div class="subtitle">Famakafakana & Haisoratra miaraka amin'i Tonton Deric</div>
+                <div style="font-size: 4em; margin-top: 20px;">🇲🇬📜🏫</div>
+            </div>
+
+            <div class="deric-elder">
+                <span style="font-size: 3.5em; margin-right: 20px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">👘</span>
+                <div>
+                    "Manao ahoana, ry zanaka ! Efa lehibe ianareo izao. Tsy mofo intsony no iarahantsika, fa ny <strong>Votoatin-kevitra</strong>.
+                    Ny taranja Malagasy ao amin'ny BAC dia fitaratra ahitana ny fahaizanao mandinika sy maneho hevitra.
+                    Andao horaisina ny penina !"
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : FAMAKAFAKANA (Dissertation/Commentaire) -->
+            <h2>I. Ny Fanadihadiana Lahatsoratra <span class="tag-serie">Séries Rehetra</span></h2>
+            <p>Ity no fanadinana lehibe indrindra. Tsy famintinana (résumé) io, fa fandinihana lalina.</p>
+
+            <div class="concept-box">
+                <h3>Ny Rafitra (Plan)</h3>
+                <p><strong>1. Fampidirana (Introduction) :</strong></p>
+                <ul>
+                    <li><em>Ambondrona (Généralité) :</em> Teny fampidirana mifanaraka amin'ny lohahevitra.</li>
+                    <li><em>Toina (Sujet) :</em> Ferenana ny lohahevitra na ny fanontaniana mipetraka.</li>
+                    <li><em>Drafitra (Annonce du plan) :</em> Lazaina ireo hevitra lehibe hovelabelarina.</li>
+                </ul>
+                <hr style="border:0; border-top:1px dashed #ccc;">
+                <p><strong>2. Vatony (Développement) :</strong></p>
+                <ul>
+                    <li>Mila hevitra roa na telo lehibe.</li>
+                    <li>Isaky ny hevitra dia mila : <strong>Hevitra fototra + Fanazavana + Ohatra</strong> (Ohabolana na zava-misy).</li>
+                    <li>Tsy azo atao ny mamerina ny tenin'ny lahatsoratra (paraphrase).</li>
+                </ul>
+                <hr style="border:0; border-top:1px dashed #ccc;">
+                <p><strong>3. Fehiny (Conclusion) :</strong></p>
+                <ul>
+                    <li>Famintinana ny voalaza.</li>
+                    <li>Tamberina na Fanokafana (Ouverture).</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : HAISORATRA (Littérature) -->
+            <h2>II. Haisoratra sy Mpanoratra <span class="tag-serie">Séries A, L, OSE</span></h2>
+            <p>Ny tantaran'ny haisoratra malagasy dia mizara vanim-potoana maro. Ireto ny tena mpiseho matetika :</p>
+
+            <div class="literary-card">
+                <h3>📜 Ny Vanim-potoana "Mitady ny Very" (1930-1945)</h3>
+                <p><strong>Hevitra :</strong> Fiverenana amin'ny fototra malagasy, alahelo ny lasa, fitiavan-tanindrazana manoloana ny fanjanahantany.</p>
+                <p><strong>Mpanoratra :</strong></p>
+                <ul>
+                    <li><strong>Jean-Joseph Rabearivelo :</strong> Mpanoratra "Ambondrona" (L'Interférence). Poety mahay teny frantsay sy gasy.</li>
+                    <li><strong>Ny Avana Ramanantoanina :</strong> Mpisalwana ny fomba gasy.</li>
+                </ul>
+            </div>
+
+            <div class="literary-card">
+                <h3>✊ Ny Vanim-potoana "Vahaza" na Fitolona (1945-1960)</h3>
+                <p><strong>Hevitra :</strong> Fitakiana ny fahaleovantena, teny mahery, fanantenana.</p>
+                <p><strong>Mpanoratra :</strong> Dox, Jacques Rabemananjara.</p>
+            </div>
+
+            <div class="concept-box" style="background: white; border-color: var(--lamba-red);">
+                <strong>Sombin-tononkalo :</strong><br>
+                <em>"Kintana iray no eny, manirery... Injay misy feo, manadala, miteny..."</em> (Rado)<br>
+                Rehefa manadihady tononkalo, jereo ny <strong>Rima</strong> (A-A / A-B) sy ny <strong>Sary</strong> (Sarinteny).
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : FITSIPITENY (Grammaire) -->
+            <h2>III. Fitsipiteny : Ny Fiendry <span class="tag-serie">Séries Rehetra</span></h2>
+            <p>Ny fifehezana ny fiendry (Voix) no lakilen'ny fanoratana tsara.</p>
+
+            <table class="table-gasy">
+                <thead>
+                    <tr>
+                        <th>Fiendry (Voix)</th>
+                        <th>Fanazavana</th>
+                        <th>Ohatra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Manano</strong> (Active)</td>
+                        <td>Ny Lazaina no manao ny asa.</td>
+                        <td><em><strong>Mianatra</strong> lesona i Tonton Deric.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anoina</strong> (Passive)</td>
+                        <td>Ny Lazaina no iharan'ny asa. (Matetika misy tovona -ina/-ana).</td>
+                        <td><em><strong>Ianaran'i</strong> Tonton Deric ny lesona.</em></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Anampivoatra</strong> (Circonstancielle)</td>
+                        <td>Ny Lazaina dia toe-javatra (Fotoana, Toerana, Fomba). (I-...-ana).</td>
+                        <td><em><strong>Ianaran'i</strong> Tonton Deric lesona ny sekoly.</em></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="deric-elder" style="font-size: 0.9em;">
+                💡 <strong>Hafatr'i Tonton Deric :</strong> 
+                Tandremo ny fampiasana ny teny hoe <strong>"no"</strong>. <br>
+                "Izaho <strong>no</strong> mihinana" (C'est moi qui mange - Mise en relief). <br>
+                Hafa ny hoe "Izaho mihinana" (Je mange).
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- EXERCICE TYPE BAC -->
+            <div style="border: 2px solid var(--text-color); padding: 30px; background: white;">
+                <h3 style="margin-top: 0; text-align: center;">Fanazarana : Fanadihadiana Ohabolana</h3>
+                <p><strong>Ohabolana :</strong> <em>"Ny ondry tsy mifampandao."</em></p>
+                
+                <p><strong>Soso-kevitra (Pistes) :</strong></p>
+                <ul>
+                    <li><strong>Hevitra 1 (Famaritana) :</strong> Ny ondry dia biby malemy, miara-dia foana mba hiaro tena. Tsy misaraka.</li>
+                    <li><strong>Hevitra 2 (Eo amin'ny fiarahamonina) :</strong> Ny Malagasy dia tia Fihavanana sy Firaisan-kina. Ny herin'ny maro no mahomby (Valalabemandry).</li>
+                    <li><strong>Fehiny :</strong> Ilaina ny firaisan-kina, fa tokony ho amin'ny tsara (tsy "ondry" manara-dreniny fotsiny amin'ny ratsy).</li>
+                </ul>
+            </div>
+
+            <!-- FOOTER -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Great Vibes'; font-size: 2.5em; color: var(--lamba-red);">"Ny fahaizana no elatra, fa ny fahendrena no lanjany."</p>
+                <div style="font-size: 3em;">🎓🎼🌄</div>
+                <p style="font-size: 0.8em; color: #555;">Mirary soa ho an'ny BAC !</p>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

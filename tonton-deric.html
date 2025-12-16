@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Univers de Tonton Deric - La Bibliothèque Magique</title>
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+
+    <!-- Fond Artistique -->
+    <div class="background-art">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+    </div>
+
+    <!-- BOUTON D'OUVERTURE MENU -->
+    <button class="magic-toggle-btn" onclick="toggleSideMenu()">
+        <span>&#8942;</span>
+    </button>
+    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleSideMenu()"></div>
+
+    <!-- MENU GLISSANT -->
+    <nav class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <span style="font-size: 2em;">🍞</span>
+            <button class="close-menu-btn" onclick="toggleSideMenu()">✕</button>
+        </div>
+        <div class="menu-items">
+            <a href="#" onclick="closeAllModals(); toggleSideMenu(); return false;" class="drawer-link">
+                <span class="icon">🏠</span> Accueil
+            </a>
+            <a href="#" onclick="openInfo('about'); toggleSideMenu(); return false;" class="drawer-link">
+                <span class="icon"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:25px; border-radius:50%;"></span> À Propos
+            </a>
+            <a href="#" onclick="openInfo('contact'); toggleSideMenu(); return false;" class="drawer-link">
+                <span class="icon">💌</span> Contact
+            </a>
+            <hr style="border: 0; border-top: 1px dashed #ccc; margin: 10px 0;">
+            <a href="#" onclick="dericSpeak(); toggleSideMenu(); return false;" class="drawer-link special">
+                <span class="icon">✨</span> Coucou Deric !
+            </a>
+        </div>
+        <div class="menu-footer">
+            <div class="blob-deco"></div>
+        </div>
+    </nav>
+
+    <!-- Tonton Deric animé (Photo) -->
+    <div class="tonton-wrapper">
+        <div class="speech-bubble" id="deric-msg">Bienvenue dans ma bibliothèque !</div>
+        <div class="deric-avatar-container" onclick="dericSpeak()">
+            <!-- Mettre la photo sous le nom tonton_photo.jpg -->
+            <video autoplay muted loop playsinline class="deric-real-photo" poster="tonton_photo.jpg">
+                <source src="video2_deric.mp4" type="video/mp4">
+            </video>
+           <!-- <img src="tonton_photo.jpg" alt="Tonton Deric" class="deric-real-photo">-->
+        </div>
+    </div>
+
+    <!-- BOUTON DONATION -->
+    <div class="donate-fab" onclick="openDonationModal()">
+        <span class="icon">🎁</span>
+        <span class="tooltip">Soutenir Deric !</span>
+    </div>
+
+    <!-- CONTENU PRINCIPAL -->
+    <div class="container">
+    
+        <!-- HEADER AVEC VIDÉO BACKGROUND -->
+        <header class="video-header">
+            <!-- La Vidéo en arrière-plan -->
+            <!-- Assurez-vous d'avoir le fichier video_deric.mp4 dans le dossier -->
+            <video autoplay muted loop playsinline class="back-video">
+                <source src="video_deric.mp4" type="video/mp4">
+            </video>
+
+            <!-- Un filtre sombre pour que le texte soit lisible -->
+            <div class="video-overlay"></div>
+
+            <!-- Le contenu (Titre) par-dessus -->
+            <div class="header-content">
+                <div style="font-size: 4em; animation: float 3s infinite;"><img src="tonton_photo1.png" alt="tonton Deric" style="width:60%; border-radius:15%;"></div>
+                <h1>L'Univers de Tonton Deric</h1>
+                <div class="subtitle">La Bibliothèque Scolaire Fantastique</div>
+            </div>
+            
+           <!-- <div style="font-size: 4em;">🍞✨</div>
+            <h1>L'Univers de Tonton Deric</h1>
+            <div class="subtitle">La Bibliothèque Scolaire Fantastique</div>-->
+        </header>
+
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterBooks('all', this)">Tous</button>
+            <button class="filter-btn" onclick="filterBooks('cm2', this)" data-filter="cm2">Primaire (CM2)</button>
+            <button class="filter-btn" onclick="filterBooks('trois', this)" data-filter="3eme">Collège (3ème)</button>
+            <button class="filter-btn" onclick="filterBooks('term', this)" data-filter="terminale">Lycée (Terminale)</button>
+        </div>
+
+        <!-- GRILLE DES LIVRES -->
+        <div class="library-grid" id="grid">
+            <!-- CM2 -->
+            <div class="book-card cm2" onclick="openBook('opérationcepe.html')"><span class="level-badge">CM2</span><span class="book-subject">Operation</span><div class="book-icon">➕</div><h3 class="book-title">Opérations Croustillantes</h3></div>
+            <div class="book-card cm2" onclick="openBook('problèmecepe.html')"><span class="level-badge">CM2</span><span class="book-subject">Maths / Problèmes</span><div class="book-icon">🕵️‍♂️</div><h3 class="book-title">Les Enquêtes</h3></div>
+            <div class="book-card cm2" onclick="openBook('svtcepe.html')"><span class="level-badge">CM2</span><span class="book-subject">SVT</span><div class="book-icon">🌿</div><h3 class="book-title">L'Herbier</h3></div>
+            <div class="book-card cm2" onclick="openBook('françaiscepe.html')"><span class="level-badge">CM2</span><span class="book-subject">Français</span><div class="book-icon">✒️</div><h3 class="book-title">Mots Magiques</h3></div>
+            <div class="book-card cm2" onclick="openBook('tantaracepe.html')"><span class="level-badge">CM2</span><span class="book-subject">Tantara</span><div class="book-icon">👑</div><h3 class="book-title">Voyage Temporel</h3></div>
+            <div class="book-card cm2" onclick="openBook('géographiecepe.html')"><span class="level-badge">CM2</span><span class="book-subject">Géographie</span><div class="book-icon">🗺️</div><h3 class="book-title">L'Atlas Coloré</h3></div>
+            <div class="book-card cm2" onclick="openBook('Malagasycepe.html')"><span class="level-badge">CM2</span><span class="book-subject">Malagasy</span><div class="book-icon">🇲🇬</div><h3 class="book-title">Bokiko Malagasy</h3></div>
+
+            <!-- 3ème -->
+            <div class="book-card trois" onclick="openBook('Mathématiquesbepc.html')"><span class="level-badge">3ème</span><span class="book-subject">Maths</span><div class="book-icon">📐</div><h3 class="book-title">Labo Mathématique</h3></div>
+            <div class="book-card trois" onclick="openBook('svtbepc.html')"><span class="level-badge">3ème</span><span class="book-subject">SVT</span><div class="book-icon">🔬</div><h3 class="book-title">Labo du Vivant</h3></div>
+            <div class="book-card trois" onclick="openBook('françaisbepc.html')"><span class="level-badge">3ème</span><span class="book-subject">Français</span><div class="book-icon">📜</div><h3 class="book-title">Belles Lettres</h3></div>
+            <div class="book-card trois" onclick="openBook('physiquebepc.html')"><span class="level-badge">3ème</span><span class="book-subject">PC</span><div class="book-icon">⚡</div><h3 class="book-title">Énergie & Matière</h3></div>
+            <div class="book-card trois" onclick="openBook('Malagasybepc.html')"><span class="level-badge">3ème</span><span class="book-subject">Malagasy</span><div class="book-icon">🐂</div><h3 class="book-title">Harem-Pirenena</h3></div>
+            <div class="book-card trois" onclick="openBook('anglaisbepc.html')"><span class="level-badge">3ème</span><span class="book-subject">Anglais</span><div class="book-icon">🇬🇧</div><h3 class="book-title">English Success</h3></div>
+            <div class="book-card trois" onclick="openBook('histo-géobepc.html')"><span class="level-badge">3ème</span><span class="book-subject">Hist-Géo</span><div class="book-icon">🌍</div><h3 class="book-title">Atlas Temporel</h3></div>
+
+            <!-- Terminale -->
+            <div class="book-card term" onclick="openBook('mathématiquesbac.html')"><span class="level-badge">BAC</span><span class="book-subject">Maths</span><div class="book-icon">♾️</div><h3 class="book-title">Grand Manuscrit</h3></div>
+            <div class="book-card term" onclick="openBook('svtbac.html')"><span class="level-badge">BAC</span><span class="book-subject">SVT</span><div class="book-icon">🧬</div><h3 class="book-title">Codex du Vivant</h3></div>
+            <div class="book-card term" onclick="openBook('françaisbac.html')"><span class="level-badge">BAC</span><span class="book-subject">Français</span><div class="book-icon">🖋️</div><h3 class="book-title">Anthologie</h3></div>
+            <div class="book-card term" onclick="openBook('philosophiebac.html')"><span class="level-badge">BAC</span><span class="book-subject">Philo</span><div class="book-icon">🦉</div><h3 class="book-title">Banquet Pensée</h3></div>
+            <div class="book-card term" onclick="openBook('physiquebac.html')"><span class="level-badge">BAC</span><span class="book-subject">PC</span><div class="book-icon">☢️</div><h3 class="book-title">Univers Quantique</h3></div>
+            <div class="book-card term" onclick="openBook('anglaisbac.html')"><span class="level-badge">BAC</span><span class="book-subject">Anglais</span><div class="book-icon">🎩</div><h3 class="book-title">English Gateway</h3></div>
+            <div class="book-card term" onclick="openBook('Malagasybac.html')"><span class="level-badge">BAC</span><span class="book-subject">Malagasy</span><div class="book-icon">🛖</div><h3 class="book-title">Lova sy Teny</h3></div>
+            <div class="book-card term" onclick="openBook('histo-géobac.html')"><span class="level-badge">BAC</span><span class="book-subject">Hist-Géo</span><div class="book-icon">📰</div><h3 class="book-title">Odyssée Monde</h3></div>
+        </div>
+
+        <footer style="text-align: center; margin-top: 50px; opacity: 0.7;">
+            <p>Fait avec ❤️ par Tonton Deric</p>
+        </footer>
+    </div>
+
+    <!-- MODAL LECTURE LIVRE -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="modal-title">Lecture en cours...</span>
+                <button class="close-btn" onclick="closeModal()">X</button>
+            </div>
+            <iframe id="book-frame" src=""></iframe>
+            <div id="error-msg" style="display:none; text-align: center; padding: 20px;">
+                <h2>Oups ! Fichier introuvable.</h2>
+                <p>Vérifiez que le fichier <strong id="file-name-display"></strong> est dans le même dossier.</p>
+                <div style="font-size: 3em;">🍞❓</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL INFO (A PROPOS / CONTACT) -->
+    <div id="info-modal" class="info-overlay" onclick="if(event.target === this) closeInfo()">
+        <div class="info-card">
+            <button class="close-info-btn" onclick="closeInfo()">✖</button>
+            
+            <!-- A PROPOS -->
+            <div id="content-about" class="info-content" style="display:none;">
+                <h2><img src="tonton_photo.jpg" alt="tonton Deric" style="width:50px; border-radius:50%;"> Qui est Tonton Deric ?</h2>
+                <div class="video-container">
+                    <!-- VIDEO ICI : Remplacer par video_deric.mp4 -->
+                    <video class="deric-video" controls poster="tonton_photo.jpg">
+                        <source src="video1_deric.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+                    <div class="video-deco"></div>
+                     <!-- NOUVEAU : BOUTON AUDIO -->
+    <button onclick="lirePresentationDeric()" class="audio-btn">
+        🔊 Écouter ma présentation
+    </button>
+                </div>
+                <p>Salut ! Je suis le prof grille-pain le plus cool de Madagascar.</p>
+                <p>Ma mission : <strong>Rendre l'école délicieuse !</strong></p>
+            </div>
+
+            <!-- CONTACT -->
+            <div id="content-contact" class="info-content" style="display:none;">
+                <h2>💌 Contactez la Cuisine</h2>
+                <form onsubmit="event.preventDefault(); envoyerEmailDeric();">
+                    <input type="text" id="contact-nom" placeholder="Votre Nom" class="input-style" required><br>
+                    <input type="email" id="contact-email" placeholder="Votre Email" class="input-style" required><br>
+                    <textarea id="contact-message" placeholder="Votre message..." class="input-style" rows="4" required></textarea><br>
+                    <button type="submit" class="submit-btn">Envoyer par Tartine 🚀</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DONATION -->
+    <div id="donation-overlay" class="info-overlay">
+        <div class="info-card donation-card">
+            <button class="close-info-btn" onclick="closeDonationModal()">✖</button>
+            <div id="donation-step-1">
+                <div style="font-size: 4em; margin-bottom: 10px;">💎</div>
+                <h2>Le Coffre de Tonton Deric</h2>
+                <form id="donation-form" onsubmit="event.preventDefault();">
+                    <label style="font-weight:bold; color:#555;">Votre Nom :</label>
+                    <input type="text" id="donator-name" class="input-style" placeholder="Ex: Rakoto" required>
+                    <label style="font-weight:bold; color:#555;">Montant (Ariary) :</label>
+                    <input type="number" id="donator-amount" class="input-style" placeholder="Ex: 1000" min="100" required>
+                    <p style="font-size:0.9em; margin-bottom:15px;">Payer avec :</p>
+                    <div class="payment-buttons">
+                        <button class="pay-btn mvola" onclick="processPayment('mvola')"><span>🟡</span> MVola</button>
+                        <button class="pay-btn orange" onclick="processPayment('orange')"><span>🟠</span> Orange Money</button>
+                    </div>
+                </form>
+            </div>
+            <div id="donation-step-2" style="display: none;">
+                <div style="font-size: 5em;">🎉💖</div>
+                <h2>Misaotra Betsaka !</h2>
+                <p id="thx-message">Merci !</p>
+                <button class="submit-btn" onclick="closeDonationModal()">Retourner</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER FANTASTIQUE -->
+    <footer class="fantastic-footer">
+        <!-- Vague décorative en haut du footer -->
+        <div class="footer-wave">
+            <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#2c3e50" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-grid">
+                
+                <!-- COLONNE 1 : LES OBJECTIFS -->
+                <div class="footer-col about-col">
+                    <h3>🚀 La Mission de Deric</h3>
+                    <p>
+                        Notre objectif est de rendre l'éducation <strong>accessible, gratuite et amusante</strong> pour tous les élèves malgaches.
+                    </p>
+                    <ul class="mission-list">
+                        <li>✨ Démocratiser le savoir</li>
+                        <li>🇲🇬 Valoriser la culture Malagasy</li>
+                        <li>💡 Préparer aux examens (CEPE, BEPC, BAC)</li>
+                    </ul>
+                </div>
+
+                <!-- COLONNE 2 : CONTACTS DIRECTS -->
+                <div class="footer-col contact-col">
+                    <h3>📬 Nous Contacter</h3>
+                    <div class="contact-line">
+                        <span>📍</span> Antsiranana, Madagascar
+                    </div>
+                    <div class="contact-line">
+                        <span>📞</span> <a href="tel:+261341108401">034 11 084 01</a>
+                    </div>
+                    <div class="contact-line">
+                        <span>📧</span> <a href="mailto:rmiandrisoaderic@gmail.com">rmiandrisoaderic@gmail.com</a>
+                    </div>
+                </div>
+
+                <!-- COLONNE 3 : RÉSEAUX SOCIAUX -->
+                <div class="footer-col social-col">
+                    <h3>🌐 Rejoins la Communauté</h3>
+                    <div class="social-icons">
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/profile.php?id=61577239424465" target="_blank" class="social-btn fb">
+                            <span class="s-icon">f</span>
+                        </a>
+                        <!-- WhatsApp -->
+                        <a href="https://chat.whatsapp.com/Jq8tWBLFBBc63q2mHov0r1?text=Bonjour%20je%20souhaite%20plus%20d'informations" target="_blank" class="social-btn wa">
+                            <span class="s-icon">💬</span>
+                        </a>
+                        <!-- Gmail -->
+                     <!--<a href="mailto:rmiandrisoaderic@gmail.com?subject=Sujet%20du%20Mail&body=Bonjour," class="social-btn gm">
+                            <span class="s-icon">M</span>
+                        </a> -->
+                        
+                        <a href="https://www.youtube.com/@MiandrisoaDeric" class="social-btn gm">
+                            <span class="s-icon"><img src="YouTube.png" alt="chaine Youtube de tonton Deric" style="width:20px; border-radius:50%;"></span>
+                        </a>
+                    </div>
+                    <p style="margin-top:10px; font-size:0.8em; opacity:0.8;">Suivez-nous pour des quiz quotidiens !</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; Fin d' année 2025 L'Univers de Tonton Deric. Fait avec ❤️ et des Tartines.</p>
+            </div>
+        </div>
+    </footer>
+    
+    
+    <script src="script.js"></script>
+</body>
+</html>

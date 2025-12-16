@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Philosophie BAC - Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Dancing+Script:wght@700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap');
+
+        :root {
+            --thought-indigo: #311b92;
+            --wisdom-gold: #ffd700;
+            --cloud-purple: #9575cd;
+            --parchment: #fffdf5;
+            --ink-black: #212121;
+        }
+
+        body {
+            background-color: #b0bec5;
+            font-family: 'Libre Baskerville', serif;
+            color: var(--ink-black);
+            margin: 0;
+            padding: 20px;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .book-page {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--parchment);
+            padding: 70px;
+            box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        /* Aquarelles "Éthérées" */
+        .paint-cloud {
+            position: absolute;
+            filter: blur(70px);
+            z-index: 0;
+            opacity: 0.4;
+            mix-blend-mode: multiply;
+        }
+        .cloud-indigo { background: var(--thought-indigo); width: 600px; height: 600px; top: -200px; left: -100px; border-radius: 50%; }
+        .cloud-purple { background: var(--cloud-purple); width: 500px; height: 500px; bottom: -100px; right: -150px; border-radius: 40%; }
+        .cloud-gold { background: var(--wisdom-gold); width: 300px; height: 300px; top: 30%; right: 10%; opacity: 0.2; }
+
+        /* Colonne Grecque (Décor) */
+        .greek-border {
+            position: absolute;
+            left: 20px; top: 20px; bottom: 20px;
+            width: 10px;
+            border-left: 2px solid var(--thought-indigo);
+            border-right: 2px solid var(--thought-indigo);
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding-left: 30px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 4em;
+            text-align: center;
+            color: var(--thought-indigo);
+            margin-bottom: 5px;
+            letter-spacing: 4px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 20px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-family: 'Philosopher', sans-serif;
+            font-size: 2em;
+            color: #555;
+            margin-top: -10px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2em;
+            color: #4a148c;
+            margin-top: 60px;
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid var(--wisdom-gold);
+            display: inline-block;
+        }
+
+        .deric-philosopher {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px double var(--thought-indigo);
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            font-family: 'Libre Baskerville', serif;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .deric-philosopher::before {
+            content: "🏛️";
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5em;
+            background: var(--parchment);
+            padding: 0 10px;
+        }
+
+        .concept-card {
+            background: white;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid var(--thought-indigo);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .quote-box {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            text-align: center;
+            color: var(--thought-indigo);
+            margin: 30px 0;
+            line-height: 1.4;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .author-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.6em;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .method-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.9);
+        }
+        .method-table th { background: var(--thought-indigo); color: white; padding: 12px; font-family: 'Cinzel'; }
+        .method-table td { border: 1px solid #ddd; padding: 12px; }
+
+        .tag-serie {
+            font-family: sans-serif;
+            font-size: 0.6em;
+            background: #444;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 4px;
+            vertical-align: middle;
+            margin-left: 10px;
+            text-transform: uppercase;
+        }
+
+        .page-break {
+            margin: 80px 0;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+        .page-break::after { content: "⚡"; font-size: 1.5em; background: var(--parchment); position: relative; top: 18px; padding: 0 10px; color: var(--thought-indigo); }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--thought-indigo);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; }
+            .page-break { page-break-after: always; border: none; }
+            .page-break::after { content: ""; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer le Manuscrit</a>
+
+    <div class="book-page">
+        <!-- Fond Aquarelle -->
+        <div class="greek-border"></div>
+        <div class="paint-cloud cloud-indigo"></div>
+        <div class="paint-cloud cloud-purple"></div>
+        <div class="paint-cloud cloud-gold"></div>
+
+        <div class="content">
+            <!-- TITRE -->
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="letter-spacing: 3px; font-weight: bold; color: #555; text-transform: uppercase;">TERMINALE (Toutes Séries)</p>
+                <h1>Le Banquet de la Pensée</h1>
+                <div class="subtitle">Philosophie & Réflexion avec Tonton Deric</div>
+                <div style="font-size: 4em; margin-top: 20px;">🦉🕯️🍇</div>
+            </div>
+
+            <div class="deric-philosopher">
+                <span style="font-size: 3.5em; display: block; margin-bottom: 15px;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">📜</span>
+                "Je pense, donc je grille.
+                Bienvenue, jeunes socratiques. Le BAC de Philo fait peur, mais c'est simple : il s'agit de poser des questions et d'y répondre sans préjugés.
+                N'apprenez pas par cœur, apprenez à <strong>penser</strong>."
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : LE SUJET -->
+            <h2>I. Le Sujet (L'Homme) <span class="tag-serie">Séries A, C, D</span></h2>
+            <p>Qui sommes-nous ? Sommes-nous maîtres de nous-mêmes ?</p>
+
+            <div class="concept-card">
+                <h3>La Conscience et l'Inconscient</h3>
+                <p><strong>Descartes :</strong> "Je pense donc je suis". La conscience est ce qui définit l'homme. Je suis transparent à moi-même.</p>
+                <hr>
+                <p><strong>Freud :</strong> "Le Moi n'est pas maître dans sa propre maison". Il existe une partie cachée de nous (l'Inconscient) qui dirige nos désirs et nos actes (Rêves, lapsus).</p>
+                <p><em>Exemple de Deric :</em> Je veux griller le pain (Conscience), mais parfois je le brûle sans le vouloir (Inconscient/Acte manqué).</p>
+            </div>
+
+            <div class="quote-box">
+                "Connais-toi toi-même."
+                <span class="author-tag">— Socrate</span>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : LA CULTURE -->
+            <h2>II. La Culture & La Société <span class="tag-serie">Séries A, L</span></h2>
+            <p>L'homme est-il un animal comme les autres ?</p>
+
+            <div class="concept-card" style="border-color: var(--wisdom-gold);">
+                <h3>Nature vs Culture</h3>
+                <ul>
+                    <li><strong>Nature :</strong> Ce qui est inné, biologique (Manger, dormir). Commun aux animaux.</li>
+                    <li><strong>Culture :</strong> Ce qui est acquis, transmis par l'éducation (Langage, Art, Technique, Religion).</li>
+                </ul>
+                <p><strong>Rousseau :</strong> La culture et la société ont perverti l'homme qui était bon naturellement.</p>
+                <p><strong>Kant :</strong> L'éducation est ce qui fait de nous des humains. "L'homme ne devient homme que par l'éducation".</p>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 3 : LA RAISON & LE RÉEL -->
+            <h2>III. La Raison & La Vérité <span class="tag-serie">Séries C, D, S</span></h2>
+            <p>Comment connaître le monde ? Faut-il croire ou démontrer ?</p>
+
+            <div class="concept-card">
+                <h3>La Démonstration et l'Expérience</h3>
+                <p>La science cherche la <strong>Vérité</strong> objective.</p>
+                <ul>
+                    <li><strong>Le Rationalisme (Descartes, Platon) :</strong> Les sens nous trompent (ex: le bâton brisé dans l'eau). Seule la Raison donne accès au vrai.</li>
+                    <li><strong>L'Empirisme (Hume, Locke) :</strong> Toute connaissance vient de l'expérience sensorielle.</li>
+                </ul>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 4 : MÉTHODOLOGIE -->
+            <h2>IV. L'Art de la Dissertation <span class="tag-serie">Toutes Séries</span></h2>
+            <p>Le jour du BAC, tu dois construire un raisonnement. Pas de "baratin" !</p>
+
+            <div class="method-table">
+                <h3 style="text-align: center; margin: 0; padding: 10px; background: #eee;">Le Plan Dialectique (Le fameux Oui/Non/Mais)</h3>
+                <table>
+                    <tr>
+                        <th>Partie</th>
+                        <th>Contenu</th>
+                        <th>Exemple : "La liberté est-elle une illusion ?"</th>
+                    </tr>
+                    <tr>
+                        <td><strong>I. Thèse</strong><br>(L'opinion commune ou 1ère réponse)</td>
+                        <td>On analyse le concept.</td>
+                        <td>Non, je suis libre car je fais des choix (Libre arbitre - Descartes).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>II. Antithèse</strong><br>(La critique)</td>
+                        <td>On montre les limites.</td>
+                        <td>Mais, je suis déterminé par mon passé, ma société, mon inconscient (Spinoza, Freud).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>III. Synthèse</strong><br>(Le dépassement)</td>
+                        <td>On résout la contradiction.</td>
+                        <td>La liberté n'est pas donnée, elle se conquiert par la connaissance (Sartre).</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- SUJET TYPE BAC -->
+            <div style="border: 2px solid var(--thought-indigo); padding: 30px; background: white; margin-top: 30px;">
+                <h3 style="margin-top: 0; text-align: center;">Sujet d'Entraînement</h3>
+                <p style="text-align: center; font-size: 1.2em; font-weight: bold;">"Faut-il toujours dire la vérité ?"</p>
+                
+                <p><strong>Pistes de réflexion de Tonton Deric :</strong></p>
+                <ol>
+                    <li><strong>Oui (Devoir Moral) :</strong> Kant dit que mentir détruit la confiance et la dignité humaine. C'est un impératif catégorique.</li>
+                    <li><strong>Non (Conséquences) :</strong> Parfois, la vérité blesse ou tue. Le "mensonge pieux" (Constant) peut être nécessaire pour protéger quelqu'un.</li>
+                    <li><strong>Synthèse :</strong> Ce n'est pas "dire n'importe quoi" vs "tout dire". Il faut dire la vérité avec sagesse et justice.</li>
+                </ol>
+            </div>
+
+            <!-- FOOTER -->
+            <div style="margin-top: 60px; text-align: center;">
+                <p style="font-family: 'Dancing Script'; font-size: 2.5em; color: var(--thought-indigo);">"Ose savoir !" (Sapere Aude)</p>
+                <p><em>- Kant (et Tonton Deric)</em></p>
+                <div style="font-size: 3em;">🌟🤔🗝️</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

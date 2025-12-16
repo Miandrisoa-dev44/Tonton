@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Cahier d'Opérations Tonton Deric</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Gaegu&family=Schoolbell&display=swap');
+
+        :root {
+            --paper-color: #fffdf0;
+            --line-blue: #b3e5fc;
+            --margin-pink: #f8bbd0;
+            --ink-color: #263238;
+            --toast-gold: #ffb74d;
+            --jam-red: #e57373;
+            --water-cyan: #4dd0e1;
+        }
+
+        body {
+            background-color: #eee;
+            font-family: 'Schoolbell', cursive; /* Police style écolier */
+            color: var(--ink-color);
+            margin: 0;
+            padding: 20px;
+            font-size: 19px;
+        }
+
+        .book-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--paper-color);
+            padding: 50px 60px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            /* Lignes de cahier */
+            background-image: 
+                linear-gradient(90deg, transparent 59px, var(--margin-pink) 60px, transparent 61px),
+                linear-gradient(var(--line-blue) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 30px;
+            border-radius: 5px;
+        }
+
+        /* Taches d'aquarelle */
+        .watercolor {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(35px);
+            z-index: 0;
+            opacity: 0.7;
+        }
+        .spot-1 { background: var(--jam-red); width: 200px; height: 200px; top: -50px; right: -50px; }
+        .spot-2 { background: var(--toast-gold); width: 300px; height: 250px; bottom: 50px; left: -80px; opacity: 0.5;}
+        .spot-3 { background: var(--water-cyan); width: 150px; height: 150px; top: 40%; right: 10%; mix-blend-mode: multiply; }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 240, 0.85); /* Fond blanc semi-transparent pour lire */
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px dashed #aaa;
+        }
+
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5em;
+            text-align: center;
+            color: #d84315;
+            margin: 0;
+            transform: rotate(-3deg);
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-family: 'Gaegu', cursive;
+            font-size: 2.2em;
+            color: #006064;
+            border-bottom: 3px solid var(--toast-gold);
+            display: inline-block;
+            margin-top: 40px;
+        }
+
+        .op-card {
+            background: white;
+            border: 2px solid var(--ink-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .op-card::before {
+            content: "★";
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: white;
+            font-size: 1.5em;
+            color: var(--toast-gold);
+            padding: 0 10px;
+        }
+
+        .calculation-grid {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.2em;
+            background: #f1f8e9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .tip-box {
+            background: #e1f5fe;
+            border-left: 5px solid var(--water-cyan);
+            padding: 15px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .page-break {
+            margin: 60px 0;
+            border-bottom: 2px dashed #ccc;
+        }
+
+        .btn-print {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #d84315;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: sans-serif;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; padding: 0; }
+            .book-page { box-shadow: none; width: 100%; max-width: 100%; margin: 0; padding: 0; border: none; background-image: none; }
+            .content { border: none; box-shadow: none; background: transparent; padding: 0; }
+            .page-break { page-break-after: always; border: none; margin: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#" onclick="window.print()" class="btn-print">🖨️ Imprimer les Calculs</a>
+
+    <div class="book-page">
+        <!-- Taches d'aquarelle -->
+        <div class="watercolor spot-1"></div>
+        <div class="watercolor spot-2"></div>
+        <div class="watercolor spot-3"></div>
+
+        <div class="content">
+            <!-- COUVERTURE -->
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="letter-spacing: 2px; font-weight: bold; color: #555;">CAHIER DE CALCUL - CEPE</p>
+                <h1>Les 4 Pouvoirs<br>de Tonton Deric</h1>
+                <div style="font-size: 6em; margin: 10px;">➕➖✖️➗</div>
+                <p style="font-size: 1.5em; font-family: 'Caveat', cursive;">Pose et Effectue avec courage !</p>
+            </div>
+
+            <div style="background: white; padding: 20px; border-radius: 20px; margin-top: 30px; text-align: center; border: 2px dashed var(--toast-gold);">
+                <span style="font-size: 3em; display: block;"><img src="tonton_photo.jpg" alt="tonton Deric" style="width:70px; border-radius:50%;">🍞</span>
+                "Salut ! Je suis <strong>Tonton Deric</strong>.<br> 
+                Un bon grille-pain doit être précis. Si je me trompe d'une virgule, le pain est brûlé !<br>
+                Voici mes techniques secrètes pour avoir 20/20 en opérations."
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 1 : ADDITION ET SOUSTRACTION -->
+            <h2>1. L'Art de l'Alignement (+ et -)</h2>
+            <p>Le secret, c'est la virgule ! La virgule, c'est le chef. Tout le monde doit s'aligner sur elle.</p>
+
+            <div class="op-card">
+                <h3>L'Addition (Manampy)</h3>
+                <p>Pose et effectue : <strong>1 452,5 + 36,75</strong></p>
+                <div class="calculation-grid">
+                    &nbsp;&nbsp;1452,50  <span style="color:red;"><- Ajoute un zéro !</span><br>
+                    +&nbsp;&nbsp;&nbsp;36,75<br>
+                    ---------<br>
+                    =&nbsp;1489,25
+                </div>
+                <div class="tip-box">
+                    💡 <strong>Astuce de Tonton Deric :</strong> Si un nombre n'a pas de chiffre après la virgule, ajoute des zéros (ex: 5 = 5,0) pour boucher les trous !
+                </div>
+            </div>
+
+            <div class="op-card">
+                <h3>La Soustraction (Manala)</h3>
+                <p>Pose et effectue : <strong>2 024 - 89,5</strong></p>
+                <div class="calculation-grid">
+                    &nbsp;&nbsp;2024,0  <span style="color:red;"><- Indispensable !</span><br>
+                    -&nbsp;&nbsp;&nbsp;89,5<br>
+                    --------<br>
+                    =&nbsp;1934,5
+                </div>
+                <div class="tip-box">
+                    ⚠️ <strong>Attention :</strong> N'oublie jamais les retenues ! Si tu dis "10 moins 5", tu dois rendre le 1 en bas à gauche.
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 2 : MULTIPLICATION -->
+            <h2>2. La Multiplication (Mampitombo)</h2>
+            <p>Ici, la virgule part en vacances pendant le calcul, et elle revient à la fin !</p>
+
+            <div class="op-card">
+                <h3>Le Piège de la Virgule</h3>
+                <p>Opération : <strong>42,5 x 3,2</strong></p>
+                <ol>
+                    <li>On calcule comme s'il n'y avait pas de virgules (425 * 32).</li>
+                    <li>On compte les chiffres après la virgule dans l'opération (il y en a <strong>2</strong> : le 5 et le 2).</li>
+                    <li>On place la virgule dans le résultat pour avoir <strong>2</strong> chiffres après.</li>
+                </ol>
+                <div class="calculation-grid">
+                    Résultat final = 136,00
+                </div>
+            </div>
+
+            <!-- CHAPITRE 3 : DIVISION -->
+            <h2>3. La Division (Mizara) - Le Boss</h2>
+            <p>C'est l'opération la plus difficile. Respire un grand coup !</p>
+
+            <div class="op-card">
+                <h3>Division avec Décimaux</h3>
+                <p>Si le diviseur a une virgule (ex: <strong>45 : 2,5</strong>), tu DOIS l'enlever !</p>
+                <p><strong>La Technique Magique :</strong><br>
+                Multiplie par 10 (ou 100) des deux côtés pour chasser la virgule.</p>
+                <div class="calculation-grid">
+                    45 : 2,5<br>
+                    Devenient...<br>
+                    450 : 25<br>
+                    = 18
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- CHAPITRE 4 : LE TEMPS -->
+            <h2>4. Le Maître du Temps (Ora)</h2>
+            <p>Au CEPE, tu devras additionner des durées. Attention, ici on compte par paquets de 60, pas de 100 !</p>
+
+            <div class="op-card">
+                <h3>Additionner des durées</h3>
+                <p>Problème : Tonton Deric grille du pain pendant <strong>2h 45min</strong> puis fait une pause de <strong>30min</strong>. Combien de temps a passé ?</p>
+                
+                <div class="calculation-grid">
+                    &nbsp;&nbsp;2 h 45 min<br>
+                    + 0 h 30 min<br>
+                    ------------<br>
+                    = 2 h 75 min
+                </div>
+                
+                <div style="background: #fff3e0; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                    🚨 <strong>ALERTE ROUGE !</strong><br>
+                    75 min, c'est trop ! Il faut enlever 60 min et les transformer en 1 heure.<br>
+                    75 min = 60 min + 15 min = <strong>1 h 15 min</strong>.<br><br>
+                    <strong>Résultat final :</strong> 2h + 1h 15min = <strong>3 h 15 min</strong>.
+                </div>
+            </div>
+
+            <div class="page-break"></div>
+
+            <!-- ENTRAINEMENT FINAL -->
+            <div style="text-align: center; border: 3px solid var(--ink-color); padding: 30px; border-radius: 10px; background: white;">
+                <h2 style="margin-top:0; border:none; font-size: 2.5em;">📝 L'Examen Blanc</h2>
+                <p>Prends une feuille et un stylo. Interdiction d'utiliser une calculatrice !</p>
+
+                <div style="text-align: left; display: inline-block;">
+                    <p><strong>1.</strong> 478,5 + 2919 + 34,75 = ...................</p>
+                    <p><strong>2.</strong> 5000 - 1248,25 = ...................</p>
+                    <p><strong>3.</strong> 34,2 * 5,6 = ...................</p>
+                    <p><strong>4.</strong> 5h 25min + 45min = ...................</p>
+                </div>
+
+                <div style="margin-top: 30px; border-top: 1px dashed #ccc; padding-top: 10px; font-size: 0.8em; color: #888;">
+                    <strong>Réponses (à l'envers) :</strong><br>
+                    <span style="display: inline-block; transform: rotate(180deg);">
+                    1. 3432,25 | 2. 3751,75 | 3. 191,52 | 4. 6h 10min (car 70min = 1h10)
+                    </span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 50px;">
+                <p style="font-family: 'Caveat'; font-size: 2em;">"Tu es prêt à tout calculer ! Bravo !"</p>
+                <div style="font-size: 4em;">🎓🍞</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
